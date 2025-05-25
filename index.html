@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANG DONGKA (THAILAND) CO., LTD.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f9f295 50%, #d4af37 100%);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            position: relative;
+        }
+        .tab button:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        .tab button.active:after {
+            width: 100%;
+        }
+        .tab button:hover:after {
+            width: 100%;
+        }
+        .tab button.active {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px 0;
+            animation: fadeEffect 1s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        gold: '#d4af37'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="bg-white shadow-md fixed w-full z-10">
+<div class="container mx-auto px-4 py-3">
+<div class="flex justify-between items-center">
+<div class="flex items-center">
+<div class="text-2xl font-bold text-gray-900">
+                        ANG DONGKA <span class="text-primary-600">(THAILAND)</span> CO., LTD.
+                    </div>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="nav-link text-gray-700 hover:text-primary-600 font-medium" href="#home">Home</a>
+<a class="nav-link text-gray-700 hover:text-primary-600 font-medium" href="#about">About</a>
+<a class="nav-link text-gray-700 hover:text-primary-600 font-medium" href="#products">Products</a>
+<a class="nav-link text-gray-700 hover:text-primary-600 font-medium" href="#distributor">Distributors</a>
+<a class="nav-link text-gray-700 hover:text-primary-600 font-medium" href="#contact">Contact</a>
+</div>
+<div class="md:hidden flex items-center">
+<button class="text-gray-700 hover:text-primary-600 focus:outline-none" id="menu-toggle">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile menu -->
+<div class="hidden md:hidden bg-white border-t" id="mobile-menu">
+<div class="container mx-auto px-4 py-2">
+<a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#home">Home</a>
+<a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#about">About</a>
+<a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#products">Products</a>
+<a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#distributor">Distributors</a>
+<a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="hero-pattern pt-28 pb-20" id="home">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-10 md:mb-0">
+<h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+                        Become a Quality Product<br/>
+<span class="text-gold">Distributor with ANG DONGKA</span>
+</h1>
+<p class="text-white text-lg mb-8">
+                        We are a leader in high-quality product distribution, offering business opportunities to grow together.
+                    </p>
+<div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 text-center" href="#distributor">
+                            Become a Distributor
+                        </a>
+<a class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center" href="#contact">
+                            Contact Us
+                        </a>
+</div>
+</div>
+<div class="md:w-1/2">
+<div class="bg-white p-6 rounded-lg shadow-lg">
+<svg class="w-full h-64" viewbox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Thai Flag Background -->
+<rect fill="#ffffff" height="300" rx="10" width="500" x="50" y="50"></rect>
+<!-- Red Stripes -->
+<rect fill="#ED1C24" height="50" rx="10 10 0 0" width="500" x="50" y="50"></rect>
+<rect fill="#ED1C24" height="50" rx="0 0 10 10" width="500" x="50" y="300"></rect>
+<!-- Blue Center -->
+<rect fill="#241D4F" height="100" width="500" x="50" y="150"></rect>
+<!-- Company Name -->
+<text dominant-baseline="middle" fill="white" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" x="300" y="180">ANG DONGKA</text>
+<text dominant-baseline="middle" fill="white" font-family="Arial" font-size="20" text-anchor="middle" x="300" y="220">THAILAND CO., LTD.</text>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-16 bg-white" id="about">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-2">About Us</h2>
+<div class="w-20 h-1 gold-gradient mx-auto"></div>
+</div>
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-8 md:mb-0">
+<div class="bg-gray-50 p-6 rounded-lg">
+<svg class="w-full h-64" viewbox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Background -->
+<rect fill="#f8f8f8" height="400" rx="10" width="600"></rect>
+<!-- Thai Flag -->
+<rect fill="#ffffff" height="200" rx="10" width="400" x="100" y="100"></rect>
+<!-- Red Stripes -->
+<rect fill="#ED1C24" height="40" rx="10 10 0 0" width="400" x="100" y="100"></rect>
+<rect fill="#ED1C24" height="40" rx="0 0 10 10" width="400" x="100" y="260"></rect>
+<!-- Blue Center -->
+<rect fill="#241D4F" height="40" width="400" x="100" y="180"></rect>
+<!-- Company Name -->
+<text fill="#0c4a6e" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" x="300" y="320">ANG DONGKA THAILAND CO., LTD.</text>
+<text fill="#0c4a6e" font-family="Arial" font-size="16" text-anchor="middle" x="300" y="350">Global Excellence in Thai Products</text>
+</svg>
+</div>
+</div>
+<div class="md:w-1/2 md:pl-10">
+<h3 class="text-2xl font-bold text-gray-900 mb-4">ANG DONGKA (THAILAND) CO., LTD.</h3>
+<p class="text-gray-700 mb-4">
+                        ANG DONGKA (THAILAND) CO., LTD., we specialize in exporting high-quality Thai products to markets around the world. Our mission is to introduce exceptional goods and innovative solutions from Thailand to international consumers—showcasing the richness, reliability, and uniqueness of Thai manufacturing.
+                    </p>
+<p class="text-gray-700 mb-4">
+                        With a growing network of global partners, we provide tailored support to ensure smooth and sustainable success for our clients. From sourcing to logistics, we are committed to excellence at every step of the export process.
+                    </p>
+<p class="text-gray-700 mb-4">
+                        Driven by integrity, innovation, and a global vision, ANG DONGKA (THAILAND) CO., LTD. is your trusted gateway to premium Thai products on the world stage.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Distributor Section -->
+<section class="py-16 bg-primary-800 text-white" id="distributor">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-2">Become a Distributor</h2>
+<div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
+<p class="text-primary-100 max-w-2xl mx-auto">
+                    Join our successful distributor network and receive comprehensive benefits and support.
+                </p>
+</div>
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/2 mb-8 md:mb-0">
+<div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+<h3 class="text-2xl font-bold text-gray-900 mb-4">Distributor Benefits</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Special 20-30% discount</strong> for distributors</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Free marketing materials</strong> and sales promotion tools</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Free product training</strong> and sales techniques</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Sales-based bonuses</strong> and special reward programs</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Exclusive distribution rights</strong> in specific areas</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Technical support</strong> and after-sales service</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Flexible Minimum Order Quantity (MOQ)</strong> - Tailored to your market size and business capacity</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Fast and Reliable Delivery</strong> - Optimized logistics network ensures timely shipments</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Priority Access to New Products</strong> - Be the first to introduce innovations to your market</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Participation in International Trade Shows</strong> - Joint exhibition opportunities to expand your network</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="md:w-1/2 md:pl-8">
+<div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+<h3 class="text-2xl font-bold text-gray-900 mb-4">Why Choose ANG DONGKA Products</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Own Manufacturing Facilities:</strong> We control the entire production process, ensuring consistent quality and timely delivery</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>ISO Certified Products:</strong> All products meet international quality standards with ISO 9001, 14001, and product-specific certifications</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Ready-to-Export Production Capacity:</strong> Our facilities can handle large-scale orders with quick turnaround times</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Quality Guarantee:</strong> All products come with comprehensive warranties and quality assurance</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Competitive Pricing:</strong> Factory-direct pricing ensures high profit margins for distributors</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Innovative Product Development:</strong> Regular introduction of new products to keep your inventory fresh and competitive</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Customization Options:</strong> Ability to customize products with your branding for exclusive market positioning</span>
+</li>
+<li class="flex items-start">
+<svg class="w-6 h-6 text-gold mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span><strong>Logistics Support:</strong> Comprehensive shipping and customs documentation assistance for smooth international transactions</span>
+</li>
+</ul>
+<div class="mt-6">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 inline-block" href="#contact">
+                                Contact Us to Become a Distributor
+                            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Products Section -->
+<section class="py-16 bg-white" id="products">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-2">Our Products</h2>
+<div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
+<p class="text-gray-600 max-w-2xl mx-auto">
+                    Discover our premium range of high-quality Thai products, crafted with natural ingredients and traditional expertise.
+                </p>
+</div>
+<!-- Product Categories Tabs -->
+<div class="tab flex flex-wrap justify-center mb-6">
+<button class="tablinks active text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'BodySupports')">Body Supports</button>
+<button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Skincare')">Natural Skincare Products</button>
+<button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Soap')">Natural SOAP</button>
+<button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'HandCream')">Natural Hand Cream</button>
+</div>
+<!-- Body Supports Tab Content -->
+<div class="tabcontent block" id="BodySupports">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Premium Neck Support" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Premium Neck Support</h3>
+<p class="text-gray-600 mb-4">Ergonomically designed neck support with memory foam technology for maximum comfort and pain relief.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Therapeutic Grade</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Best Seller</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Lumbar Support Cushion" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Lumbar Support Cushion</h3>
+<p class="text-gray-600 mb-4">Designed to provide optimal support for your lower back, reducing strain during long sitting periods.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Orthopedic Design</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Ergonomic</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Knee Support Brace" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Knee Support Brace</h3>
+<p class="text-gray-600 mb-4">Advanced compression knee brace that provides stability and pain relief for sports and daily activities.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Sports Grade</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Adjustable</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Natural Skincare Products Tab Content -->
+<div class="tabcontent hidden" id="Skincare">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Aloe Vera Facial Serum" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Aloe Vera Facial Serum</h3>
+<p class="text-gray-600 mb-4">Hydrating serum with pure aloe vera extract that soothes and rejuvenates tired skin.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">100% Natural</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Hydrating</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Thai Herbal Face Mask" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Thai Herbal Face Mask</h3>
+<p class="text-gray-600 mb-4">Traditional Thai herbal mask that purifies and brightens skin using ancient recipes.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">Traditional Recipe</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Purifying</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Coconut Oil Moisturizer" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Coconut Oil Moisturizer</h3>
+<p class="text-gray-600 mb-4">Rich moisturizer made with virgin coconut oil that deeply nourishes and protects skin.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">Cold-Pressed</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Nourishing</span>
+</div>
+</div>
+</div>
+<!-- Natural SOAP Tab Content -->
+<!-- Natural Skincare Products Tab Content -->
+<div class="tabcontent hidden" id="Skincare">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Aloe Vera Facial Serum" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Aloe Vera Facial Serum</h3>
+<p class="text-gray-600 mb-4">Hydrating serum with pure aloe vera extract that soothes and rejuvenates tired skin.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">100% Natural</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Hydrating</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Thai Herbal Face Mask" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Thai Herbal Face Mask</h3>
+<p class="text-gray-600 mb-4">Traditional Thai herbal mask that purifies and brightens skin using ancient recipes.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">Traditional Recipe</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Purifying</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-green-700">
+<img alt="Coconut Oil Moisturizer" class="w-full h-64 object-cover" src="https://i.postimg.cc/Y9b8pWSG/4x3-Create-a-product-image-of-a-soap-1.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Coconut Oil Moisturizer</h3>
+<p class="text-gray-600 mb-4">Rich moisturizer made with virgin coconut oil that deeply nourishes and protects skin.</p>
+<div class="flex items-center justify-between">
+<span class="text-green-600 font-semibold">Cold-Pressed</span>
+<span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">Nourishing</span>
+</div>
+</div>
+</div>
+<!-- Natural Hand Cream Tab Content -->
+<div class="text-center mt-10">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="#contact">
+                    Request Product Catalog
+                </a>
+</div>
+</div>
+</div></div></div><div class="tabcontent hidden" id="Soap">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Rice Milk Soap" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Rice Milk Soap</h3>
+<p class="text-gray-600 mb-4">Gentle soap made from natural rice milk, helps nourish and brighten your skin.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Natural Extract</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Best Seller</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Herbal Soap" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Thai Herbal Soap</h3>
+<p class="text-gray-600 mb-4">Infused with Thai herbs to refresh and cleanse your skin effectively.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Herbal Formula</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Refreshing</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-primary-700">
+<img alt="Turmeric Soap" class="w-full h-64 object-cover" src="https://i.postimg.cc/Bv2HBH5R/re-design-a-packaging-product-im-2.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Turmeric Soap</h3>
+<p class="text-gray-600 mb-4">Natural soap with turmeric extract known for its anti-inflammatory and brightening properties.</p>
+<div class="flex items-center justify-between">
+<span class="text-primary-600 font-semibold">Brightening</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Natural</span>
+</div>
+</div>
+</div>
+</div>
+</div><div class="tabcontent hidden" id="HandCream">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 - Jasmine Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-purple-700">
+<img alt="Natural Hand Cream Product" class="w-full h-64 object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Jasmine Hand Cream</h3>
+<p class="text-gray-600 mb-4">Luxurious hand cream with Thai jasmine extract that deeply nourishes and softens hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-purple-600 font-semibold">Nourishing</span>
+<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Floral</span>
+</div>
+</div>
+</div>
+<!-- Product 2 - Rose Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-pink-700">
+<img alt="Natural Hand Cream Product" class="w-full h-64 object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Rose Hand Cream</h3>
+<p class="text-gray-600 mb-4">Elegant hand cream with rose oil that hydrates and rejuvenates dry hands with a delicate fragrance.</p>
+<div class="flex items-center justify-between">
+<span class="text-pink-600 font-semibold">Hydrating</span>
+<span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">Elegant</span>
+</div>
+</div>
+</div>
+<!-- Product 3 - Mango Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-yellow-600">
+<img alt="Natural Hand Cream Product" class="w-full h-64 object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Mango Hand Cream</h3>
+<p class="text-gray-600 mb-4">Tropical hand cream with mango butter that deeply moisturizes and repairs dry, damaged hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-yellow-600 font-semibold">Repairing</span>
+<span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Tropical</span>
+</div>
+</div>
+</div>
+</div>
+</div></div></section>
+<!-- Contact Section - Updated with new address and phone number -->
+<section class="py-16 bg-white" id="contact">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-2">Contact Us</h2>
+<div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
+<p class="text-gray-600 max-w-2xl mx-auto">
+                    Get in touch with us for more information about our products or becoming a distributor.
+                </p>
+</div>
+<div class="max-w-3xl mx-auto">
+<div class="bg-primary-50 p-8 rounded-lg shadow-md">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="flex items-start">
+<svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-gray-900">Address</h4>
+<p class="text-gray-700">41/91 Nuanjan 27 Ramintra road bungkum 10230 Thailand</p>
+</div>
+</div>
+<div class="flex items-start">
+<svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-gray-900">Phone</h4>
+<p class="text-gray-700">092 299 5397</p>
+</div>
+</div>
+<div class="flex items-start">
+<svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-gray-900">Email</h4>
+<p class="text-gray-700">thanapong102030@gmail.com</p>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-start">
+<svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-gray-900">Website</h4>
+<p class="text-gray-700"><a class="text-primary-600 hover:text-primary-800 hover:underline" href="http://www.angdongka.com" target="_blank">www.angdongka.com</a></p>
+</div>
+</div>
+<div class="flex items-start">
+<svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-gray-900 mb-2">Business Hours</h4>
+<div class="grid grid-cols-2 gap-2">
+<div class="text-gray-700">Monday - Friday</div>
+<div class="text-gray-700">9:00 AM - 6:00 PM</div>
+<div class="text-gray-700">Saturday</div>
+<div class="text-gray-700">9:00 AM - 1:00 PM</div>
+<div class="text-gray-700">Sunday</div>
+<div class="text-gray-700">Closed</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="mailto:thanapong102030@gmail.com">
+                            Email Us Now
+                        </a>
+</div>
+</div>
+<!-- Natural SOAP Tab Content -->
+</div>
+</div>
+</section>
+<!-- Footer - Updated with expanded content -->
+<footer class="bg-primary-900 text-white py-10">
+<div class="container mx-auto px-4">
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-4">ANG DONGKA (THAILAND) CO., LTD.</h3>
+<p class="text-primary-100 text-lg leading-relaxed">
+                    Your trusted partner for high-quality Thai products. We specialize in exporting premium goods to markets worldwide. With decades of experience in international trade, we connect Thai manufacturers with global distributors, ensuring seamless logistics, competitive pricing, and exceptional product quality. Our commitment to excellence has established us as a leading exporter of Thai health, wellness, and beauty products across Asia, Europe, and North America. We pride ourselves on building long-term relationships with our partners and providing comprehensive support at every step of the distribution process.
+                </p>
+</div>
+<div class="border-t border-primary-800 mt-8 pt-6 text-center text-primary-300 text-sm">
+<p>© 2025 ANG DONGKA (THAILAND) CO., LTD. All rights reserved. | Exporting Thai Quality to the World</p>
+</div>
+</div>
+</footer>
+<script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Product tabs functionality
+        function openProductTab(evt, tabName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'944b47dae65ac8d3',t:'MTc0ODA3Mzg1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
