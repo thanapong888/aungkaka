@@ -170,7 +170,7 @@
 </div>
 </div>
 <!-- Mobile menu -->
-<div class="md:hidden bg-white border-t" id="mobile-menu">
+<div class="hidden md:hidden bg-white border-t" id="mobile-menu">
 <div class="container mx-auto px-4 py-2">
 <a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#home">Home</a>
 <a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#about">About</a>
@@ -656,12 +656,14 @@
 </div>
 </div></div></section>
 <!-- Contact Section - Updated with new address and phone number -->
+
 <!-- View All Products Button -->
 <div class="text-center mt-10">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="https://thanapong888.github.io/huay/" target="_blank">
+    <a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="https://thanapong888.github.io/huay/" target="_blank">
         View All Products
     </a>
 </div>
+
 <section class="py-16 bg-white" id="contact">
 <div class="container mx-auto px-4">
 <div class="text-center mb-12">
@@ -757,6 +759,34 @@
 </div>
 </div>
 </footer>
+<script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
 
+        // Product tabs functionality
+        function openProductTab(evt, tabName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'944b47dae65ac8d3',t:'MTc0ODA3Mzg1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
