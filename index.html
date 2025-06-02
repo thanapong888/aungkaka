@@ -142,25 +142,11 @@
             }
         }
     </script>
-<style>
-.product-card img {
-    transition: transform 0.3s ease;
-}
-.product-card:hover img {
-    transform: scale(1.05);
-}
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-</style></head>
+</head>
 <body>
 <!-- Navigation -->
 <nav class="bg-white shadow-md fixed w-full z-10">
-<div class="py-3 container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4 py-3">
 <div class="flex justify-between items-center">
 <div class="flex items-center">
 <div class="text-2xl font-bold text-gray-900">
@@ -185,7 +171,7 @@
 </div>
 <!-- Mobile menu -->
 <div class="hidden md:hidden bg-white border-t" id="mobile-menu">
-<div class="container mx-auto py-2 lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4 py-2">
 <a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#home">Home</a>
 <a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#about">About</a>
 <a class="block py-2 text-gray-700 hover:text-primary-600 font-medium" href="#products">Products</a>
@@ -196,7 +182,7 @@
 </nav>
 <!-- Hero Section -->
 <section class="hero-pattern pt-28 pb-20" id="home">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="flex flex-col md:flex-row items-center">
 <div class="md:w-1/2 mb-10 md:mb-0">
 <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
@@ -236,7 +222,7 @@
 </section>
 <!-- About Section -->
 <section class="py-16 bg-white" id="about">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold text-gray-900 mb-2">About Us</h2>
 <div class="w-20 h-1 gold-gradient mx-auto"></div>
@@ -277,7 +263,7 @@
 </section>
 <!-- Distributor Section -->
 <section class="py-16 bg-primary-800 text-white" id="distributor">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold mb-2">Become a Distributor</h2>
 <div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
@@ -418,7 +404,7 @@
 </section>
 <!-- Our Products Section -->
 <section class="py-16 bg-white" id="products">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold text-gray-900 mb-2">Our Products</h2>
 <div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
@@ -427,7 +413,7 @@
                 </p>
 </div>
 <!-- Product Categories Tabs -->
-<div class="tab flex flex-wrap justify-center mb-6 overflow-x-auto whitespace-nowrap flex space-x-4 pb-2 scrollbar-hide">
+<div class="tab flex flex-wrap justify-center mb-6">
 <button class="tablinks active text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'BodySupports')">Body Supports</button>
 <button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Skincare')">Natural Skincare Products</button>
 <button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Soap')">Natural SOAP</button>
@@ -435,29 +421,29 @@
 </div>
 <!-- Body Supports Tab Content -->
 <div class="tabcontent block" id="BodySupports">
-<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Product 1 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
-<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/jjPkQSj7/LINE-ALBUM-5252025-250525-12.jpg"/>
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/QdCvLgDz/5c03a3e3-63fa-4098-95c6-9f781a5c8607.png"/>
 </div>
 <div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Premium Neck Support</h3>
-<p class="text-gray-600 mb-4">Ergonomically designed neck support with memory foam technology for maximum comfort and pain relief.</p>
+<h3 class="text-xl font-bold text-gray-900 mb-2">LS SUPPORT Back Support Belt</h3>
+<p class="text-gray-600 mb-4">Made from high-quality premium-grade elastic: strong, durable, soft, flexible, and highly breathable</p>
 <div class="flex items-center justify-between">
-<span class="text-primary-600 font-semibold">Therapeutic Grade</span>
+<span class="text-primary-600 font-semibold">Medical Grade</span>
 <span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Best Seller</span>
 </div>
 </div>
 </div>
 <!-- Product 2 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
-<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/tg8ct4rJ/256cc3de-f51e-429d-8d5c-16c4ffdc1ecb.png"/>
 </div>
 <div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Lumbar Support Cushion</h3>
-<p class="text-gray-600 mb-4">Designed to provide optimal support for your lower back, reducing strain during long sitting periods.</p>
+<h3 class="text-xl font-bold text-gray-900 mb-2">FLEXI Knee Support</h3>
+<p class="text-gray-600 mb-4">Soft and flexible material that provides comfort and ease of movement without feeling restrictive</p>
 <div class="flex items-center justify-between">
 <span class="text-primary-600 font-semibold">Orthopedic Design</span>
 <span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Ergonomic</span>
@@ -465,16 +451,16 @@
 </div>
 </div>
 <!-- Product 3 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
-<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/HxmT9msw/WRIST-SUPPORT.png"/>
 </div>
 <div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-2">Knee Support Brace</h3>
-<p class="text-gray-600 mb-4">Advanced compression knee brace that provides stability and pain relief for sports and daily activities.</p>
+<h3 class="text-xl font-bold text-gray-900 mb-2">Elbow Support</h3>
+<p class="text-gray-600 mb-4">Made from high-quality medical-grade elastic Soft and flexible material for a snug, non-restrictive fit</p>
 <div class="flex items-center justify-between">
-<span class="text-primary-600 font-semibold">Sports Grade</span>
-<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Adjustable</span>
+<span class="text-primary-600 font-semibold">Medical Grade</span>
+<span class="bg-primary-100 text-primary-800 text-sm font-medium px-3 py-1 rounded-full">Ergonomic</span>
 </div>
 </div>
 </div>
@@ -482,10 +468,10 @@
 </div>
 <!-- Natural Skincare Products Tab Content -->
 <div class="tabcontent hidden" id="Skincare">
-<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Product 1 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -498,8 +484,8 @@
 </div>
 </div>
 <!-- Product 2 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -512,8 +498,8 @@
 </div>
 </div>
 <!-- Product 3 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -528,10 +514,10 @@
 <!-- Natural SOAP Tab Content -->
 <!-- Natural Skincare Products Tab Content -->
 <div class="tabcontent hidden" id="Skincare">
-<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Product 1 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -544,8 +530,8 @@
 </div>
 </div>
 <!-- Product 2 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -558,8 +544,8 @@
 </div>
 </div>
 <!-- Product 3 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-green-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -579,10 +565,10 @@
 </div>
 </div>
 </div></div></div><div class="tabcontent hidden" id="Soap">
-<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Product 1 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -595,8 +581,8 @@
 </div>
 </div>
 <!-- Product 2 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -609,8 +595,8 @@
 </div>
 </div>
 <!-- Product 3 -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-primary-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -624,10 +610,10 @@
 </div>
 </div>
 </div><div class="tabcontent hidden" id="HandCream">
-<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Product 1 - Jasmine Hand Cream -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-purple-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -640,8 +626,8 @@
 </div>
 </div>
 <!-- Product 2 - Rose Hand Cream -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-pink-700">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -654,8 +640,8 @@
 </div>
 </div>
 <!-- Product 3 - Mango Hand Cream -->
-<div class="shadow-md transition-transform duration-300 overflow-hidden product-card bg-gray-50 transition-all rounded-lg hover:shadow-lg rounded-xl">
-<div class="p-4 bg-yellow-600">
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
 <img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
 </div>
 <div class="p-6">
@@ -677,7 +663,7 @@
     </a>
 </div>
 <section class="py-16 bg-white" id="contact">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold text-gray-900 mb-2">Contact Us</h2>
 <div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
@@ -688,7 +674,7 @@
 <div class="max-w-3xl mx-auto">
 <div class="bg-primary-50 p-8 rounded-lg shadow-md">
 <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
-<div class="grid grid-cols-2 md:grid-cols-2 gap-8 sm:grid-cols-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="space-y-6">
 <div class="flex items-start">
 <svg class="w-6 h-6 text-primary-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -735,7 +721,7 @@
 </svg>
 <div>
 <h4 class="font-semibold text-gray-900 mb-2">Business Hours</h4>
-<div class="grid grid-cols-2 gap-2 sm:grid-cols-2">
+<div class="grid grid-cols-2 gap-2">
 <div class="text-gray-700">Monday - Friday</div>
 <div class="text-gray-700">9:00 AM - 6:00 PM</div>
 <div class="text-gray-700">Saturday</div>
@@ -759,7 +745,7 @@
 </section>
 <!-- Footer - Updated with expanded content -->
 <footer class="bg-primary-900 text-white py-10">
-<div class="container mx-auto lg:px-8 sm:px-6 px-4">
+<div class="container mx-auto px-4">
 <div class="mb-8">
 <h3 class="text-xl font-bold mb-4">ANG DONGKA (THAILAND) CO., LTD.</h3>
 <p class="text-primary-100 text-lg leading-relaxed">
