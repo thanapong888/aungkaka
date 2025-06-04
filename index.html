@@ -164,6 +164,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 <!-- Particles.js for floating particles background -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<style>
+@keyframes subtleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+.bounce-on-hover:hover {
+  animation: subtleBounce 0.6s ease-in-out;
+}
+</style>
 </head>
 <body><div id="particles-js" style="position:fixed;width:100%;height:100%;z-index:-1;top:0;left:0;"></div>
 <!-- Navigation -->
@@ -215,10 +233,10 @@
                         We are a leader in high-quality product distribution, offering business opportunities to grow together.
                     </p>
 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 text-center" href="#distributor">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 text-center bounce-on-hover" href="#distributor">
                             Become a Distributor
                         </a>
-<a class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center" href="#contact">
+<a class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center bounce-on-hover" href="#contact">
                             Contact Us
                         </a>
 </div>
@@ -246,7 +264,7 @@
 <section class="py-16 bg-white" data-aos="fade-up" id="about">
 <div class="container mx-auto px-4">
 <div class="text-center mb-12">
-<h2 class="text-3xl font-bold text-gray-900 mb-2" data-aos="fade-up">About Us</h2>
+<h2 class="text-3xl font-bold text-gray-900 mb-2 shimmer" data-aos="fade-up">About Us</h2>
 <div class="w-20 h-1 gold-gradient mx-auto"></div>
 </div>
 <div class="flex flex-col md:flex-row items-center">
@@ -287,8 +305,7 @@
 <section class="py-16 bg-primary-800 text-white" data-aos="fade-up" id="distributor">
 <div class="container mx-auto px-4">
 <div class="text-center mb-12">
-<h2 class="text-3xl font-bold mb-2" data-aos="fade-up">Become a Distributor</h2>
-<div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
+<h2 class="text-3xl font-bold mb-2 shimmer text-white" data-aos="fade-up"><span style="color:black">Become a Distributor</span></h2><div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
 <p class="text-primary-100 max-w-2xl mx-auto">
                     Join our successful distributor network and receive comprehensive benefits and support.
                 </p>
@@ -415,7 +432,7 @@
 </li>
 </ul>
 <div class="mt-6">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 inline-block" href="#contact">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-6 rounded-lg transition duration-300 inline-block bounce-on-hover" href="#contact">
                                 Contact Us to Become a Distributor
                             </a>
 </div>
@@ -428,7 +445,7 @@
 <section class="py-16 bg-white" data-aos="fade-up" id="products">
 <div class="container mx-auto px-4">
 <div class="text-center mb-12">
-<h2 class="text-3xl font-bold text-gray-900 mb-2" data-aos="fade-up">Our Products</h2>
+<h2 class="text-3xl font-bold text-gray-900 mb-2 shimmer" data-aos="fade-up">Our Products</h2>
 <div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
 <p class="text-gray-600 max-w-2xl mx-auto">
                     Discover our premium range of high-quality Thai products, crafted with natural ingredients and traditional expertise.
@@ -440,7 +457,7 @@
 <button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Skincare')">Natural Skincare Products</button>
 <button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'Soap')">Natural SOAP</button>
 <button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'HandCream')">Natural Hand Cream</button>
-</div>
+<button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'OrganicThaiRice')">Organic Thai Rice</button><button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'OrganicQuickMeal')">Organic Quick Meal</button><button class="tablinks text-gray-800 hover:text-primary-600 transition-colors" onclick="openProductTab(event, 'HealthyNatureBeverages')">Healthy Nature Beverages</button></div>
 <!-- Body Supports Tab Content -->
 <div class="tabcontent block" id="BodySupports">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -581,7 +598,7 @@
 </div>
 <!-- Natural Hand Cream Tab Content -->
 <div class="text-center mt-10">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="#contact">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block bounce-on-hover" href="#contact">
                     Request Product Catalog
                 </a>
 </div>
@@ -676,18 +693,153 @@
 </div>
 </div>
 </div>
+</div><div class="tabcontent hidden" id="HealthyNatureBeverages">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 - Jasmine Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Jasmine Hand Cream</h3>
+<p class="text-gray-600 mb-4">Luxurious hand cream with Thai jasmine extract that deeply nourishes and softens hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-purple-600 font-semibold">Nourishing</span>
+<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Floral</span>
+</div>
+</div>
+</div>
+<!-- Product 2 - Rose Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Rose Hand Cream</h3>
+<p class="text-gray-600 mb-4">Elegant hand cream with rose oil that hydrates and rejuvenates dry hands with a delicate fragrance.</p>
+<div class="flex items-center justify-between">
+<span class="text-pink-600 font-semibold">Hydrating</span>
+<span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">Elegant</span>
+</div>
+</div>
+</div>
+<!-- Product 3 - Mango Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Mango Hand Cream</h3>
+<p class="text-gray-600 mb-4">Tropical hand cream with mango butter that deeply moisturizes and repairs dry, damaged hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-yellow-600 font-semibold">Repairing</span>
+<span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Tropical</span>
+</div>
+</div>
+</div>
+</div>
+</div><div class="tabcontent hidden" id="OrganicQuickMeal">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 - Jasmine Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Jasmine Hand Cream</h3>
+<p class="text-gray-600 mb-4">Luxurious hand cream with Thai jasmine extract that deeply nourishes and softens hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-purple-600 font-semibold">Nourishing</span>
+<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Floral</span>
+</div>
+</div>
+</div>
+<!-- Product 2 - Rose Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Rose Hand Cream</h3>
+<p class="text-gray-600 mb-4">Elegant hand cream with rose oil that hydrates and rejuvenates dry hands with a delicate fragrance.</p>
+<div class="flex items-center justify-between">
+<span class="text-pink-600 font-semibold">Hydrating</span>
+<span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">Elegant</span>
+</div>
+</div>
+</div>
+<!-- Product 3 - Mango Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Mango Hand Cream</h3>
+<p class="text-gray-600 mb-4">Tropical hand cream with mango butter that deeply moisturizes and repairs dry, damaged hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-yellow-600 font-semibold">Repairing</span>
+<span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Tropical</span>
+</div>
+</div>
+</div>
+</div>
+</div><div class="tabcontent hidden" id="OrganicThaiRice">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Product 1 - Jasmine Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Jasmine Hand Cream</h3>
+<p class="text-gray-600 mb-4">Luxurious hand cream with Thai jasmine extract that deeply nourishes and softens hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-purple-600 font-semibold">Nourishing</span>
+<span class="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">Floral</span>
+</div>
+</div>
+</div>
+<!-- Product 2 - Rose Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Rose Hand Cream</h3>
+<p class="text-gray-600 mb-4">Elegant hand cream with rose oil that hydrates and rejuvenates dry hands with a delicate fragrance.</p>
+<div class="flex items-center justify-between">
+<span class="text-pink-600 font-semibold">Hydrating</span>
+<span class="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">Elegant</span>
+</div>
+</div>
+</div>
+<!-- Product 3 - Mango Hand Cream -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md product-card transition-all duration-300 fade-in-up hover-glow" data-aos="fade-up">
+<div class="p-4 bg-white shadow-lg rounded-t-lg">
+<img alt="Updated Product Image" class="w-full aspect-square object-cover" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Mango Hand Cream</h3>
+<p class="text-gray-600 mb-4">Tropical hand cream with mango butter that deeply moisturizes and repairs dry, damaged hands.</p>
+<div class="flex items-center justify-between">
+<span class="text-yellow-600 font-semibold">Repairing</span>
+<span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-3 py-1 rounded-full">Tropical</span>
+</div>
+</div>
+</div>
+</div>
 </div></div></section>
 <!-- Contact Section - Updated with new address and phone number -->
 <!-- View All Products Button -->
 <div class="text-center mt-10">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="https://thanapong888.github.io/dongkaproduct/" target="_blank">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block bounce-on-hover" href="https://thanapong888.github.io/dongkaproduct/" target="_blank">
         View All Products
     </a>
 </div>
 <section class="py-16 bg-white" data-aos="fade-up" id="contact">
 <div class="container mx-auto px-4">
 <div class="text-center mb-12">
-<h2 class="text-3xl font-bold text-gray-900 mb-2" data-aos="fade-up">Contact Us</h2>
+<h2 class="text-3xl font-bold text-gray-900 mb-2 shimmer" data-aos="fade-up">Contact Us</h2>
 <div class="w-20 h-1 gold-gradient mx-auto mb-4"></div>
 <p class="text-gray-600 max-w-2xl mx-auto">
                     Get in touch with us for more information about our products or becoming a distributor.
@@ -756,7 +908,7 @@
 </div>
 </div>
 <div class="mt-8 text-center">
-<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block" href="mailto:thanapong102030@gmail.com">
+<a class="gold-gradient hover:opacity-90 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 inline-block bounce-on-hover" href="mailto:thanapong102030@gmail.com">
                             Email Us Now
                         </a>
 </div>
