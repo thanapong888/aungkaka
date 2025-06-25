@@ -144,6 +144,67 @@
   </style>
 </head>
 <body>
+
+  <div style="position: absolute; top: 80px; width: 100%; text-align: center; z-index: 5;">
+    <div style="
+      display: inline-block;
+      padding: 20px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      border: 4px solid;
+      border-image: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000) 1;
+      animation: borderRun 5s linear infinite;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      background-color: rgba(255, 255, 255, 0.8);
+    ">
+      Need a password? Please contact us via:
+    </div>
+    <div>
+      <a href="https://www.facebook.com/angdongkathailand/" target="_blank" style="text-decoration: none; margin-right: 20px;">
+        <button style="
+          background-image: linear-gradient(45deg, #3b5998, #8b9dc3);
+          color: white;
+          padding: 16px 32px;
+          font-size: 20px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          animation: pulseBtn 2s infinite;
+        ">Facebook</button>
+      </a>
+      <a href="https://wa.me/66619949962" target="_blank" style="text-decoration: none;">
+        <button style="
+          background-image: linear-gradient(45deg, #25D366, #128C7E);
+          color: white;
+          padding: 16px 32px;
+          font-size: 20px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          animation: pulseBtn 2s infinite;
+        ">WhatsApp</button>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    @keyframes pulseBtn {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,0,0,0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,0,0,0.2); }
+    }
+
+    @keyframes borderRun {
+      0% { border-image-source: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000); }
+      25% { border-image-source: linear-gradient(90deg, #00ff00, #0000ff, #ff0000, #00ff00); }
+      50% { border-image-source: linear-gradient(90deg, #0000ff, #ff0000, #00ff00, #0000ff); }
+      75% { border-image-source: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000); }
+      100% { border-image-source: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000); }
+    }
+  </style>
+
   <div class="pattern-layer"></div>
   <!-- Add 10 flower divs -->
   <div class="floating-flower"></div>
@@ -162,9 +223,19 @@
     <h2>Enter Password</h2>
     <input type="text" id="password" placeholder="Password">
     <br>
-    <button onclick="checkPassword()">Submit</button>
+    <button onclick="checkPassword()" style="
+  background-image: linear-gradient(45deg, #8B4513, #D2B48C);
+  animation: pulseBtn 2s infinite;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+">ENTER</button>
     <p id="error"></p>
-  </div>
+
+    </div>
 
   <script>
     function checkPassword() {
