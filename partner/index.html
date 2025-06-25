@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Protected</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdf1e7;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: linear-gradient(120deg, #ff0000 0%, #ffffff 33%, #000066 66%);
+      background-size: 300% 300%;
+      animation: waveFlag 15s ease-in-out infinite;
+      opacity: 0.07;
+      z-index: -4;
+    }
+
+    .floating-flower {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Double_lotus_flower_icon_gold.svg/1024px-Double_lotus_flower_icon_gold.svg.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+      animation: floatPetal 30s linear infinite;
+    }
+
+    /* 10 floating flowers with various delays and positions */
+    .floating-flower:nth-child(1) { top: -100px; left: 10%; animation-delay: 0s; }
+    .floating-flower:nth-child(2) { top: -120px; left: 20%; animation-delay: 3s; }
+    .floating-flower:nth-child(3) { top: -80px; left: 30%; animation-delay: 6s; }
+    .floating-flower:nth-child(4) { top: -90px; left: 40%; animation-delay: 9s; }
+    .floating-flower:nth-child(5) { top: -110px; left: 50%; animation-delay: 12s; }
+    .floating-flower:nth-child(6) { top: -130px; left: 60%; animation-delay: 15s; }
+    .floating-flower:nth-child(7) { top: -100px; left: 70%; animation-delay: 18s; }
+    .floating-flower:nth-child(8) { top: -90px; left: 80%; animation-delay: 21s; }
+    .floating-flower:nth-child(9) { top: -95px; left: 25%; animation-delay: 24s; }
+    .floating-flower:nth-child(10){ top: -85px; left: 75%; animation-delay: 27s; }
+
+    @keyframes floatPetal {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    .pattern-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Thai_Art_Pattern.svg/1024px-Thai_Art_Pattern.svg.png');
+      background-size: 300px;
+      opacity: 0.07;
+      z-index: -3;
+      animation: subtleDrift 60s linear infinite;
+    }
+
+    @keyframes waveFlag {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes subtleDrift {
+      from { background-position: 0 0; }
+      to { background-position: 300px 300px; }
+    }
+
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transform: scale(1.05);
+      transition: transform 0.5s ease;
+      z-index: 1;
+    }
+
+    .company-header {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #ff6f61, #f7c59f, #ff6f61);
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      animation: pulse 2s infinite;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0px rgba(255, 111, 97, 0.7); }
+      50% { box-shadow: 0 0 20px rgba(255, 111, 97, 0.9); }
+      100% { box-shadow: 0 0 0px rgba(255, 111, 97, 0.7); }
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 280px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern-layer"></div>
+  <!-- Add 10 flower divs -->
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+  <div class="floating-flower"></div>
+
+  <div class="box">
+    <div class="company-header">EXCLUSIVE FOR PARTNER ANG DONGKA (THAILAND) CO., LTD.</div>
+    <h2>Enter Password</h2>
+    <input type="text" id="password" placeholder="Password">
+    <br>
+    <button onclick="checkPassword()">Submit</button>
+    <p id="error"></p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      const correct = "ThailandSME2025";
+      if (password === correct) {
+        window.location.href = "https://www.youtube.com/";
+      } else {
+        document.getElementById("error").textContent = "Incorrect password. Please try again.";
+      }
+    }
+  </script>
+</body>
+</html>
