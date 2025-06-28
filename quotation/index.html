@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=1024" name="viewport"/>
 <title>Online Shop</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -211,7 +211,8 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
         margin: 2px 0;
     }
 }
-</style>
+
+html, body { overflow-x: auto !important; min-width: 1024px; }</style>
 <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -437,17 +438,19 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                         Body Supports
                     </button>
 <button class="category-tab px-3 py-2 text-sm md:text-base" data-category="skincare">
-                        Skincare Products
+                        Natural Skincare Products
                     </button>
 <button class="category-tab px-3 py-2 text-sm md:text-base" data-category="soap">
                         Natural SOAP
                     </button>
-             
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="hand-cream">
+                        Natural Hand Cream
+                    </button>
 <button class="category-tab px-3 py-2 text-sm md:text-base" data-category="rice">
                         Organic Thai Rice
                     </button>
 <button class="category-tab px-3 py-2 text-sm md:text-base" data-category="beverages">
-                        Healthy Beverages
+                        Healthy Nature Beverages
                     </button>
 <button class="category-tab px-3 py-2 text-sm md:text-base" data-category="quick-meal">
                         Organic Quick Meal
@@ -652,13 +655,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 1,
                 name: "Back Support Cushion",
                 price: 39.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Ergonomic back support cushion to reduce back pain",
                 category: "body-supports",
                 moq: 50,
@@ -669,13 +676,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 2,
                 name: "Neck Support Pillow",
                 price: 29.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Comfortable neck support pillow for better sleep",
                 category: "body-supports",
                 moq: 30,
@@ -686,13 +697,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 3,
                 name: "Knee Support Brace",
                 price: 24.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Knee support brace for joint pain relief",
                 category: "body-supports",
                 moq: 40,
@@ -703,13 +718,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 22,
                 name: "Ankle Support Brace",
                 price: 19.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Ankle support brace for sports and daily activities",
                 category: "body-supports",
                 moq: 35,
@@ -720,13 +739,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 23,
                 name: "Wrist Support Band",
                 price: 14.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Wrist support band for carpal tunnel and wrist pain",
                 category: "body-supports",
                 moq: 50,
@@ -737,13 +760,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 24,
                 name: "Posture Corrector",
                 price: 34.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Full back posture corrector for better alignment",
                 category: "body-supports",
                 moq: 25,
@@ -751,18 +778,22 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
             },
             
-            // Skincare Products
+            // Natural Skincare Products
             {
                 id: 4,
                 name: "Natural Moisturizer",
                 price: 19.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "100% natural moisturizer, chemical-free and safe",
                 category: "skincare",
                 moq: 100,
@@ -773,13 +804,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 5,
                 name: "Vitamin C Serum",
                 price: 29.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Concentrated vitamin C serum for brighter skin",
                 category: "skincare",
                 moq: 80,
@@ -790,13 +825,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 6,
                 name: "Natural Face Mask",
                 price: 9.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Natural face mask for skin rejuvenation",
                 category: "skincare",
                 moq: 120,
@@ -809,13 +848,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 7,
                 name: "Thai Herbal Soap",
                 price: 4.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Authentic Thai herbal soap for deep cleansing",
                 category: "soap",
                 moq: 200,
@@ -826,13 +869,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 8,
                 name: "Organic Honey Soap",
                 price: 5.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Organic honey soap for moisturized skin",
                 category: "soap",
                 moq: 150,
@@ -843,13 +890,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 9,
                 name: "Aloe Vera Soap",
                 price: 4.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Aloe vera soap to reduce skin inflammation",
                 category: "soap",
                 moq: 180,
@@ -857,18 +908,22 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 sizes: ["50g", "100g"]
             },
             
-         
+            // Natural Hand Cream
             {
                 id: 10,
                 name: "Lavender Hand Cream",
                 price: 8.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Lavender hand cream for soft, moisturized hands",
                 category: "hand-cream",
                 moq: 100,
@@ -879,13 +934,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 11,
                 name: "Rose Hand Cream",
                 price: 8.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Rose hand cream for soft, moisturized hands",
                 category: "hand-cream",
                 moq: 100,
@@ -896,13 +955,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 12,
                 name: "Intensive Hand Cream",
                 price: 10.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Intensive hand cream for very dry skin",
                 category: "hand-cream",
                 moq: 80,
@@ -915,13 +978,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 13,
                 name: "Organic Jasmine Rice",
                 price: 6.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Premium organic jasmine rice, pesticide-free",
                 category: "rice",
                 moq: 50,
@@ -932,13 +999,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 14,
                 name: "Organic Brown Rice",
                 price: 7.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Organic brown rice rich in nutrients",
                 category: "rice",
                 moq: 50,
@@ -949,13 +1020,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 15,
                 name: "Organic Riceberry",
                 price: 8.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Organic riceberry with high antioxidants",
                 category: "rice",
                 moq: 40,
@@ -963,18 +1038,22 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 sizes: ["1kg", "5kg"]
             },
             
-            // Healthy Beverages
+            // Healthy Nature Beverages
             {
                 id: 16,
                 name: "Thai Herbal Tea",
                 price: 5.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Authentic Thai herbal tea for health benefits",
                 category: "beverages",
                 moq: 100,
@@ -985,13 +1064,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 17,
                 name: "Organic Fruit Juice",
                 price: 4.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "100% organic fruit juice, no added sugar",
                 category: "beverages",
                 moq: 120,
@@ -1002,13 +1085,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 18,
                 name: "Herbal Health Drink",
                 price: 4.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Herbal health drink for body nourishment",
                 category: "beverages",
                 moq: 100,
@@ -1021,13 +1108,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 19,
                 name: "Ready-to-Eat Basil Rice",
                 price: 3.90,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Ready-to-eat basil rice made from organic ingredients",
                 category: "quick-meal",
                 moq: 150,
@@ -1038,13 +1129,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 20,
                 name: "Organic Vegetable Salad",
                 price: 4.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Fresh organic vegetable salad, daily prepared",
                 category: "quick-meal",
                 moq: 120,
@@ -1055,13 +1150,17 @@ button.add-btn:hover, button.add:hover, .btn-add:hover {
                 id: 21,
                 name: "Ready-to-Eat Vegetable Soup",
                 price: 3.50,
-                image: `<div class="carousel-container">
-        <div class="carousel-images">
-            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
-        </div>
-        <button class="carousel-nav prev">&#10094;</button>
-        <button class="carousel-nav next">&#10095;</button>
-    </div>`,
+                image: `
+<div class="swiper product-swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+`,
                 description: "Ready-to-eat vegetable soup made from organic vegetables",
                 category: "quick-meal",
                 moq: 130,
@@ -1763,29 +1862,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".carousel-container").forEach(function (container) {
-        const imagesWrapper = container.querySelector(".carousel-images");
-        const images = imagesWrapper.querySelectorAll("img");
-        let index = 0;
-
-        const updateCarousel = () => {
-            imagesWrapper.style.transform = `translateX(-${index * 100}%)`;
-        };
-
-        container.querySelector(".carousel-nav.prev").addEventListener("click", () => {
-            index = (index - 1 + images.length) % images.length;
-            updateCarousel();
-        });
-
-        container.querySelector(".carousel-nav.next").addEventListener("click", () => {
-            index = (index + 1) % images.length;
-            updateCarousel();
-        });
+</script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  const swipers = document.querySelectorAll('.product-swiper');
+  swipers.forEach((el) => {
+    new Swiper(el, {
+      loop: true,
+      navigation: {
+        nextEl: el.querySelector('.swiper-button-next'),
+        prevEl: el.querySelector('.swiper-button-prev'),
+      },
     });
+  });
 });
-</script>
-</body>
+</script></body>
 </html>
