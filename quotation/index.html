@@ -1,1283 +1,1791 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=1024" name="viewport"/>
-<title>
-   ANG DONGKA Products
-  </title>
-<script src="https://cdn.tailwindcss.com">
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
-<script>
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    var activeTab = document.getElementById(tabName);
-    evt.currentTarget.className += " active";
-
-    if (!activeTab.dataset.loaded) {
-      const cards = activeTab.querySelectorAll(".product-card");
-      cards.forEach((card, index) => {
-        setTimeout(() => card.classList.add("reveal"), index * 100);
-      });
-      activeTab.dataset.loaded = true;
-    }
-    activeTab.style.display = "block";
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Online Shop</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        .cart-item {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        .tab-active {
+            color: #4f46e5;
+            border-bottom: 3px solid #4f46e5;
+            font-weight: 600;
+        }
+        .product-image {
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
-window.onload = function () {
-    document.getElementsByClassName("tablinks")[0].click();
-};
-</script>
-<style>body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f9fafb;
+        .category-tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .category-tab {
+            white-space: nowrap;
+            margin-bottom: 0.5rem;
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 200px;
+            margin-top: 50px;
+            margin-bottom: 5px;
+        }
+        .bg-light-blue {
+            background-color: #e0f7fa;
+        }
+        .product-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .tag-bestseller {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .tag-eco {
+            background-color: #10b981;
+            color: white;
+        }
+        .tag-new {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .moq-badge {
+            display: inline-block;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+        .size-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .size-selector select {
+            flex: 1;
+            margin-right: 8px;
+        }
+        .size-selector input {
+            width: 60px;
+            margin-right: 8px;
+        }
+        .size-selector button {
+            white-space: nowrap;
+        }
+        /* PDF specific styles */
+        @media print {
+            .quotation-pdf {
+                padding: 20mm !important;
+            }
+            .pdf-header {
+                margin-bottom: 15mm !important;
+            }
+            .pdf-table {
+                margin: 10mm 0 !important;
+            }
+            .pdf-table th, .pdf-table td {
+                padding: 2mm 3mm !important;
+            }
+            .pdf-footer {
+                margin-top: 15mm !important;
+            }
+        }
+    
+.add-to-cart-btn {
+    background-image: linear-gradient(to right, #60527d, #a64c58);
+    color: white !important;
+    border: none;
+    font-weight: 500;
+}
+.add-to-cart-btn:hover {
+    filter: brightness(1.1);
+}
+
+button.add-btn, button.add, .btn-add {
+    background-image: linear-gradient(to right, #60527d, #a64c58);
+    color: white !important;
+    border: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+}
+button.add-btn:hover, button.add:hover, .btn-add:hover {
+    filter: brightness(1.1);
+}
+
+@keyframes gradient-x {
+    0%, 100% { background-position: left; }
+    50% { background-position: right; }
+}
+.animate-gradient-x {
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient-x 5s ease infinite;
+}
+
+@media print {
+  .quotation-pdf {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .quotation-pdf .text-right {
+    text-align: right;
+  }
+  .pdf-table th, .pdf-table td {
+    padding: 4px 6px;
+  }
+  .pdf-header, .pdf-footer {
+    margin-bottom: 10mm !important;
+  }
+}
+@media print {
+    .quotation-pdf {
+        font-size: 11px;
+        line-height: 1.3;
+        padding: 10mm 15mm !important;
     }
-    h2, h3 {
-      font-family: 'Playfair Display', serif;
+    .pdf-header,
+    .pdf-footer {
+        margin-bottom: 5mm !important;
     }
-    .product-card {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+    .pdf-table th,
+    .pdf-table td {
+        padding: 3mm 4mm !important;
     }
-    .product-card.reveal {
-      opacity: 1;
-      transform: none;
+    .pdf-table {
+        width: 100%;
     }
-    .fade-in {
-      animation: fadeIn 1s ease-in-out forwards;
+    .quotation-pdf h1,
+    .quotation-pdf h2,
+    .quotation-pdf h3 {
+        margin-bottom: 4px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .quotation-pdf p {
+        margin: 2px 0;
     }
-  
-.carousel-images::-webkit-scrollbar {
-  display: none;
+}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        .cart-item {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        .tab-active {
+            color: #4f46e5;
+            border-bottom: 3px solid #4f46e5;
+            font-weight: 600;
+        }
+        .product-image {
+    aspect-ratio: 4 / 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .category-tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .category-tab {
+            white-space: nowrap;
+            margin-bottom: 0.5rem;
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 200px;
+            margin-top: 50px;
+            margin-bottom: 5px;
+        }
+        .bg-amber-50 {
+            background-color: #e0f7fa;
+        }
+    
+.add-to-cart-btn {
+    background-image: linear-gradient(to right, #60527d, #a64c58);
+    color: white !important;
+    border: none;
+    font-weight: 500;
+}
+.add-to-cart-btn:hover {
+    filter: brightness(1.1);
+}
+
+@keyframes gradient-x {
+    0%, 100% { background-position: left; }
+    50% { background-position: right; }
+}
+.animate-gradient-x {
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient-x 5s ease infinite;
+}
+
+/* Quotation Section Enhancements */
+#quotationContent {
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 40px;
+    max-width: 800px;
+    margin: auto;
+}
+#quotationContent h1, #quotationContent h2, #quotationContent h3 {
+    margin-bottom: 8px;
+}
+#quotationContent table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#quotationContent th, #quotationContent td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+#quotationContent thead {
+    background-color: #f3f4f6;
+}
+#quotationContent tfoot {
+    font-weight: bold;
+    background-color: #f9fafb;
+}
+#quotationContent .signature-line {
+    margin-top: 60px;
+}
+
+#quotationContent {
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 30px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+#quotationContent h1 {
+    font-size: 20px;
+}
+#quotationContent h2 {
+    font-size: 16px;
+}
+
+#quotationContent {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#quotationContent {
+    font-size: 13px;
+    line-height: 1.4;
+    padding: 20px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+#quotationContent h1 {
+    font-size: 18px;
+}
+#quotationContent h2 {
+    font-size: 15px;
+}
+#quotationContent h3 {
+    font-size: 14px;
+}
+#quotationContent table th, 
+#quotationContent table td {
+    padding: 6px 8px;
+}
+#quotationContent .signature-line {
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+#quotationContent .text-center.text-gray-600.text-sm.mt-8 {
+    margin-top: 20px;
+}
+
+.product-image {
+    position: relative;
+}
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 .carousel-images {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    display: flex;
+    transition: transform 0.3s ease-in-out;
 }
-
-.carousel-images::-webkit-scrollbar { display: none; }
-.carousel-images { -ms-overflow-style: none; scrollbar-width: none; }
-/* Scroll Reveal Animation */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s ease-in-out;
-}
-.reveal-up.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Hover scale */
-.product-card:hover {
-  transform: scale(1.03);
-}
-/* Enhanced Tabs */
-.tab {
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #e2e8f0;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.tab button {
-  position: relative;
-  background: none;
-  border: none;
-  padding: 10px 0;
-  color: #1f2937;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.tab button:hover {
-  color: #3b7a57;
-  background-color: transparent !important;
-}
-
-.tab button.active {
-  font-weight: 700;
-  color: #3b7a57;
-}
-
-.tab button.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 3px;
-  background-color: #d4af37; /* Gold underline */
-  border-radius: 2px;
-}
-a.bg-[#0c4a6e]:hover {
-  background-color: #3b7a57 !important;
-}
-.product-hover-effect {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.product-hover-effect:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
-}
-body {
-  background-color: #fff8f0;
-}
-
-.product-card {
-  background: #ffffff;
-  border: 1px solid #f0c987;
-  border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(240, 201, 135, 0.3);
-}
-
-button, .btn {
-  background-color: #f0c987;
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-button:hover, .btn:hover {
-  background-color: #e0b96c;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #333;
-}
-
-h1, h2, h3, h4 {
-  font-weight: 600;
-  color: #2a2a2a;
-}
-p {
-        font-family: 'Montserrat', sans-serif;
-    }
-#interactive-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #fffaf0;
-  }
-
-  canvas#bubble-canvas {
+.carousel-images img {
     width: 100%;
-    height: 100%;
-    display: block;
-  }
-.product-card {
-    border: 2px solid transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-  }
-  .product-card:hover {
-    border: 2px solid #d4af37;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-  }
-.fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-p strong { font-weight: 700; }
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.carousel-nav.prev {
+    left: 5px;
+}
+.carousel-nav.next {
+    right: 5px;
+}
 </style></head>
-<body class="py-12 fade-in" style="background-color: #fffaf0;">
-<div class="max-w-7xl mx-auto px-4">
-<div class="mb-6">
-<a class="text-sm bg-[#0c4a6e] text-white px-4 py-2 rounded hover:bg-[#0a3a56] transition" href="http://www.angdongka.co.th/">
-     ← Back to Main Website
-    </a>
+<body class="bg-light-blue bg-[#fef3e7]">
+<!-- Header -->
+<header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg bg-gradient-to-r from-yellow-200 to-yellow-700">
+<div class="container mx-auto px-4 py-6 flex justify-between items-center">
+<h1 class="text-xl font-bold bg-gradient-to-r from-red-800 via-white to-blue-800 bg-clip-text text-transparent animate-gradient-x font-bold text-base font-semibold">ANG DONGKA (THAILAND) CO., LTD.</h1>
+<div class="flex items-center space-x-4">
+<button class="relative flex items-center bg-white text-indigo-700 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition" id="cartBtn">
+<svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Cart</span>
+<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full" id="cartCount">0</span>
+</button>
 </div>
-<h2 class="text-4xl text-center font-bold text-gray-900 mb-4">
-    ANG DONGKA (THAILAND) CO., LTD.
-   </h2>
-<p class="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
-    We specialize in exporting high-quality Thai products to the global market. Our mission is to deliver excellence through innovation, natural ingredients, and traditional expertise.
-   </p>
-<div class="tab flex justify-center mb-8 flex-wrap gap-4">
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'Body')">
-     Body Supports
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'Skincare')">
-     Natural Skincare Products
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'Soap')">
-     Natural SOAP
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'HandCream')">
-     Natural Hand Cream
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'HandCream3')">
-     Organic Thai Rice
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'HandCream2')">
-     Healthy Nature Beverages
-    </button>
-<button class="tablinks bg-gray-200 hover:bg-[#0c4a6e] hover:text-white py-2 px-4 rounded" onclick="openTab(event, 'HandCream1')">
-     Organic Quick Meal
-    </button>
 </div>
-<div class="tabcontent hidden" id="Body">
+</header>
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-8">
+<!-- Shop Section -->
+<section class="mb-12" id="shopSection">
+<!-- Category Tabs -->
+<div class="mb-8">
+<div class="category-tabs-container border-b border-gray-200 pb-2">
+<button class="category-tab tab-active px-3 py-2 text-sm md:text-base" data-category="body-supports">
+                        Body Supports
+                    </button>
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="skincare">
+                        Skincare Products
+                    </button>
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="soap">
+                        Natural SOAP
+                    </button>
+             
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="rice">
+                        Organic Thai Rice
+                    </button>
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="beverages">
+                        Healthy Beverages
+                    </button>
+<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="quick-meal">
+                        Organic Quick Meal
+                    </button>
+</div>
+</div>
+<!-- Products Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full"><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/pVKm2zv2/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/fbk3ZPzF/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/3w6kwZWw/Screenshot-2025-06-13-233235.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">
-         LS LUMBAR SUPPORT
-        </h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-         Best Seller
-        </span>
-</div>
-<p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>💢 Individuals with back, waist, or hip pain<br/>💻 Office workers those sitting for long hours (office syndrome)<br/>📦 People who frequently lift heavy objects<br/>👵 Elderly or those with weak muscles<br/>🧬 Conditions like muscle inflammation, spinal degeneration, or herniated discs<br/>🛌 Post-surgery recovery<br/>🧘 Physical therapy and rehabilitation<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Chart (Waist circumference in inches)</strong><br/>S – 26–30"<br/>M – 30–34"<br/>L – 34–38"<br/>XL – 38–42"<br/>2XL – 42–50"<br/>3XL – 50–56"<br/>4XL – 56–60"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-black border border-gray-300">
-</span>
-<span class="w-5 h-5 rounded-full bg-amber-100 border border-gray-300">
-</span>
-</div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $20 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full"><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/D0gJ7JDf/f36f51f6-fcca-4ccc-975d-a3a7cd5ae873.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/W3mt7qsm/23329eb6-3957-4c35-b1cf-b632564dad52.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/NG459XJB/1749831782489.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">ECO BACK SUPPORT</h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Affordable Model</span>
-</div>
-<p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>
-🚗 Long-distance drivers, warehouse workers, factory staff, homemakers<br/>
-💼 Office syndrome or sitting in the same position for long periods<br/>
-🧓 Seniors or individuals with weak muscles<br/>
-🛠️ Laborers, machine movers, and those doing physical work<br/>
-🏥 Nurses, caregivers, post-surgery recovery, and physical therapy patients<br/>
-⚠️ People with back, waist, or hip pain<br/>
-📦 Those who regularly lift heavy objects<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Chart (Waist circumference in inches)</strong><br/>
-S – 20–26"<br/>
-M – 26–30"<br/>
-L – 30–36"<br/>
-XL – 36–42"<br/>
-2XL – 42–48"<br/>
-3XL – 48–54"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-black border border-gray-300"></span></div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">Thailand Retail Price $12 USD</p>
-<p class="text-sm text-red-700 font-semibold mt-1">Wholesale price: Please contact us</p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full"><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/QtbD3zQT/f9df1d8d-8215-4582-aab4-a078a8b8ade4.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/jqF97KSj/542e4ff6-4d03-48eb-9b0a-e8df5cea6245.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/QtM4FnL5/1def40ea-5f23-4fa1-9f4d-8807d0cdf02e.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">Posture Support Shirt LS14</h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Flagship Model</span>
-</div>
-<p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>
-🧍‍♂️ Upper and lower back pain<br/>
-🎯 Posture correction – rounded shoulders, hunchback<br/>
-💼 Prolonged sitting – office syndrome<br/>
-🏋️‍♂️ Heavy lifting – factory workers, housekeepers<br/>
-👵 Elderly individuals<br/>
-🧘 Muscle weakness / spinal degeneration<br/>
-🤕 Recovery after injury or surgery<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Chart (Waist circumference in inches)</strong><br/>
-S – 27–32"<br/>
-M – 32–36"<br/>
-L – 36–40"<br/>
-XL – 40–44"<br/>
-2XL – 44–48"<br/>
-3XL – 48–52"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-black border border-gray-300"></span></div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">Thailand Retail Price $35 USD</p>
-<p class="text-sm text-red-700 font-semibold mt-1">Wholesale price: Please contact us</p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/SNJtz44b/dd243938-433e-4f20-b026-1b9c489ab022.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/ydLvkQrN/0f03e966-dccd-4940-92a7-0899fe5bda55.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/76HKP89c/Blue-Good-Night-Flyer.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">MINI BACK SUPPORT</h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ergonomic</span>
-</div>
-<p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>
-💢 Back, waist, or hip pain<br/>
-💺 Long hours of sitting – office syndrome<br/>
-🧳 Heavy lifting – housekeepers, factory workers, drivers<br/>
-👵 Elderly individuals<br/>
-🧬 Muscle weakness, spinal degeneration, herniated discs<br/>
-🏥 Post-surgery recovery or physical therapy support<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Chart (Waist in inches):</strong><br/>
-S – 26–30"<br/>
-M – 30–34"<br/>
-L – 34–38"<br/>
-XL – 38–42"<br/>
-2XL – 42–50"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-black border border-gray-300">
-</span>
-<span class="w-5 h-5 rounded-full bg-amber-100 border border-gray-300">
-</span>
-</div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">Thailand Retail Price $14 USD</p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full"><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/ryHGjSJ0/4af36bda-5224-4710-8267-9d4cead93863-1.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/GmwFwd6b/a9204779-ff0a-4d2e-872d-967c2d4a5930.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/XYfwnt0d/12476833-530c-4453-9f5f-26c49fb5d112-1.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">BACK POSTURE SUPPORT</h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ergonomic</span>
-</div>
-<p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>💢 Individuals with back, waist, or hip pain<br/>💻 Office workers those sitting for long hours (office syndrome)<br/>📦 People who frequently lift heavy objects<br/>👵 Elderly or those with weak muscles<br/>🧬 Conditions like muscle inflammation, spinal degeneration, or herniated discs<br/>🛌 Post-surgery recovery<br/>🧘 Physical therapy and rehabilitation<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Chart (Waist circumference in inches)</strong><br/>S – 26–30"<br/>M – 30–34"<br/>L – 34–38"<br/>XL – 38–42"<br/>2XL – 42–50"<br/>3XL – 50–56"<br/>4XL – 56–60"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-amber-100 border border-gray-300">
-</span>
-</div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">Thailand Retail Price $23 USD</p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-[4/5] overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/rwHsj1Gg/26f2c4c9-6710-4fb4-82ac-83cff1967935.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/tRVWPf97/3.webp"/><img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/BQTF7KL0/4.webp"/></div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<div class="flex items-center justify-between">
-<h4 class="text-lg font-bold text-gray-900">KNEE SUPPORT WITH SPRING</h4>
-<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ergonomic</span>
-</div>
-<p>📌 Price is for 1 piece – To order a pair, please select 2 units</p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>Key Features</strong><br/>👫 Unisex product 📦 In Stock Ready to Ship<br/>🏭 100% Made in Thailand<br/>✅ Certified ISO 9001 &amp; ISO 13485<br/>🩺 Made from premium-grade elastic strong, flexible, Lightweight comfortable to wear all day.<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>💡 Recommended For</strong><br/>
-🤕 Relieves knee pain or swelling from heavy use<br/>
-🦴 Helps with arthritis and joint degeneration<br/>
-🛡️ Supports injured muscles and ligaments<br/>
-🏃‍♀️ Suitable for sports and exercise<br/>
-🔁 Can be worn on both left &amp; right knees<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>📏 Size Guide (Measure around the kneecap):</strong><br/>
-S – 13–15"<br/>
-M – 15–17"<br/>
-L – 17–19"<br/>
-XL – 19–21"<br/>
-2XL – 21–23"<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🧼 Care Instructions</strong><br/>🧴 Soak in mild detergent for 30 minutes<br/>✋ Hand wash gently<br/>💧 Rinse thoroughly with clean water<br/>🌤️ Dry in the shade<br/></p><p class="text-sm text-gray-600" style="margin-top: 1rem;"><strong>🚫 Do Not</strong><br/>❌ Machine wash<br/>❌ Dry under direct sunlight<br/>❌ Iron / Use brush<br/>❌ Twist or wring<br/>❌ Wear while sleeping<br/></p><div class="mt-2 flex gap-2 items-center">
-<span class="text-sm font-medium text-gray-700">
-         Colors:
-        </span>
-<div class="flex items-center gap-1">
-<span class="w-5 h-5 rounded-full bg-amber-100 border border-gray-300">
-</span>
-</div>
-</div>
-<p class="text-sm text-green-700 font-semibold mt-1">Thailand Retail Price $14 USD</p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="Skincare">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/qvhHfXvy/WRIST-SUPPORT-4.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/8z2QTJ73/WRIST-SUPPORT-2.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/8PngnnNT/WRIST-SUPPORT-3.webp"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">MILK PROTEIN SUNSCREEN</h4>
-<p class="text-sm text-gray-600">A lightweight, gentle sunscreen with SPF50 PA+++, formulated with milk protein. Protects your skin from harmful UVA and UVB rays—major causes of skin damage—while maintaining a smooth, non-greasy feel.</p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/9XgJZ3ct/dff8d2a0-dc72-4ed2-92dc-49f126942b8e.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/yxGjHRLr/WRIST-SUPPORT-1.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/026ZCtQg/6e1fa9f7-e865-4632-a92e-8449392b5776.webp"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">LOTUS GOLD SERUM</h4>
-<p class="text-sm text-gray-600">A luxurious serum infused with the power of lotus flower extract. Helps reduce acne and soothe irritation by calming skin inflammation and strengthening the skin’s natural barrier.</p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Qd3YmRyB/new-1-1.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/KvLsnZJS/d1f43304-6195-4423-8167-2bef5ca4c69a.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/bdXkyft1/229086fe-34e0-440f-a854-4952a7287d34.webp"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">NAD PEPTIDE ACNE SERUM</h4>
-<p class="text-sm text-gray-600">A concentrated serum enriched with 12 types of peptides and advanced skin-repairing technology from Salmon DNA. Deeply revitalizes skin at the cellular level and stimulates tissue regeneration for visibly healthier, more resilient skin.</p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Skincare Product 4
-       </h4>
-<p class="text-sm text-gray-600">
-        Skincare product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Skincare Product 5
-       </h4>
-<p class="text-sm text-gray-600">
-        Skincare product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Skincare Product 6
-       </h4>
-<p class="text-sm text-gray-600">
-        Skincare product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Skincare Product 7
-       </h4>
-<p class="text-sm text-gray-600">
-        Skincare product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Skincare Product 8
-       </h4>
-<p class="text-sm text-gray-600">
-        Skincare product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="Soap">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Soap Product 1
-       </h4>
-<p class="text-sm text-gray-600">
-        Soap product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Soap Product 2
-       </h4>
-<p class="text-sm text-gray-600">
-        Soap product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Soap Product 3
-       </h4>
-<p class="text-sm text-gray-600">
-        Soap product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="HandCream">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 1
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 2
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 3
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="HandCream3">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 1
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 2
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 3
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="HandCream2">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 1
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 2
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 3
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-<div class="tabcontent hidden" id="HandCream1">
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 1
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 2
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-<div class="bg-white rounded-lg overflow-hidden product-card shadow-xl hover:shadow-2xl transition transform duration-300 reveal-up">
-<div class="relative w-full aspect-square overflow-hidden group">
-<div class="carousel-images flex overflow-x-auto scroll-smooth snap-x snap-mandatory h-full w-full">
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/WpQ5Ts1m/grunge-textured-not-available-stamp-seal-not-available-stamp-seal-watermark-distress-style-blue-vect.webp"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/Xv0LGPGp/31.png"/>
-<img class="w-full snap-center shrink-0 object-cover" loading="lazy" src="https://i.postimg.cc/d01XyksG/assets-V2-8y-BORdm-CQKWm9k-Sju93-C-asset.png"/>
-</div>
-<button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, -1)">
-        ❮
-       </button>
-<button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-1 rounded-full shadow-md z-10" onclick="scrollCarousel(this, 1)">
-        ❯
-       </button>
-</div>
-<div class="p-4 product-hover-effect">
-<h4 class="text-lg font-bold text-gray-900">
-        Hand Cream Product 3
-       </h4>
-<p class="text-sm text-gray-600">
-        Hand cream product description.
-       </p>
-<p class="text-sm text-green-700 font-semibold mt-1">
-        Thailand Retail Price $1 USD
-       </p>
-<p class="text-sm text-red-700 font-semibold mt-1">
-        Wholesale price: Please contact us
-       </p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<!-- Products will be dynamically generated here -->
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex justify-center">
+<div class="flex space-x-2" id="pagination">
+<!-- Pagination will be dynamically generated here -->
+</div>
+</div>
+</section>
+<!-- Cart Section (Hidden by default) -->
+<section class="hidden" id="cartSection">
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold text-gray-800">Shopping Cart</h2>
+<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToShopBtn">
+<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                        Back to Shop
+                    </button>
+</div>
+<!-- Cart Table -->
+<div class="overflow-x-auto">
+<table class="w-full mb-6">
+<thead class="bg-gray-50 border-b">
+<tr>
+<th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Product</th>
+<th class="py-3 px-4 text-center text-sm font-medium text-gray-700">Quantity</th>
+<th class="py-3 px-4 text-right text-sm font-medium text-gray-700">Price</th>
+<th class="py-3 px-4 text-right text-sm font-medium text-gray-700">Total</th>
+<th class="py-3 px-4 text-center text-sm font-medium text-gray-700">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200" id="cartItems">
+<!-- Cart items will be dynamically added here -->
+</tbody>
+</table>
+</div>
+<div class="mt-6 pt-6 border-t border-gray-200">
+<div class="flex justify-between text-lg font-semibold">
+<span>Total:</span>
+<span id="cartTotal">$0.00</span>
+</div>
+<button class="mt-6 w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition btn-primary" id="checkoutBtn">
+                        Proceed to Checkout
+                    </button>
+</div>
+</div>
+</section>
+<!-- Checkout Form (Hidden by default) -->
+<section class="hidden" id="checkoutSection">
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold text-gray-800">Order Information</h2>
+<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToCartBtn">
+<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                        Back to Cart
+                    </button>
+</div>
+<form class="space-y-6" id="checkoutForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="company">Company Name *</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="company" name="company" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="name">Customer Name *</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="name" name="name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email *</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="email" name="email" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="phone">Phone Number *</label>
+<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="phone" name="phone" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="address">Address *</label>
+<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="address" name="address" required="" rows="3"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="notes">Notes</label>
+<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="notes" name="notes" rows="2"></textarea>
+</div>
+<button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition btn-primary" type="submit">
+                        Generate Quotation
+                    </button>
+</form>
+</div>
+</section>
+<!-- Quotation Section (Hidden by default) -->
+<section class="hidden" id="quotationSection">
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold text-gray-800">Quotation</h2>
+<div class="flex space-x-4">
+<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToCheckoutBtn">
+<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                            Edit Information
+                        </button>
+<button class="flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition" id="downloadPdfBtn">
+<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                            Download PDF
+                        </button>
+</div>
+</div>
+<div class="quotation-pdf p-4 text-sm leading-relaxed" id="quotationContent">
+<div class="flex justify-between items-start mb-4 pdf-header">
+<div>
+<h1 class="text-lg font-semibold" style="color: #5e3205;">ANG DONGKA (THAILAND) CO., LTD.</h1>
+<p class="text-gray-600">Nuanchan, Khet Bueng Kum, Ramintra rd. Bangkok 10230</p>
+<p class="text-gray-600">Tel: +66 619949962</p>
+<p class="text-gray-600">Email: thanapong102030@gmail.com</p>
+</div>
+<div class="text-right">
+<h2 class="text-sm text-right">Quotation</h2>
+<p class="text-sm text-right" id="quotationNumber">No: QT-2023001</p>
+<p class="text-sm text-right" id="quotationDate">Date: 01/06/2023</p>
+</div>
+</div>
+<div class="mb-4">
+<h3 class="font-bold text-gray-800 mb-2">Customer Information:</h3>
+<div class="text-gray-600" id="customerInfo">
+<!-- Customer info will be added here -->
+</div>
+</div>
+<table class="w-full mb-4 pdf-table">
+<thead>
+<tr class="bg-gray-100">
+<th class="py-2 px-4 text-left">Item</th>
+<th class="py-2 px-4 text-right">Quantity</th>
+<th class="py-2 px-4 text-right">Unit Price</th>
+<th class="py-2 px-4 text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200" id="quotationItems">
+<!-- Quotation items will be added here -->
+</tbody>
+<tfoot class="border-t-2 border-gray-300">
+<tr>
+<td class="py-2 px-4 text-right font-bold" colspan="3">Total Amount:</td>
+<td class="py-2 px-4 text-right font-bold" id="quotationTotal">$0.00</td>
+</tr>
+</tfoot>
+</table>
+<div class="mb-4">
+<h3 class="font-bold text-gray-800 mb-2">Notes:</h3>
+<div class="text-gray-600" id="quotationNotes">
+<!-- Notes will be added here -->
+</div>
+</div>
+<!-- Terms and Conditions Section -->
+<div class="mb-4 border-t border-gray-300 pt-6">
+<h3 class="font-bold text-gray-800 mb-2">Terms and Conditions:</h3>
+<ul class="text-gray-600 list-disc pl-5 space-y-1">
+<li>This quotation is valid for 7 days from the issue date to protect against exchange rate fluctuations.</li>
+<li>Payment Terms: Full payment required before shipping.</li>
+<li>Delivery Time: 1-5 business days after payment confirmation.</li>
+</ul>
+</div>
+<!-- Signature Section -->
+<div class="mt-12 flex justify-center space-x-24 text-sm">
+<div class="text-center">
+<div class="signature-line"></div>
+<p class="text-gray-800">Customer Signature</p>
+<p class="text-gray-600 text-sm">Position: ___________________</p>
+</div>
+<div class="text-center">
+<div class="signature-line"></div>
+<p class="text-gray-800">ANG DONGKA (THAILAND) CO., LTD.</p>
+<p class="text-gray-600 text-sm">Position: ___________________</p>
+</div>
+</div>
+<div class="text-center text-gray-500 text-xs mt-6">
+<p>Thank you for shopping with ANG DONGKA (THAILAND) CO., LTD.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
 <script>
-   function scrollCarousel(button, direction) {
-    const container = button.parentElement.querySelector('.carousel-images');
-    const scrollAmount = container.clientWidth;
-    container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
-  }
-  </script>
-<script>
-   function scrollCarousel(button, direction) {
-  const container = button.parentElement.querySelector('.carousel-images');
-  const scrollAmount = container.clientWidth;
-  container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-  </script>
-<script>
-   function scrollCarousel(button, direction) {
-  const container = button.parentElement.querySelector('.carousel-images');
-  const scrollAmount = container.clientWidth;
-  container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-  </script>
-<script>
-   // Scroll reveal on scroll
-document.addEventListener("DOMContentLoaded", () => {
-  const revealElements = document.querySelectorAll(".reveal-up");
+        // Sample product data with categories
+        const products = [
+            // Body Supports
+            {
+                id: 1,
+                name: "Back Support Cushion",
+                price: 39.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Ergonomic back support cushion to reduce back pain",
+                category: "body-supports",
+                moq: 50,
+                tag: "bestseller",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            {
+                id: 2,
+                name: "Neck Support Pillow",
+                price: 29.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Comfortable neck support pillow for better sleep",
+                category: "body-supports",
+                moq: 30,
+                tag: "eco",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            {
+                id: 3,
+                name: "Knee Support Brace",
+                price: 24.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Knee support brace for joint pain relief",
+                category: "body-supports",
+                moq: 40,
+                tag: "bestseller",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            {
+                id: 22,
+                name: "Ankle Support Brace",
+                price: 19.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Ankle support brace for sports and daily activities",
+                category: "body-supports",
+                moq: 35,
+                tag: "new",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            {
+                id: 23,
+                name: "Wrist Support Band",
+                price: 14.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Wrist support band for carpal tunnel and wrist pain",
+                category: "body-supports",
+                moq: 50,
+                tag: "eco",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            {
+                id: 24,
+                name: "Posture Corrector",
+                price: 34.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Full back posture corrector for better alignment",
+                category: "body-supports",
+                moq: 25,
+                tag: "bestseller",
+                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            },
+            
+            // Skincare Products
+            {
+                id: 4,
+                name: "Natural Moisturizer",
+                price: 19.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "100% natural moisturizer, chemical-free and safe",
+                category: "skincare",
+                moq: 100,
+                tag: "bestseller",
+                sizes: ["50ml", "100ml", "200ml"]
+            },
+            {
+                id: 5,
+                name: "Vitamin C Serum",
+                price: 29.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Concentrated vitamin C serum for brighter skin",
+                category: "skincare",
+                moq: 80,
+                tag: "eco",
+                sizes: ["30ml", "50ml"]
+            },
+            {
+                id: 6,
+                name: "Natural Face Mask",
+                price: 9.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Natural face mask for skin rejuvenation",
+                category: "skincare",
+                moq: 120,
+                tag: "new",
+                sizes: ["Single", "Pack of 5", "Pack of 10"]
+            },
+            
+            // Natural SOAP
+            {
+                id: 7,
+                name: "Thai Herbal Soap",
+                price: 4.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Authentic Thai herbal soap for deep cleansing",
+                category: "soap",
+                moq: 200,
+                tag: "bestseller",
+                sizes: ["50g", "100g"]
+            },
+            {
+                id: 8,
+                name: "Organic Honey Soap",
+                price: 5.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Organic honey soap for moisturized skin",
+                category: "soap",
+                moq: 150,
+                tag: "eco",
+                sizes: ["50g", "100g"]
+            },
+            {
+                id: 9,
+                name: "Aloe Vera Soap",
+                price: 4.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Aloe vera soap to reduce skin inflammation",
+                category: "soap",
+                moq: 180,
+                tag: "bestseller",
+                sizes: ["50g", "100g"]
+            },
+            
+         
+            {
+                id: 10,
+                name: "Lavender Hand Cream",
+                price: 8.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Lavender hand cream for soft, moisturized hands",
+                category: "hand-cream",
+                moq: 100,
+                tag: "bestseller",
+                sizes: ["30ml", "50ml", "100ml"]
+            },
+            {
+                id: 11,
+                name: "Rose Hand Cream",
+                price: 8.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Rose hand cream for soft, moisturized hands",
+                category: "hand-cream",
+                moq: 100,
+                tag: "eco",
+                sizes: ["30ml", "50ml", "100ml"]
+            },
+            {
+                id: 12,
+                name: "Intensive Hand Cream",
+                price: 10.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Intensive hand cream for very dry skin",
+                category: "hand-cream",
+                moq: 80,
+                tag: "new",
+                sizes: ["50ml", "100ml"]
+            },
+            
+            // Organic Thai Rice
+            {
+                id: 13,
+                name: "Organic Jasmine Rice",
+                price: 6.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Premium organic jasmine rice, pesticide-free",
+                category: "rice",
+                moq: 50,
+                tag: "bestseller",
+                sizes: ["1kg", "5kg", "10kg"]
+            },
+            {
+                id: 14,
+                name: "Organic Brown Rice",
+                price: 7.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Organic brown rice rich in nutrients",
+                category: "rice",
+                moq: 50,
+                tag: "eco",
+                sizes: ["1kg", "5kg", "10kg"]
+            },
+            {
+                id: 15,
+                name: "Organic Riceberry",
+                price: 8.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Organic riceberry with high antioxidants",
+                category: "rice",
+                moq: 40,
+                tag: "new",
+                sizes: ["1kg", "5kg"]
+            },
+            
+            // Healthy Beverages
+            {
+                id: 16,
+                name: "Thai Herbal Tea",
+                price: 5.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Authentic Thai herbal tea for health benefits",
+                category: "beverages",
+                moq: 100,
+                tag: "bestseller",
+                sizes: ["20 bags", "50 bags", "100 bags"]
+            },
+            {
+                id: 17,
+                name: "Organic Fruit Juice",
+                price: 4.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "100% organic fruit juice, no added sugar",
+                category: "beverages",
+                moq: 120,
+                tag: "eco",
+                sizes: ["250ml", "500ml", "1L"]
+            },
+            {
+                id: 18,
+                name: "Herbal Health Drink",
+                price: 4.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Herbal health drink for body nourishment",
+                category: "beverages",
+                moq: 100,
+                tag: "new",
+                sizes: ["250ml", "500ml"]
+            },
+            
+            // Organic Quick Meal
+            {
+                id: 19,
+                name: "Ready-to-Eat Basil Rice",
+                price: 3.90,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Ready-to-eat basil rice made from organic ingredients",
+                category: "quick-meal",
+                moq: 150,
+                tag: "bestseller",
+                sizes: ["200g", "400g"]
+            },
+            {
+                id: 20,
+                name: "Organic Vegetable Salad",
+                price: 4.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Fresh organic vegetable salad, daily prepared",
+                category: "quick-meal",
+                moq: 120,
+                tag: "eco",
+                sizes: ["250g", "500g"]
+            },
+            {
+                id: 21,
+                name: "Ready-to-Eat Vegetable Soup",
+                price: 3.50,
+                image: `<div class="carousel-container">
+        <div class="carousel-images">
+            <img src="https://i.postimg.cc/CLp0mF4w/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" alt="Product Image" /><img src="https://i.postimg.cc/XYQ0j96v/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" alt="Product Image" /><img src="https://i.postimg.cc/9f0HrzcY/Screenshot-2025-06-13-233235.webp" alt="Product Image" />
+        </div>
+        <button class="carousel-nav prev">&#10094;</button>
+        <button class="carousel-nav next">&#10095;</button>
+    </div>`,
+                description: "Ready-to-eat vegetable soup made from organic vegetables",
+                category: "quick-meal",
+                moq: 130,
+                tag: "new",
+                sizes: ["300ml", "500ml"]
+            }
+        ];
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+        // Cart state
+        let cart = [];
+        let customerInfo = {};
+        let currentCategory = "body-supports"; // Default to first category instead of "all"
+        let currentPage = 1;
+        const productsPerPage = 6;
 
-  revealElements.forEach(el => {
-    revealObserver.observe(el);
-  });
-});
-  </script>
-<div id="interactive-bg">
-<canvas id="bubble-canvas">
-</canvas>
-</div>
-<script>
-   const canvas = document.getElementById('bubble-canvas');
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  let bubbles = [];
+        // DOM elements
+        const productContainer = document.querySelector('#shopSection .grid');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartCountElement = document.getElementById('cartCount');
+        const cartTotalElement = document.getElementById('cartTotal');
+        const shopSection = document.getElementById('shopSection');
+        const cartSection = document.getElementById('cartSection');
+        const checkoutSection = document.getElementById('checkoutSection');
+        const quotationSection = document.getElementById('quotationSection');
+        const paginationContainer = document.getElementById('pagination');
+        const categoryTabs = document.querySelectorAll('.category-tab');
 
-  function resizeCanvas() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }
-
-  function createBubbles() {
-    bubbles = [];
-    for (let i = 0; i < 40; i++) {
-      bubbles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 6 + 2,
-        speed: Math.random() * 1 + 0.5,
-        alpha: Math.random() * 0.5 + 0.3
-      });
-    }
-  }
-
-  function drawBubbles() {
-    ctx.clearRect(0, 0, width, height);
-    for (const bubble of bubbles) {
-      ctx.beginPath();
-      ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(128, 192, 255, ${bubble.alpha})`;
-      ctx.fill();
-
-      bubble.y -= bubble.speed;
-      if (bubble.y < -bubble.radius) {
-        bubble.y = height + bubble.radius;
-        bubble.x = Math.random() * width;
-      }
-    }
-    requestAnimationFrame(drawBubbles);
-  }
-
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    createBubbles();
-  });
-
-  resizeCanvas();
-  createBubbles();
-  drawBubbles();
-  </script>
-<div style="position: fixed; top: 10px; right: 10px; z-index: 9999;">
-<img alt="Thai Flag" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_Thailand.svg" style="width: 40px; height: auto; box-shadow: 0 0 6px rgba(0,0,0,0.3);"/>
-</div>
-<script>
-   document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+        // Format price
+        function formatPrice(price) {
+            return '$' + price.toFixed(2);
         }
-      });
-    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.product-card').forEach(card => {
-      card.classList.add('fade-up');
-      observer.observe(card);
+        // Filter products by category and page
+        function getFilteredProducts() {
+            return products.filter(product => product.category === currentCategory);
+        }
+
+        // Get paginated products
+        function getPaginatedProducts() {
+            const filteredProducts = getFilteredProducts();
+            
+            // For body-supports category, show all products without pagination
+            if (currentCategory === "body-supports") {
+                return filteredProducts;
+            }
+            
+            // For other categories, apply pagination
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            return filteredProducts.slice(startIndex, endIndex);
+        }
+
+        // Get tag class based on tag name
+        function getTagClass(tag) {
+            switch(tag) {
+                case 'bestseller':
+                    return 'tag-bestseller';
+                case 'eco':
+                    return 'tag-eco';
+                case 'new':
+                    return 'tag-new';
+                default:
+                    return '';
+            }
+        }
+
+        // Get tag text based on tag name
+        function getTagText(tag) {
+            switch(tag) {
+                case 'bestseller':
+                    return 'Best Seller';
+                case 'eco':
+                    return 'Eco Friendly';
+                case 'new':
+                    return 'New';
+                default:
+                    return '';
+            }
+        }
+
+        // Render products
+        function renderProducts() {
+            productContainer.innerHTML = '';
+            const paginatedProducts = getPaginatedProducts();
+            
+            if (paginatedProducts.length === 0) {
+                productContainer.innerHTML = `
+                    <div class="col-span-3 py-12 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="text-gray-600 text-lg">No products found in this category</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            paginatedProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white rounded-lg shadow-md overflow-hidden product-card';
+                
+                // Tag HTML - now moved next to product name
+                const tagHTML = product.tag ? 
+                    `<span class="product-tag ${getTagClass(product.tag)}">${getTagText(product.tag)}</span>` : '';
+                
+                // Different UI based on category
+                let actionHTML = '';
+                
+                if (product.category === 'body-supports') {
+                    // Size selectors for body supports
+                    actionHTML = `
+                        <div class="mt-4 border-t pt-4">
+                            <div class="text-sm font-medium text-gray-700 mb-2">Select Size & Quantity:</div>
+                            <div class="size-selector mb-2">
+                                <select class="size-select border border-gray-300 rounded px-2 py-1 text-sm" data-id="${product.id}">
+                                    ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
+                                </select>
+                                <input type="number" min="1" value="1" class="size-quantity border border-gray-300 rounded px-2 py-1 text-sm" data-id="${product.id}">
+                                <button class="add-size-btn bg-indigo-600 text-white px-2 py-1 rounded text-sm hover:bg-indigo-700 transition" data-id="${product.id}">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Simple add to cart button for other categories
+                    actionHTML = `
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xl font-bold text-indigo-600">${formatPrice(product.price)}</span>
+                            <button class="add-to-cart-btn bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition" data-id="${product.id}">
+                                Add to Cart
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                productCard.innerHTML = `
+                    <div class="product-image bg-gray-100 p-4">
+                        ${product.image}
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                            ${product.name}
+                            ${tagHTML}
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-2">${product.description}</p>
+                        <div class="moq-badge">MOQ: ${product.moq} units</div>
+                        ${product.category === 'body-supports' ? 
+                            `<div class="flex justify-between items-center mt-4">
+                                <span class="text-xl font-bold text-indigo-600">${formatPrice(product.price)}</span>
+                            </div>` : ''
+                        }
+                        ${actionHTML}
+                    </div>
+                `;
+                productContainer.appendChild(productCard);
+            });
+
+            // Add event listeners to "Add" buttons for sizes
+            document.querySelectorAll('.add-size-btn').forEach(button => {
+                button.addEventListener('click', addSizeToCart);
+            });
+            
+            // Add event listeners to "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+            
+            // Render pagination (only for non-body-supports categories)
+            if (currentCategory !== "body-supports") {
+                renderPagination();
+            } else {
+                paginationContainer.innerHTML = ''; // Clear pagination for body-supports
+            }
+        }
+        
+        // Render pagination
+        function renderPagination() {
+            const filteredProducts = getFilteredProducts();
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+            
+            paginationContainer.innerHTML = '';
+            
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.className = 'px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition';
+                prevButton.innerHTML = '&laquo;';
+                prevButton.addEventListener('click', () => {
+                    currentPage--;
+                    renderProducts();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(prevButton);
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `px-3 py-1 rounded-md transition ${currentPage === i ? 'bg-indigo-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`;
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderProducts();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                const nextButton = document.createElement('button');
+                nextButton.className = 'px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition';
+                nextButton.innerHTML = '&raquo;';
+                nextButton.addEventListener('click', () => {
+                    currentPage++;
+                    renderProducts();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(nextButton);
+            }
+        }
+
+        // Add size to cart (for body supports)
+        function addSizeToCart(event) {
+            const productId = parseInt(event.target.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            
+            // Get the selected size and quantity
+            const sizeSelect = event.target.parentElement.querySelector('.size-select');
+            const quantityInput = event.target.parentElement.querySelector('.size-quantity');
+            
+            const selectedSize = sizeSelect.value;
+            const quantity = parseInt(quantityInput.value);
+            
+            if (quantity <= 0) {
+                alert('Please enter a valid quantity');
+                return;
+            }
+            
+            // Create a unique ID for this product+size combination
+            const cartItemId = `${productId}-${selectedSize}`;
+            
+            // Check if this product+size is already in cart
+            const existingItemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+            
+            if (existingItemIndex !== -1) {
+                // Update existing item
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Add new item
+                cart.push({
+                    id: productId,
+                    cartItemId: cartItemId,
+                    name: product.name,
+                    price: product.price,
+                    quantity: quantity,
+                    size: selectedSize,
+                    category: product.category
+                });
+            }
+            
+            updateCartCount();
+            showAddedToCartNotification(`${product.name} (${selectedSize})`);
+        }
+
+        // Add to cart (for non-body supports)
+        function addToCart(event) {
+            const productId = parseInt(event.target.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            
+            // For non-body supports, just add the product without size
+            const cartItemId = `${productId}`;
+            
+            // Check if this product is already in cart
+            const existingItemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
+            
+            if (existingItemIndex !== -1) {
+                // Update existing item
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                // Add new item
+                cart.push({
+                    id: productId,
+                    cartItemId: cartItemId,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1,
+                    category: product.category
+                });
+            }
+            
+            updateCartCount();
+            showAddedToCartNotification(product.name);
+        }
+
+        // Show notification when product is added to cart
+        function showAddedToCartNotification(productName) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>${productName} added to cart</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+        }
+
+        // Render cart items
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="py-8 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <p class="text-gray-600">Your cart is empty</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            cart.forEach((item) => {
+                const product = products.find(p => p.id === item.id);
+                const tr = document.createElement('tr');
+                tr.className = 'cart-item';
+                
+                // Show size info only for body supports
+                const sizeInfo = item.size ? `<p class="text-sm text-gray-600">Size: ${item.size}</p>` : '';
+                
+                tr.innerHTML = `
+                    <td class="py-4 px-4">
+                        <div class="flex items-center">
+                            <div class="mr-4 text-gray-400 w-12 h-12">
+                                ${product.image}
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">${item.name}</h4>
+                                ${sizeInfo}
+                                <span class="text-xs text-gray-500">MOQ: ${product.moq} units</span>
+                                <div class="mt-2">
+                                    <input type="text" placeholder="Additional notes" class="note-input border border-gray-300 rounded px-2 py-1 text-sm w-full" data-id="${item.cartItemId}" value="${item.note || ''}">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4 text-center">
+                        <input type="number" min="1" value="${item.quantity}" class="quantity-input border border-gray-300 rounded px-2 py-1 text-center" data-id="${item.cartItemId}">
+                    </td>
+                    <td class="py-4 px-4 text-right">${formatPrice(item.price)}</td>
+                    <td class="py-4 px-4 text-right font-medium">${formatPrice(item.price * item.quantity)}</td>
+                    <td class="py-4 px-4 text-center">
+                        <button class="remove-from-cart text-red-500 hover:text-red-700" data-id="${item.cartItemId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </td>
+                `;
+                cartItemsContainer.appendChild(tr);
+            });
+            
+            // Add event listeners to quantity inputs
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', updateQuantity);
+            });
+            
+            // Add event listeners to note inputs
+            document.querySelectorAll('.note-input').forEach(input => {
+                input.addEventListener('change', updateNote);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-from-cart').forEach(button => {
+                button.addEventListener('click', removeFromCart);
+            });
+            
+            // Update cart total
+            updateCartTotal();
+        }
+
+        // Update quantity
+        function updateQuantity(event) {
+            const cartItemId = event.target.getAttribute('data-id');
+            const newQuantity = parseInt(event.target.value);
+            
+            if (newQuantity <= 0) {
+                cart = cart.filter(item => item.cartItemId !== cartItemId);
+            } else {
+                const item = cart.find(item => item.cartItemId === cartItemId);
+                if (item) {
+                    item.quantity = newQuantity;
+                }
+            }
+            
+            updateCartCount();
+            renderCart();
+        }
+
+        // Update note
+        function updateNote(event) {
+            const cartItemId = event.target.getAttribute('data-id');
+            const newNote = event.target.value;
+            
+            const item = cart.find(item => item.cartItemId === cartItemId);
+            if (item) {
+                item.note = newNote;
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(event) {
+            const cartItemId = event.target.closest('.remove-from-cart').getAttribute('data-id');
+            cart = cart.filter(item => item.cartItemId !== cartItemId);
+            
+            updateCartCount();
+            renderCart();
+        }
+
+        // Update cart total
+        function updateCartTotal() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = formatPrice(total);
+        }
+
+        // Group cart items by product for quotation
+        function groupCartItemsByProduct() {
+            const groupedItems = [];
+            const productGroups = {};
+            
+            // Group items by product ID
+            cart.forEach(item => {
+                if (!productGroups[item.id]) {
+                    productGroups[item.id] = {
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        sizes: [],
+                        totalQuantity: 0,
+                        totalPrice: 0,
+                        category: item.category
+                    };
+                }
+                
+                // For body supports, add size and quantity
+                if (item.category === 'body-supports') {
+                    productGroups[item.id].sizes.push({
+                        size: item.size,
+                        quantity: item.quantity,
+                        note: item.note
+                    });
+                } else {
+                    // For other categories, just add quantity
+                    productGroups[item.id].totalQuantity += item.quantity;
+                }
+                
+                // Update totals
+                productGroups[item.id].totalQuantity += (item.category === 'body-supports' ? 0 : item.quantity);
+                productGroups[item.id].totalPrice += item.price * item.quantity;
+            });
+            
+            // Convert to array
+            for (const id in productGroups) {
+                groupedItems.push(productGroups[id]);
+            }
+            
+            return groupedItems;
+        }
+
+        // Generate quotation
+        function generateQuotation() {
+            // Set customer info
+            const customerInfoElement = document.getElementById('customerInfo');
+            customerInfoElement.innerHTML = `
+                <p><strong>Company Name:</strong> ${customerInfo.company}</p>
+                <p><strong>Customer Name:</strong> ${customerInfo.name}</p>
+                <p><strong>Email:</strong> ${customerInfo.email}</p>
+                <p><strong>Phone:</strong> ${customerInfo.phone}</p>
+                <p><strong>Address:</strong> ${customerInfo.address}</p>
+            `;
+            
+            // Set quotation number and date
+            const today = new Date();
+            const quotationNumber = `QT-${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+            const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+            
+            document.getElementById('quotationNumber').textContent = `No: ${quotationNumber}`;
+            document.getElementById('quotationDate').textContent = `Date: ${formattedDate}`;
+            
+            // Set quotation items - now grouped by product
+            const quotationItemsElement = document.getElementById('quotationItems');
+            quotationItemsElement.innerHTML = '';
+            
+            const groupedItems = groupCartItemsByProduct();
+            
+            groupedItems.forEach(item => {
+                const tr = document.createElement('tr');
+                
+                // Format item name based on category
+                let itemName = item.name;
+                
+                // For body supports, format sizes as (Size Quantity) (Size Quantity)
+                if (item.category === 'body-supports' && item.sizes.length > 0) {
+                    const sizesText = item.sizes.map(s => `(${s.size} ${s.quantity})`).join(' ');
+                    itemName = `${item.name} ${sizesText}`;
+                }
+                
+                // Calculate total quantity for body supports
+                const totalQuantity = item.category === 'body-supports' 
+                    ? item.sizes.reduce((sum, s) => sum + s.quantity, 0) 
+                    : item.totalQuantity;
+                
+                tr.innerHTML = `
+                    <td class="py-2 px-4">${itemName}</td>
+                    <td class="py-2 px-4 text-right">${totalQuantity}</td>
+                    <td class="py-2 px-4 text-right">${formatPrice(item.price)}</td>
+                    <td class="py-2 px-4 text-right">${formatPrice(item.totalPrice)}</td>
+                `;
+                quotationItemsElement.appendChild(tr);
+            });
+            
+            // Set quotation total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('quotationTotal').textContent = formatPrice(total);
+            
+            // Set notes
+            const quotationNotesElement = document.getElementById('quotationNotes');
+            quotationNotesElement.textContent = customerInfo.notes || 'No notes provided';
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const element = document.getElementById('quotationContent');
+            const opt = {
+                margin: [20, 20, 20, 20], // Increased margins [top, right, bottom, left]
+                filename: 'Quotation.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Add loading indicator
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            loadingOverlay.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+                    <p class="text-gray-800">Generating PDF...</p>
+                </div>
+            `;
+            document.body.appendChild(loadingOverlay);
+            
+            // Generate PDF with better formatting
+            html2pdf().from(element).set(opt).save().then(() => {
+                // Remove loading indicator
+                document.body.removeChild(loadingOverlay);
+            });
+        }
+
+        // Initialize
+        function init() {
+            // Render products
+            renderProducts();
+            
+            // Category tabs
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    categoryTabs.forEach(t => t.classList.remove('tab-active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('tab-active');
+                    
+                    // Update current category and reset page
+                    currentCategory = tab.getAttribute('data-category');
+                    currentPage = 1;
+                    
+                    // Render products
+                    renderProducts();
+                });
+            });
+            
+            // Cart button - now only shows the cart section
+            document.getElementById('cartBtn').addEventListener('click', () => {
+                shopSection.classList.add('hidden'); // Hide shop section
+                cartSection.classList.remove('hidden'); // Show cart section
+                checkoutSection.classList.add('hidden');
+                quotationSection.classList.add('hidden');
+                renderCart();
+            });
+            
+            // Back to shop button
+            document.getElementById('backToShopBtn').addEventListener('click', () => {
+                shopSection.classList.remove('hidden');
+                cartSection.classList.add('hidden');
+                checkoutSection.classList.add('hidden');
+                quotationSection.classList.add('hidden');
+            });
+            
+            // Checkout button
+            document.getElementById('checkoutBtn').addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Please add products to your cart before proceeding');
+                    return;
+                }
+                
+                shopSection.classList.add('hidden');
+                cartSection.classList.add('hidden');
+                checkoutSection.classList.remove('hidden');
+                quotationSection.classList.add('hidden');
+            });
+            
+            // Back to cart button
+            document.getElementById('backToCartBtn').addEventListener('click', () => {
+                shopSection.classList.add('hidden');
+                cartSection.classList.remove('hidden');
+                checkoutSection.classList.add('hidden');
+                quotationSection.classList.add('hidden');
+            });
+            
+            // Checkout form submission
+            document.getElementById('checkoutForm').addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                // Get form data
+                customerInfo = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    company: document.getElementById('company').value,
+                    address: document.getElementById('address').value,
+                    notes: document.getElementById('notes').value
+                };
+                
+                // Generate quotation
+                generateQuotation();
+                
+                // Show quotation section
+                shopSection.classList.add('hidden');
+                cartSection.classList.add('hidden');
+                checkoutSection.classList.add('hidden');
+                quotationSection.classList.remove('hidden');
+            });
+            
+            // Back to checkout button
+            document.getElementById('backToCheckoutBtn').addEventListener('click', () => {
+                shopSection.classList.add('hidden');
+                cartSection.classList.add('hidden');
+                checkoutSection.classList.remove('hidden');
+                quotationSection.classList.add('hidden');
+            });
+            
+            // Download PDF button
+            document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+        }
+
+        // Initialize the app
+        init();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95624ca4b7204b8e',t:'MTc1MDk5OTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.swiper-container').forEach(container => {
+        new Swiper(container, {
+            loop: true,
+            navigation: {
+                nextEl: container.querySelector('.swiper-button-next'),
+                prevEl: container.querySelector('.swiper-button-prev'),
+            },
+            pagination: {
+                el: container.querySelector('.swiper-pagination'),
+                clickable: true,
+            },
+        });
     });
-  });
-  </script>
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".carousel-container").forEach(function (container) {
+        const imagesWrapper = container.querySelector(".carousel-images");
+        const images = imagesWrapper.querySelectorAll("img");
+        let index = 0;
+
+        const updateCarousel = () => {
+            imagesWrapper.style.transform = `translateX(-${index * 100}%)`;
+        };
+
+        container.querySelector(".carousel-nav.prev").addEventListener("click", () => {
+            index = (index - 1 + images.length) % images.length;
+            updateCarousel();
+        });
+
+        container.querySelector(".carousel-nav.next").addEventListener("click", () => {
+            index = (index + 1) % images.length;
+            updateCarousel();
+        });
+    });
+});
+</script>
 </body>
 </html>
