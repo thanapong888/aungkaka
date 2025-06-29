@@ -4,14 +4,50 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=1024" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Online Shop</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
+#quotationContent {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+#quotationContent h1 {
+  font-size: 28px;
+}
+
+#quotationContent h2 {
+  font-size: 24px;
+}
+
+#quotationContent h3 {
+  font-size: 20px;
+}
+
+#quotationContent table th,
+#quotationContent table td {
+  font-size: 17px;
+  padding: 8px 10px;
+}
+
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
+}
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f6f0;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -20,1860 +56,1618 @@
         .product-card {
             transition: all 0.3s ease;
         }
-        .cart-item {
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         .btn-primary {
             background-color: #4f46e5;
+            color: white;
             transition: all 0.3s ease;
         }
         .btn-primary:hover {
             background-color: #4338ca;
-            transform: translateY(-2px);
         }
-        .tab-active {
-            color: #4f46e5;
-            border-bottom: 3px solid #4f46e5;
-            font-weight: 600;
-        }
-        .product-image {
-    aspect-ratio: 4 / 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-        .category-tabs-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .category-tab {
-            white-space: nowrap;
-            margin-bottom: 0.5rem;
-        }
-        .quantity-input {
-            width: 50px;
-            text-align: center;
-        }
-        .signature-line {
-            border-top: 1px solid #000;
-            width: 200px;
-            margin-top: 50px;
-            margin-bottom: 5px;
-        }
-        .bg-light-blue {
-            background-color: #e0f7fa;
-        }
-        .product-tag {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-        .tag-bestseller {
-            background-color: #f59e0b;
+        .btn-secondary {
+            background-color: #f43f5e;
             color: white;
+            transition: all 0.3s ease;
         }
-        .tag-eco {
+        .btn-secondary:hover {
+            background-color: #e11d48;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #f43f5e;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .btn-success {
             background-color: #10b981;
             color: white;
         }
-        .tag-new {
-            background-color: #3b82f6;
-            color: white;
-        }
-        .moq-badge {
-            display: inline-block;
-            background-color: #e5e7eb;
-            color: #4b5563;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-top: 4px;
-        }
-        .size-selector {
-            display: flex;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-        .size-selector select {
-            flex: 1;
-            margin-right: 8px;
-        }
-        .size-selector input {
-            width: 60px;
-            margin-right: 8px;
-        }
-        .size-selector button {
-            white-space: nowrap;
-        }
-        /* PDF specific styles */
-        @media print {
-            .quotation-pdf {
-                padding: 20mm !important;
-            }
-            .pdf-header {
-                margin-bottom: 15mm !important;
-            }
-            .pdf-table {
-                margin: 10mm 0 !important;
-            }
-            .pdf-table th, .pdf-table td {
-                padding: 2mm 3mm !important;
-            }
-            .pdf-footer {
-                margin-top: 15mm !important;
-            }
-        }
-    
-.add-to-cart-btn {
-    background-image: linear-gradient(to right, #60527d, #a64c58);
-    color: white !important;
-    border: none;
-    font-weight: 500;
-}
-.add-to-cart-btn:hover {
-    filter: brightness(1.1);
-}
-
-button.add-btn, button.add, .btn-add {
-    background-image: linear-gradient(to right, #60527d, #a64c58);
-    color: white !important;
-    border: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-}
-button.add-btn:hover, button.add:hover, .btn-add:hover {
-    filter: brightness(1.1);
-}
-
-@keyframes gradient-x {
-    0%, 100% { background-position: left; }
-    50% { background-position: right; }
-}
-.animate-gradient-x {
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient-x 5s ease infinite;
-}
-
-@media print {
-  .quotation-pdf {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-  .quotation-pdf .text-right {
-    text-align: right;
-  }
-  .pdf-table th, .pdf-table td {
-    padding: 4px 6px;
-  }
-  .pdf-header, .pdf-footer {
-    margin-bottom: 10mm !important;
-  }
-}
-@media print {
-    .quotation-pdf {
-        font-size: 11px;
-        line-height: 1.3;
-        padding: 10mm 15mm !important;
-    }
-    .pdf-header,
-    .pdf-footer {
-        margin-bottom: 5mm !important;
-    }
-    .pdf-table th,
-    .pdf-table td {
-        padding: 3mm 4mm !important;
-    }
-    .pdf-table {
-        width: 100%;
-    }
-    .quotation-pdf h1,
-    .quotation-pdf h2,
-    .quotation-pdf h3 {
-        margin-bottom: 4px;
-    }
-    .quotation-pdf p {
-        margin: 2px 0;
-    }
-}
-
-html, body { overflow-x: auto !important; min-width: 1024px; }</style>
-<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script><style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .product-card {
-            transition: all 0.3s ease;
-        }
-        .cart-item {
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .btn-primary {
-            background-color: #4f46e5;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #4338ca;
-            transform: translateY(-2px);
-        }
-        .tab-active {
-            color: #4f46e5;
-            border-bottom: 3px solid #4f46e5;
-            font-weight: 600;
-        }
-        .product-image {
-    aspect-ratio: 4 / 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .category-tabs-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .category-tab {
-            white-space: nowrap;
-            margin-bottom: 0.5rem;
-        }
-        .quantity-input {
-            width: 50px;
-            text-align: center;
+        .btn-success:hover {
+            background-color: #059669;
         }
         .signature-line {
-            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
             width: 200px;
-            margin-top: 50px;
+            display: inline-block;
             margin-bottom: 5px;
         }
-        .bg-amber-50 {
-            background-color: #e0f7fa;
+        .position-line {
+            border-bottom: 1px solid #000;
+            width: 150px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .image-gallery {
+            position: relative;
+            aspect-ratio: 1 / 1.2;
+            overflow: hidden;
+        }
+        .gallery-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .gallery-image.active {
+            opacity: 1;
+        }
+        .gallery-nav {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 10;
+        }
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #cbd5e0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .gallery-dot.active {
+            background-color: #4f46e5;
+        }
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+        .gallery-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .gallery-prev {
+            left: 5px;
+        }
+        .gallery-next {
+            right: 5px;
+        }
+        .category-tab {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .category-tab.active {
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+        }
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .size-btn.selected {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+        }
+        .cart-quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
+        .cart-item-row {
+            display: grid;
+            grid-template-columns: 3fr 2fr 2fr 2fr 1fr;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s ease;
+        }
+        .cart-item-row:hover {
+            background-color: #f8fafc;
+        }
+        .cart-header {
+            font-weight: 600;
+            color: #4b5563;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            background-color: transparent !important;
+        }
+        .remove-btn {
+            color: #ef4444;
+            transition: all 0.2s ease;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .remove-btn:hover {
+            background-color: #fee2e2;
+        }
+        @media print {
+            .no-print {
+                display: none;
+            }
         }
     
-.add-to-cart-btn {
-    background-image: linear-gradient(to right, #60527d, #a64c58);
-    color: white !important;
-    border: none;
-    font-weight: 500;
-}
-.add-to-cart-btn:hover {
-    filter: brightness(1.1);
+.gallery-image svg {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-@keyframes gradient-x {
-    0%, 100% { background-position: left; }
-    50% { background-position: right; }
-}
-.animate-gradient-x {
-    background-size: 200% auto;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient-x 5s ease infinite;
-}
 
-/* Quotation Section Enhancements */
-#quotationContent {
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 40px;
-    max-width: 800px;
-    margin: auto;
-}
-#quotationContent h1, #quotationContent h2, #quotationContent h3 {
-    margin-bottom: 8px;
-}
-#quotationContent table {
+.gallery-image img {
     width: 100%;
-    border-collapse: collapse;
-}
-#quotationContent th, #quotationContent td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-#quotationContent thead {
-    background-color: #f3f4f6;
-}
-#quotationContent tfoot {
-    font-weight: bold;
-    background-color: #f9fafb;
-}
-#quotationContent .signature-line {
-    margin-top: 60px;
-}
-
-#quotationContent {
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 30px;
-    max-width: 750px;
-    margin: 0 auto;
-}
-#quotationContent h1 {
-    font-size: 20px;
-}
-#quotationContent h2 {
-    font-size: 16px;
-}
-
-#quotationContent {
-    border: none !important;
-    box-shadow: none !important;
-}
-
-#quotationContent {
-    font-size: 13px;
-    line-height: 1.4;
-    padding: 20px;
-    max-width: 720px;
-    margin: 0 auto;
-}
-#quotationContent h1 {
-    font-size: 18px;
-}
-#quotationContent h2 {
-    font-size: 15px;
-}
-#quotationContent h3 {
-    font-size: 14px;
-}
-#quotationContent table th, 
-#quotationContent table td {
-    padding: 6px 8px;
-}
-#quotationContent .signature-line {
-    margin-top: 40px;
-    margin-bottom: 0px;
-}
-#quotationContent .text-center.text-gray-600.text-sm.mt-8 {
-    margin-top: 20px;
-}
-
-.product-image {
-    position: relative;
-}
-.carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-.carousel-images {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
-}
-.carousel-images img {
-    width: 100%;
-    flex-shrink: 0;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
+    border-radius: 0.5rem;
 }
-.carousel-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.6);
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    padding: 2px 8px;
-    border-radius: 4px;
-}
-.carousel-nav.prev {
-    left: 5px;
-}
-.carousel-nav.next {
-    right: 5px;
-}
-</style></head>
-<body class="bg-light-blue bg-[#fef3e7]">
+
+
+body { font-family: 'Montserrat', sans-serif; }</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet"/></head>
+<body>
+<div class="min-h-screen flex flex-col">
 <!-- Header -->
-<header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg bg-gradient-to-r from-yellow-200 to-yellow-700">
-<div class="container mx-auto px-4 py-6 flex justify-between items-center">
-<h1 class="text-xl font-bold bg-gradient-to-r from-red-800 via-white to-blue-800 bg-clip-text text-transparent animate-gradient-x font-bold text-base font-semibold">ANG DONGKA (THAILAND) CO., LTD.</h1>
+<header class="bg-[#FFE6A9] shadow-md py-4 px-6 no-print sticky top-0 z-50">
+<div class="container mx-auto flex justify-between items-center">
+<h1 class="text-2xl font-bold bg-gradient-to-r from-red-500 via-white to-blue-500 bg-clip-text text-transparent animate-gradient-x font-extrabold font-bold text-[#1e293b]">ANG DONGKA (THAILAND) CO., LTD.</h1>
 <div class="flex items-center space-x-4">
-<button class="relative flex items-center bg-white text-indigo-700 px-4 py-2 rounded-full font-medium hover:bg-gray-100 transition" id="cartBtn">
-<svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<button class="relative p-2" id="cartButton">
+<svg class="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
-<span>Cart</span>
-<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full" id="cartCount">0</span>
+<span class="cart-badge hidden" id="cartBadge">0</span>
 </button>
 </div>
 </div>
 </header>
 <!-- Main Content -->
-<main class="container mx-auto px-4 py-8">
-<!-- Shop Section -->
-<section class="mb-12" id="shopSection">
+<main class="flex-grow container mx-auto py-8 px-4">
+<!-- Products Section -->
+<section class="mb-12" id="productsSection">
 <!-- Category Tabs -->
-<div class="mb-8">
-<div class="category-tabs-container border-b border-gray-200 pb-2">
-<button class="category-tab tab-active px-3 py-2 text-sm md:text-base" data-category="body-supports">
-                        Body Supports
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="skincare">
-                        Natural Skincare Products
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="soap">
-                        Natural SOAP
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="hand-cream">
-                        Natural Hand Cream
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="rice">
-                        Organic Thai Rice
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="beverages">
-                        Healthy Nature Beverages
-                    </button>
-<button class="category-tab px-3 py-2 text-sm md:text-base" data-category="quick-meal">
-                        Organic Quick Meal
-                    </button>
-</div>
-</div>
-<!-- Products Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-<!-- Products will be dynamically generated here -->
-</div>
-<!-- Pagination -->
-<div class="mt-8 flex justify-center">
-<div class="flex space-x-2" id="pagination">
-<!-- Pagination will be dynamically generated here -->
-</div>
+<div class="flex border-b mb-6 overflow-x-auto">
+<div class="category-tab active" data-category="clothes">Body Supports</div>
+<div class="category-tab" data-category="phones">Skincare Products</div>
+<div class="category-tab" data-category="devices">Natural SOAP</div>
+<div class="category-tab" data-category="tablet">Organic Thai Rice</div><div class="category-tab" data-category="game">Healthy Beverages</div><div class="category-tab" data-category="software">Organic Quick Meal</div></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+<!-- Products will be dynamically inserted here -->
 </div>
 </section>
-<!-- Cart Section (Hidden by default) -->
+<!-- Cart Section (Initially Hidden) -->
 <section class="hidden" id="cartSection">
-<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="bg-white rounded-lg shadow-lg p-6">
 <div class="flex justify-between items-center mb-6">
-<h2 class="text-2xl font-bold text-gray-800">Shopping Cart</h2>
-<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToShopBtn">
-<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-                        Back to Shop
-                    </button>
+<h2 class="text-2xl font-semibold text-gray-800">Shopping Cart</h2>
+<button class="text-indigo-600 hover:text-indigo-800" id="backToProducts">
+                            ← Back to Products
+                        </button>
 </div>
-<!-- Cart Table -->
-<div class="overflow-x-auto">
-<table class="w-full mb-6">
-<thead class="bg-gray-50 border-b">
-<tr>
-<th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Product</th>
-<th class="py-3 px-4 text-center text-sm font-medium text-gray-700">Quantity</th>
-<th class="py-3 px-4 text-right text-sm font-medium text-gray-700">Price</th>
-<th class="py-3 px-4 text-right text-sm font-medium text-gray-700">Total</th>
-<th class="py-3 px-4 text-center text-sm font-medium text-gray-700">Action</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-gray-200" id="cartItems">
-<!-- Cart items will be dynamically added here -->
-</tbody>
-</table>
+<!-- Cart Header -->
+<div class="cart-item-row cart-header">
+<div>Product</div>
+<div class="text-center">Quantity</div>
+<div class="text-right">Price</div>
+<div class="text-right">Total</div>
+<div></div> <!-- Empty header for remove button -->
 </div>
-<div class="mt-6 pt-6 border-t border-gray-200">
-<div class="flex justify-between text-lg font-semibold">
-<span>Total:</span>
+<div class="mb-6" id="cartItems">
+<!-- Cart items will be dynamically inserted here -->
+</div>
+<div class="border-t pt-4">
+<div class="flex justify-end text-lg font-semibold mb-2">
+<span class="mr-16">Grand Total:</span>
 <span id="cartTotal">$0.00</span>
 </div>
-<button class="mt-6 w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition btn-primary" id="checkoutBtn">
-                        Proceed to Checkout
-                    </button>
+<button class="w-full py-3 btn-primary rounded-lg font-semibold mt-4" id="checkoutButton">
+                            Proceed to Checkout
+                        </button>
 </div>
 </div>
 </section>
-<!-- Checkout Form (Hidden by default) -->
+<!-- Checkout Form Section (Initially Hidden) -->
 <section class="hidden" id="checkoutSection">
-<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="bg-white rounded-lg shadow-lg p-6">
 <div class="flex justify-between items-center mb-6">
-<h2 class="text-2xl font-bold text-gray-800">Order Information</h2>
-<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToCartBtn">
-<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-                        Back to Cart
-                    </button>
+<h2 class="text-2xl font-semibold text-gray-800">Order Information</h2>
+<button class="text-indigo-600 hover:text-indigo-800" id="backToCart">
+                            ← Back to Cart
+                        </button>
 </div>
-<form class="space-y-6" id="checkoutForm">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<form class="space-y-4" id="checkoutForm">
 <div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="company">Company Name *</label>
-<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="company" name="company" required="" type="text"/>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="companyName">Company Name</label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="companyName" name="companyName" required="" type="text"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="name">Customer Name *</label>
-<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="name" name="name" required="" type="text"/>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="customerName">Your Name</label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="customerName" name="customerName" required="" type="text"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email *</label>
-<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="email" name="email" required="" type="email"/>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="address">Address</label>
+<textarea class="w-full px-4 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="address" name="address" required="" rows="3"></textarea>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="phone">Phone Number *</label>
-<input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="phone" name="phone" required="" type="tel"/>
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="address">Address *</label>
-<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="address" name="address" required="" rows="3"></textarea>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email</label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="email" name="email" required="" type="email"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700 mb-1" for="notes">Notes</label>
-<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="notes" name="notes" rows="2"></textarea>
+<label class="block text-sm font-medium text-gray-700 mb-1" for="phone">Phone Number</label>
+<input class="w-full px-4 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500" id="phone" name="phone" required="" type="tel"/>
 </div>
-<button class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition btn-primary" type="submit">
-                        Generate Quotation
-                    </button>
+<button class="w-full py-3 btn-primary rounded-lg font-semibold mt-6" type="submit">
+                            Generate Quotation
+                        </button>
 </form>
 </div>
 </section>
-<!-- Quotation Section (Hidden by default) -->
+<!-- Quotation Section (Initially Hidden) -->
 <section class="hidden" id="quotationSection">
-<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<div class="bg-white rounded-lg shadow-lg p-6">
 <div class="flex justify-between items-center mb-6">
-<h2 class="text-2xl font-bold text-gray-800">Quotation</h2>
+<h2 class="text-2xl font-semibold text-gray-800">Quotation</h2>
 <div class="flex space-x-4">
-<button class="text-indigo-600 hover:text-indigo-800 flex items-center" id="backToCheckoutBtn">
-<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-                            Edit Information
-                        </button>
-<button class="flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition" id="downloadPdfBtn">
-<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-                            Download PDF
-                        </button>
+<button class="text-indigo-600 hover:text-indigo-800 no-print" id="backToCheckout">
+                                ← Edit Information
+                            </button>
+<button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 no-print" id="downloadPDF">
+                                Download PDF
+                            </button>
 </div>
 </div>
-<div class="quotation-pdf p-4 text-sm leading-relaxed" id="quotationContent">
-<div class="flex justify-between items-start mb-4 pdf-header">
+<div class="p-6 rounded-lg" id="quotationContent">
+<div class="flex justify-between mb-6">
 <div>
-<h1 class="text-lg font-semibold" style="color: #5e3205;">ANG DONGKA (THAILAND) CO., LTD.</h1>
-<p class="text-gray-600">Nuanchan, Khet Bueng Kum, Ramintra rd. Bangkok 10230</p>
-<p class="text-gray-600">Tel: +66 619949962</p>
+<h1 class="text-2xl font-bold text-[#1e293b]">ANG DONGKA(THAILAND) CO., LTD.</h1>
+<p class="text-gray-600">41/91 Nuanjan 27 Ramintra road Thailand</p>
+<p class="text-gray-600">Tel: 0619949962</p>
 <p class="text-gray-600">Email: thanapong102030@gmail.com</p>
 </div>
 <div class="text-right">
-<h2 class="text-sm text-right">Quotation</h2>
-<p class="text-sm text-right" id="quotationNumber">No: QT-2023001</p>
-<p class="text-sm text-right" id="quotationDate">Date: 01/06/2023</p>
+<h2 class="text-xl font-semibold">Quotation</h2>
+<p class="text-gray-600" id="quotationNumber"></p>
+<p class="text-gray-600" id="quotationDate"></p>
 </div>
 </div>
-<div class="mb-4">
-<h3 class="font-bold text-gray-800 mb-2">Customer Information:</h3>
-<div class="text-gray-600" id="customerInfo">
-<!-- Customer info will be added here -->
+<div class="mb-6">
+<h3 class="font-semibold mb-2">Customer Information:</h3>
+<p class="font-medium" id="quoteCompanyName"></p>
+<p id="quoteCustomerName"></p>
+<p class="whitespace-pre-line" id="quoteAddress"></p>
+<p id="quoteEmail"></p>
+<p id="quotePhone"></p>
 </div>
-</div>
-<table class="w-full mb-4 pdf-table">
+<table class="w-full border-collapse mb-6">
 <thead>
 <tr class="bg-gray-100">
-<th class="py-2 px-4 text-left">Item</th>
-<th class="py-2 px-4 text-right">Quantity</th>
-<th class="py-2 px-4 text-right">Unit Price</th>
-<th class="py-2 px-4 text-right">Total</th>
+<th class="border p-2 text-left">Item</th>
+<th class="border p-2 text-right">Unit Price</th>
+<th class="border p-2 text-right">Quantity</th>
+<th class="border p-2 text-right">Total</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-gray-200" id="quotationItems">
-<!-- Quotation items will be added here -->
+<tbody id="quoteItems">
+<!-- Quote items will be dynamically inserted here -->
 </tbody>
-<tfoot class="border-t-2 border-gray-300">
+<tfoot>
 <tr>
-<td class="py-2 px-4 text-right font-bold" colspan="3">Total Amount:</td>
-<td class="py-2 px-4 text-right font-bold" id="quotationTotal">$0.00</td>
+<td class="border p-2 text-right font-semibold" colspan="3">Grand Total:</td>
+<td class="border p-2 text-right font-semibold" id="quoteTotal"></td>
 </tr>
 </tfoot>
 </table>
-<div class="mb-4">
-<h3 class="font-bold text-gray-800 mb-2">Notes:</h3>
-<div class="text-gray-600" id="quotationNotes">
-<!-- Notes will be added here -->
+<div class="mt-8">
+<p class="font-semibold">Terms and Conditions:</p>
+<p>This quotation is valid for 7 days from the issue date to protect against exchange rate fluctuations.</p>
+<p class="mt-2">Payment Terms: Full payment required before shipping.</p>
+<p class="mt-2">Delivery Time: 1-5 business days after payment confirmation.</p>
 </div>
-</div>
-<!-- Terms and Conditions Section -->
-<div class="mb-4 border-t border-gray-300 pt-6">
-<h3 class="font-bold text-gray-800 mb-2">Terms and Conditions:</h3>
-<ul class="text-gray-600 list-disc pl-5 space-y-1">
-<li>This quotation is valid for 7 days from the issue date to protect against exchange rate fluctuations.</li>
-<li>Payment Terms: Full payment required before shipping.</li>
-<li>Delivery Time: 1-5 business days after payment confirmation.</li>
-</ul>
-</div>
-<!-- Signature Section -->
-<div class="mt-12 flex justify-center space-x-24 text-sm">
+<!-- Signature Section with Position Lines -->
+<div class="mt-16 flex justify-between">
 <div class="text-center">
 <div class="signature-line"></div>
-<p class="text-gray-800">Customer Signature</p>
-<p class="text-gray-600 text-sm">Position: ___________________</p>
+<p id="customerCompanySignature"></p>
+<p class="text-sm" id="customerSignatureName"></p>
+<div class="position-line mt-2"></div>
+<p class="text-sm">Position: _________________</p>
+<p class="text-sm mt-2">Date: _______________</p>
 </div>
 <div class="text-center">
 <div class="signature-line"></div>
-<p class="text-gray-800">ANG DONGKA (THAILAND) CO., LTD.</p>
-<p class="text-gray-600 text-sm">Position: ___________________</p>
+<p>ANG DONGKA Signature</p>
+<div class="position-line mt-2"></div>
+<p class="text-sm">Position: _________________</p>
+<p class="text-sm mt-2">Date: _______________</p>
 </div>
 </div>
-<div class="text-center text-gray-500 text-xs mt-6">
-<p>Thank you for shopping with ANG DONGKA (THAILAND) CO., LTD.</p>
+<div class="mt-12 text-center">
+<p>Thank you for choosing ANG DONGKA(THAILAND) CO., LTD.</p>
 </div>
 </div>
 </div>
 </section>
 </main>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-6 mt-auto no-print">
+<div class="container mx-auto px-4">
+<p class="text-center">© 2023 ANG DONGKA(THAILAND) CO., LTD. All rights reserved.</p>
+</div>
+</footer>
+</div>
 <script>
-        // Sample product data with categories
+        // Sample product data with categories - 6 products per category
         const products = [
-            // Body Supports
-            {
-                id: 1,
-                name: "Back Support Cushion",
-                price: 39.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Ergonomic back support cushion to reduce back pain",
-                category: "body-supports",
-                moq: 50,
-                tag: "bestseller",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            // Clothes category - 6 items
+            { 
+                id: 1, 
+                name: 'LS LUMBAR SUPPORT', 
+                price: 29.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: ["<img src=\"https://i.postimg.cc/KY3YR2FP/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/3N87C5Mb/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/2y0Y0crj/Screenshot-2025-06-13-233235.webp\" class=\"w-full h-full object-contain\">"]
             },
-            {
-                id: 2,
-                name: "Neck Support Pillow",
-                price: 29.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Comfortable neck support pillow for better sleep",
-                category: "body-supports",
-                moq: 30,
-                tag: "eco",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            { 
+                id: 2, 
+                name: 'ECO BACK SUPPORT', 
+                price: 59.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: ["<img src=\"https://i.postimg.cc/8cmy7qyk/f36f51f6-fcca-4ccc-975d-a3a7cd5ae873.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/527RqWf6/23329eb6-3957-4c35-b1cf-b632564dad52.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/wvJ4ptLm/1749831782489.webp\" class=\"w-full h-full object-contain\">"]
             },
-            {
-                id: 3,
-                name: "Knee Support Brace",
-                price: 24.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Knee support brace for joint pain relief",
-                category: "body-supports",
-                moq: 40,
-                tag: "bestseller",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            { 
+                id: 3, 
+                name: 'Posture Support Shirt LS14', 
+                price: 49.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: ["<img src=\"https://i.postimg.cc/mkZ8vmwP/f9df1d8d-8215-4582-aab4-a078a8b8ade4.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/KzPWSkhH/542e4ff6-4d03-48eb-9b0a-e8df5cea6245.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/9MYLg6G3/1def40ea-5f23-4fa1-9f4d-8807d0cdf02e.webp\" class=\"w-full h-full object-contain\">"]
             },
-            {
-                id: 22,
-                name: "Ankle Support Brace",
-                price: 19.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Ankle support brace for sports and daily activities",
-                category: "body-supports",
-                moq: 35,
-                tag: "new",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            { 
+                id: 13, 
+                name: 'MINI BACK SUPPORT', 
+                price: 39.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: [
+                    createPoloSVG('#4f46e5'),
+                    createPoloSVG('#10b981'),
+                    createPoloSVG('#f43f5e')
+                ]
             },
-            {
-                id: 23,
-                name: "Wrist Support Band",
-                price: 14.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Wrist support band for carpal tunnel and wrist pain",
-                category: "body-supports",
-                moq: 50,
-                tag: "eco",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            { 
+                id: 14, 
+                name: 'BACK POSTURE SUPPORT', 
+                price: 89.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: [
+                    createJacketSVG('#4f46e5'),
+                    createJacketSVG('#000000'),
+                    createJacketSVG('#f43f5e')
+                ]
             },
-            {
-                id: 24,
-                name: "Posture Corrector",
-                price: 34.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Full back posture corrector for better alignment",
-                category: "body-supports",
-                moq: 25,
-                tag: "bestseller",
-                sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
+            { 
+                id: 15, 
+                name: 'KNEE SUPPORT WITH SPRING', 
+                price: 34.99, 
+                category: 'clothes',
+                hasSize: true,
+                images: [
+                    createShortsSVG('#4f46e5'),
+                    createShortsSVG('#10b981'),
+                    createShortsSVG('#000000')
+                ]
             },
             
-            // Natural Skincare Products
-            {
-                id: 4,
-                name: "Natural Moisturizer",
-                price: 19.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "100% natural moisturizer, chemical-free and safe",
-                category: "skincare",
-                moq: 100,
-                tag: "bestseller",
-                sizes: ["50ml", "100ml", "200ml"]
+            // Skincare Products category - 6 items
+            { 
+                id: 4, 
+                name: 'MILK PROTEIN SUNSCREEN', 
+                price: 799.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createPhoneSVG('#4f46e5'),
+                    createPhoneSVG('#10b981'),
+                    createPhoneSVG('#f43f5e')
+                ]
             },
-            {
-                id: 5,
-                name: "Vitamin C Serum",
-                price: 29.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Concentrated vitamin C serum for brighter skin",
-                category: "skincare",
-                moq: 80,
-                tag: "eco",
-                sizes: ["30ml", "50ml"]
+            { 
+                id: 5, 
+                name: 'LOTUS GOLD SERUM', 
+                price: 999.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createPhoneSVG('#000000'),
+                    createPhoneSVG('#ffffff', '#000000'),
+                    createPhoneSVG('#f59e0b')
+                ]
             },
-            {
-                id: 6,
-                name: "Natural Face Mask",
-                price: 9.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Natural face mask for skin rejuvenation",
-                category: "skincare",
-                moq: 120,
-                tag: "new",
-                sizes: ["Single", "Pack of 5", "Pack of 10"]
+            { 
+                id: 6, 
+                name: 'NAD PEPTIDE ACNE SERUM', 
+                price: 299.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createPhoneSVG('#4f46e5'),
+                    createPhoneSVG('#10b981'),
+                    createPhoneSVG('#f43f5e')
+                ]
             },
-            
-            // Natural SOAP
-            {
-                id: 7,
-                name: "Thai Herbal Soap",
-                price: 4.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Authentic Thai herbal soap for deep cleansing",
-                category: "soap",
-                moq: 200,
-                tag: "bestseller",
-                sizes: ["50g", "100g"]
+            { 
+                id: 16, 
+                name: 'Foldable Phone', 
+                price: 1299.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createFoldablePhoneSVG('#4f46e5'),
+                    createFoldablePhoneSVG('#000000'),
+                    createFoldablePhoneSVG('#f59e0b')
+                ]
             },
-            {
-                id: 8,
-                name: "Organic Honey Soap",
-                price: 5.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Organic honey soap for moisturized skin",
-                category: "soap",
-                moq: 150,
-                tag: "eco",
-                sizes: ["50g", "100g"]
+            { 
+                id: 17, 
+                name: 'Budget Smartphone', 
+                price: 399.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createPhoneSVG('#10b981'),
+                    createPhoneSVG('#4f46e5'),
+                    createPhoneSVG('#000000')
+                ]
             },
-            {
-                id: 9,
-                name: "Aloe Vera Soap",
-                price: 4.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Aloe vera soap to reduce skin inflammation",
-                category: "soap",
-                moq: 180,
-                tag: "bestseller",
-                sizes: ["50g", "100g"]
+            { 
+                id: 18, 
+                name: 'Gaming Phone', 
+                price: 899.99, 
+                category: 'phones',
+                hasSize: false,
+                images: [
+                    createGamingPhoneSVG('#f43f5e'),
+                    createGamingPhoneSVG('#000000'),
+                    createGamingPhoneSVG('#4f46e5')
+                ]
             },
             
-            // Natural Hand Cream
-            {
-                id: 10,
-                name: "Lavender Hand Cream",
-                price: 8.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Lavender hand cream for soft, moisturized hands",
-                category: "hand-cream",
-                moq: 100,
-                tag: "bestseller",
-                sizes: ["30ml", "50ml", "100ml"]
+            // Devices category - 6 items
+            { 
+                id: 7, 
+                name: 'Laptop Pro', 
+                price: 1299.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createLaptopSVG('#4f46e5'),
+                    createLaptopSVG('#10b981'),
+                    createLaptopSVG('#000000')
+                ]
             },
-            {
-                id: 11,
-                name: "Rose Hand Cream",
-                price: 8.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Rose hand cream for soft, moisturized hands",
-                category: "hand-cream",
-                moq: 100,
-                tag: "eco",
-                sizes: ["30ml", "50ml", "100ml"]
+            { 
+                id: 8, 
+                name: 'Tablet Air', 
+                price: 499.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createTabletSVG('#4f46e5'),
+                    createTabletSVG('#10b981'),
+                    createTabletSVG('#f43f5e')
+                ]
             },
-            {
-                id: 12,
-                name: "Intensive Hand Cream",
-                price: 10.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Intensive hand cream for very dry skin",
-                category: "hand-cream",
-                moq: 80,
-                tag: "new",
-                sizes: ["50ml", "100ml"]
+            { 
+                id: 9, 
+                name: 'Smartwatch', 
+                price: 249.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createWatchSVG('#4f46e5'),
+                    createWatchSVG('#10b981'),
+                    createWatchSVG('#f43f5e')
+                ]
             },
-            
-            // Organic Thai Rice
-            {
-                id: 13,
-                name: "Organic Jasmine Rice",
-                price: 6.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Premium organic jasmine rice, pesticide-free",
-                category: "rice",
-                moq: 50,
-                tag: "bestseller",
-                sizes: ["1kg", "5kg", "10kg"]
+            { 
+                id: 10, 
+                name: 'Wireless Headphones', 
+                price: 129.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createHeadphonesSVG('#4f46e5'),
+                    createHeadphonesSVG('#10b981'),
+                    createHeadphonesSVG('#f43f5e')
+                ]
             },
-            {
-                id: 14,
-                name: "Organic Brown Rice",
-                price: 7.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Organic brown rice rich in nutrients",
-                category: "rice",
-                moq: 50,
-                tag: "eco",
-                sizes: ["1kg", "5kg", "10kg"]
+            { 
+                id: 11, 
+                name: 'Bluetooth Speaker', 
+                price: 79.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createSpeakerSVG('#4f46e5'),
+                    createSpeakerSVG('#10b981'),
+                    createSpeakerSVG('#f43f5e')
+                ]
             },
-            {
-                id: 15,
-                name: "Organic Riceberry",
-                price: 8.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Organic riceberry with high antioxidants",
-                category: "rice",
-                moq: 40,
-                tag: "new",
-                sizes: ["1kg", "5kg"]
-            },
-            
-            // Healthy Nature Beverages
-            {
-                id: 16,
-                name: "Thai Herbal Tea",
-                price: 5.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Authentic Thai herbal tea for health benefits",
-                category: "beverages",
-                moq: 100,
-                tag: "bestseller",
-                sizes: ["20 bags", "50 bags", "100 bags"]
-            },
-            {
-                id: 17,
-                name: "Organic Fruit Juice",
-                price: 4.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "100% organic fruit juice, no added sugar",
-                category: "beverages",
-                moq: 120,
-                tag: "eco",
-                sizes: ["250ml", "500ml", "1L"]
-            },
-            {
-                id: 18,
-                name: "Herbal Health Drink",
-                price: 4.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Herbal health drink for body nourishment",
-                category: "beverages",
-                moq: 100,
-                tag: "new",
-                sizes: ["250ml", "500ml"]
-            },
-            
-            // Organic Quick Meal
-            {
-                id: 19,
-                name: "Ready-to-Eat Basil Rice",
-                price: 3.90,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Ready-to-eat basil rice made from organic ingredients",
-                category: "quick-meal",
-                moq: 150,
-                tag: "bestseller",
-                sizes: ["200g", "400g"]
-            },
-            {
-                id: 20,
-                name: "Organic Vegetable Salad",
-                price: 4.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Fresh organic vegetable salad, daily prepared",
-                category: "quick-meal",
-                moq: 120,
-                tag: "eco",
-                sizes: ["250g", "500g"]
-            },
-            {
-                id: 21,
-                name: "Ready-to-Eat Vegetable Soup",
-                price: 3.50,
-                image: `
-<div class="swiper product-swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="https://i.postimg.cc/kML51SNf/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/d0QQkjvt/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-    <div class="swiper-slide"><img src="https://i.postimg.cc/Jz54zdf2/Screenshot-2025-06-13-233235.webp" class="w-full h-auto object-cover rounded-lg" /></div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-`,
-                description: "Ready-to-eat vegetable soup made from organic vegetables",
-                category: "quick-meal",
-                moq: 130,
-                tag: "new",
-                sizes: ["300ml", "500ml"]
+            { 
+                id: 12, 
+                name: 'Digital Camera', 
+                price: 599.99, 
+                category: 'devices',
+                hasSize: false,
+                images: [
+                    createCameraSVG('#4f46e5'),
+                    createCameraSVG('#10b981'),
+                    createCameraSVG('#f43f5e')
+                ]
             }
-        ];
+        ,
+{ 
+                id: 100, 
+                name: 'Laptop Pro', 
+                price: 1299.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createLaptopSVG('#4f46e5'),
+                    createLaptopSVG('#10b981'),
+                    createLaptopSVG('#000000')
+                ]
+            },
+{ 
+                id: 101, 
+                name: 'Tablet Air', 
+                price: 499.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createTabletSVG('#4f46e5'),
+                    createTabletSVG('#10b981'),
+                    createTabletSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 102, 
+                name: 'Smartwatch', 
+                price: 249.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createWatchSVG('#4f46e5'),
+                    createWatchSVG('#10b981'),
+                    createWatchSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 103, 
+                name: 'Wireless Headphones', 
+                price: 129.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createHeadphonesSVG('#4f46e5'),
+                    createHeadphonesSVG('#10b981'),
+                    createHeadphonesSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 104, 
+                name: 'Bluetooth Speaker', 
+                price: 79.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createSpeakerSVG('#4f46e5'),
+                    createSpeakerSVG('#10b981'),
+                    createSpeakerSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 105, 
+                name: 'Digital Camera', 
+                price: 599.99, 
+                category: 'tablet',
+                hasSize: false,
+                images: [
+                    createCameraSVG('#4f46e5'),
+                    createCameraSVG('#10b981'),
+                    createCameraSVG('#f43f5e')
+                ]
+            }
+,
+{ 
+                id: 200, 
+                name: 'Laptop Pro', 
+                price: 1299.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createLaptopSVG('#4f46e5'),
+                    createLaptopSVG('#10b981'),
+                    createLaptopSVG('#000000')
+                ]
+            },
+{ 
+                id: 201, 
+                name: 'Tablet Air', 
+                price: 499.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createTabletSVG('#4f46e5'),
+                    createTabletSVG('#10b981'),
+                    createTabletSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 202, 
+                name: 'Smartwatch', 
+                price: 249.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createWatchSVG('#4f46e5'),
+                    createWatchSVG('#10b981'),
+                    createWatchSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 203, 
+                name: 'Wireless Headphones', 
+                price: 129.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createHeadphonesSVG('#4f46e5'),
+                    createHeadphonesSVG('#10b981'),
+                    createHeadphonesSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 204, 
+                name: 'Bluetooth Speaker', 
+                price: 79.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createSpeakerSVG('#4f46e5'),
+                    createSpeakerSVG('#10b981'),
+                    createSpeakerSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 205, 
+                name: 'Digital Camera', 
+                price: 599.99, 
+                category: 'game',
+                hasSize: false,
+                images: [
+                    createCameraSVG('#4f46e5'),
+                    createCameraSVG('#10b981'),
+                    createCameraSVG('#f43f5e')
+                ]
+            }
+,
+{ 
+                id: 300, 
+                name: 'Laptop Pro', 
+                price: 1299.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createLaptopSVG('#4f46e5'),
+                    createLaptopSVG('#10b981'),
+                    createLaptopSVG('#000000')
+                ]
+            },
+{ 
+                id: 301, 
+                name: 'Tablet Air', 
+                price: 499.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createTabletSVG('#4f46e5'),
+                    createTabletSVG('#10b981'),
+                    createTabletSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 302, 
+                name: 'Smartwatch', 
+                price: 249.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createWatchSVG('#4f46e5'),
+                    createWatchSVG('#10b981'),
+                    createWatchSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 303, 
+                name: 'Wireless Headphones', 
+                price: 129.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createHeadphonesSVG('#4f46e5'),
+                    createHeadphonesSVG('#10b981'),
+                    createHeadphonesSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 304, 
+                name: 'Bluetooth Speaker', 
+                price: 79.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createSpeakerSVG('#4f46e5'),
+                    createSpeakerSVG('#10b981'),
+                    createSpeakerSVG('#f43f5e')
+                ]
+            },
+{ 
+                id: 305, 
+                name: 'Digital Camera', 
+                price: 599.99, 
+                category: 'software',
+                hasSize: false,
+                images: [
+                    createCameraSVG('#4f46e5'),
+                    createCameraSVG('#10b981'),
+                    createCameraSVG('#f43f5e')
+                ]
+            }
+];
+
+        // Available sizes for clothes
+        const availableSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 
         // Cart state
         let cart = [];
         let customerInfo = {};
-        let currentCategory = "body-supports"; // Default to first category instead of "all"
-        let currentPage = 1;
-        const productsPerPage = 6;
+        let currentCategory = 'clothes'; // Default to clothes category
 
         // DOM elements
-        const productContainer = document.querySelector('#shopSection .grid');
-        const cartItemsContainer = document.getElementById('cartItems');
-        const cartCountElement = document.getElementById('cartCount');
-        const cartTotalElement = document.getElementById('cartTotal');
-        const shopSection = document.getElementById('shopSection');
+        const productsSection = document.getElementById('productsSection');
         const cartSection = document.getElementById('cartSection');
         const checkoutSection = document.getElementById('checkoutSection');
         const quotationSection = document.getElementById('quotationSection');
-        const paginationContainer = document.getElementById('pagination');
+        const cartButton = document.getElementById('cartButton');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const backToProducts = document.getElementById('backToProducts');
+        const checkoutButton = document.getElementById('checkoutButton');
+        const backToCart = document.getElementById('backToCart');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const backToCheckout = document.getElementById('backToCheckout');
+        const downloadPDF = document.getElementById('downloadPDF');
         const categoryTabs = document.querySelectorAll('.category-tab');
 
-        // Format price
-        function formatPrice(price) {
-            return '$' + price.toFixed(2);
+        // Initialize the app
+        function init() {
+            renderProducts();
+            setupEventListeners();
         }
 
-        // Filter products by category and page
-        function getFilteredProducts() {
-            return products.filter(product => product.category === currentCategory);
-        }
+        // Set up event listeners
+        function setupEventListeners() {
+            // Category tabs
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    currentCategory = this.getAttribute('data-category');
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    renderProducts();
+                });
+            });
 
-        // Get paginated products
-        function getPaginatedProducts() {
-            const filteredProducts = getFilteredProducts();
+            // Add to cart buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const productId = parseInt(e.target.getAttribute('data-id'));
+                    const product = products.find(p => p.id === productId);
+                    
+                    if (product.hasSize) {
+                        // For clothes, check if size is selected
+                        const productCard = e.target.closest('.product-card');
+                        const selectedSize = productCard.querySelector('.size-btn.selected');
+                        const quantityInput = productCard.querySelector('.quantity-input');
+                        
+                        if (!selectedSize) {
+                            showNotification('Please select a size', 'error');
+                            return;
+                        }
+                        
+                        const size = selectedSize.getAttribute('data-size');
+                        const quantity = parseInt(quantityInput.value) || 1;
+                        
+                        addToCartWithOptions(productId, size, quantity, e.target);
+                    } else {
+                        // For non-clothes items
+                        addToCart(productId, e.target);
+                    }
+                }
+            });
+
+            // Size selection buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('size-btn')) {
+                    const productCard = e.target.closest('.product-card');
+                    const sizeButtons = productCard.querySelectorAll('.size-btn');
+                    
+                    sizeButtons.forEach(btn => btn.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+            });
+
+            // Cart button
+            cartButton.addEventListener('click', showCart);
+
+            // Back to products button
+            backToProducts.addEventListener('click', showProducts);
+
+            // Checkout button
+            checkoutButton.addEventListener('click', showCheckout);
+
+            // Back to cart button
+            backToCart.addEventListener('click', showCart);
+
+            // Checkout form submission
+            checkoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                processCheckout();
+            });
+
+            // Back to checkout button
+            backToCheckout.addEventListener('click', showCheckout);
+
+            // Download PDF button
+            downloadPDF.addEventListener('click', generatePDF);
             
-            // For body-supports category, show all products without pagination
-            if (currentCategory === "body-supports") {
-                return filteredProducts;
-            }
+            // Listen for quantity changes in cart
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('cart-quantity-input')) {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    const size = e.target.getAttribute('data-size') || '';
+                    let newQuantity = parseInt(e.target.value) || 1;
+                    
+                    if (newQuantity < 1) {
+                        newQuantity = 1;
+                        e.target.value = 1;
+                    }
+                    
+                    updateCartItemQuantity(id, size, newQuantity);
+                }
+            });
             
-            // For other categories, apply pagination
-            const startIndex = (currentPage - 1) * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            return filteredProducts.slice(startIndex, endIndex);
+            // Listen for cart item buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('decrease-quantity')) {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    const size = e.target.getAttribute('data-size') || '';
+                    decreaseQuantity(id, size);
+                }
+                
+                if (e.target.classList.contains('increase-quantity')) {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    const size = e.target.getAttribute('data-size') || '';
+                    increaseQuantity(id, size);
+                }
+                
+                if (e.target.classList.contains('remove-btn')) {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    const size = e.target.getAttribute('data-size') || '';
+                    removeItem(id, size);
+                }
+            });
         }
 
-        // Get tag class based on tag name
-        function getTagClass(tag) {
-            switch(tag) {
-                case 'bestseller':
-                    return 'tag-bestseller';
-                case 'eco':
-                    return 'tag-eco';
-                case 'new':
-                    return 'tag-new';
-                default:
-                    return '';
-            }
-        }
-
-        // Get tag text based on tag name
-        function getTagText(tag) {
-            switch(tag) {
-                case 'bestseller':
-                    return 'Best Seller';
-                case 'eco':
-                    return 'Eco Friendly';
-                case 'new':
-                    return 'New';
-                default:
-                    return '';
-            }
-        }
-
-        // Render products
+        // Render products to the page based on selected category
         function renderProducts() {
-            productContainer.innerHTML = '';
-            const paginatedProducts = getPaginatedProducts();
-            
-            if (paginatedProducts.length === 0) {
-                productContainer.innerHTML = `
-                    <div class="col-span-3 py-12 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p class="text-gray-600 text-lg">No products found in this category</p>
+            const productsContainer = document.querySelector('#productsSection .grid');
+            productsContainer.innerHTML = '';
+
+            const filteredProducts = products.filter(product => product.category === currentCategory);
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card bg-white rounded-lg shadow-md overflow-hidden';
+                
+                // Create image gallery
+                const galleryHtml = `
+                    <div class="image-gallery bg-gray-50">
+                        ${product.images.map((image, index) => `
+                            <div class="gallery-image ${index === 0 ? 'active' : ''}" data-index="${index}">
+                                ${image}
+                            </div>
+                        `).join('')}
+                        <div class="gallery-arrow gallery-prev">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </div>
+                        <div class="gallery-arrow gallery-next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="gallery-nav">
+                            ${product.images.map((_, index) => `
+                                <div class="gallery-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
-                return;
-            }
-            
-            paginatedProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'bg-white rounded-lg shadow-md overflow-hidden product-card';
                 
-                // Tag HTML - now moved next to product name
-                const tagHTML = product.tag ? 
-                    `<span class="product-tag ${getTagClass(product.tag)}">${getTagText(product.tag)}</span>` : '';
+                // Create size selection for clothes
+                let sizeSelectionHtml = '';
+                let quantityInputHtml = '';
                 
-                // Different UI based on category
-                let actionHTML = '';
-                
-                if (product.category === 'body-supports') {
-                    // Size selectors for body supports
-                    actionHTML = `
-                        <div class="mt-4 border-t pt-4">
-                            <div class="text-sm font-medium text-gray-700 mb-2">Select Size & Quantity:</div>
-                            <div class="size-selector mb-2">
-                                <select class="size-select border border-gray-300 rounded px-2 py-1 text-sm" data-id="${product.id}">
-                                    ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
-                                </select>
-                                <input type="number" min="1" value="1" class="size-quantity border border-gray-300 rounded px-2 py-1 text-sm" data-id="${product.id}">
-                                <button class="add-size-btn bg-indigo-600 text-white px-2 py-1 rounded text-sm hover:bg-indigo-700 transition" data-id="${product.id}">
-                                    Add
-                                </button>
+                if (product.hasSize) {
+                    sizeSelectionHtml = `
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-600 mb-2">Select Size:</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${availableSizes.map(size => `
+                                    <div class="size-btn" data-size="${size}">${size}</div>
+                                `).join('')}
                             </div>
                         </div>
                     `;
-                } else {
-                    // Simple add to cart button for other categories
-                    actionHTML = `
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-xl font-bold text-indigo-600">${formatPrice(product.price)}</span>
-                            <button class="add-to-cart-btn bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition" data-id="${product.id}">
-                                Add to Cart
-                            </button>
+                    
+                    quantityInputHtml = `
+                        <div class="flex items-center mb-4">
+                            <p class="text-sm text-gray-600 mr-2">Quantity:</p>
+                            <input type="number" min="1" value="1" class="quantity-input border rounded px-2 py-1">
                         </div>
                     `;
                 }
                 
                 productCard.innerHTML = `
-                    <div class="product-image bg-gray-100 p-4">
-                        ${product.image}
-                    </div>
+                    ${galleryHtml}
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">
-                            ${product.name}
-                            ${tagHTML}
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-2">${product.description}</p>
-                        <div class="moq-badge">MOQ: ${product.moq} units</div>
-                        ${product.category === 'body-supports' ? 
-                            `<div class="flex justify-between items-center mt-4">
-                                <span class="text-xl font-bold text-indigo-600">${formatPrice(product.price)}</span>
-                            </div>` : ''
-                        }
-                        ${actionHTML}
+                        <h3 class="text-lg font-semibold mb-1">${product.name}</h3>
+<p class="text-sm text-gray-600 mb-2">${product.description}</p>
+                        <p class="text-gray-700 mb-4">$${product.price.toLocaleString()}</p>
+                        ${sizeSelectionHtml}
+                        ${quantityInputHtml}
+                        <button class="add-to-cart w-full py-2 btn-primary rounded-lg" data-id="${product.id}">
+                            Add to Cart
+                        </button>
                     </div>
                 `;
-                productContainer.appendChild(productCard);
+                productsContainer.appendChild(productCard);
+                
+                // Add event listeners for gallery navigation
+                const gallery = productCard.querySelector('.image-gallery');
+                const prevBtn = gallery.querySelector('.gallery-prev');
+                const nextBtn = gallery.querySelector('.gallery-next');
+                const dots = gallery.querySelectorAll('.gallery-dot');
+                
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navigateGallery(gallery, 'prev');
+                });
+                
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navigateGallery(gallery, 'next');
+                });
+                
+                dots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const index = parseInt(dot.getAttribute('data-index'));
+                        showGalleryImage(gallery, index);
+                    });
+                });
             });
-
-            // Add event listeners to "Add" buttons for sizes
-            document.querySelectorAll('.add-size-btn').forEach(button => {
-                button.addEventListener('click', addSizeToCart);
-            });
-            
-            // Add event listeners to "Add to Cart" buttons
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.addEventListener('click', addToCart);
-            });
-            
-            // Render pagination (only for non-body-supports categories)
-            if (currentCategory !== "body-supports") {
-                renderPagination();
-            } else {
-                paginationContainer.innerHTML = ''; // Clear pagination for body-supports
-            }
         }
         
-        // Render pagination
-        function renderPagination() {
-            const filteredProducts = getFilteredProducts();
-            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+        // Navigate gallery images
+        function navigateGallery(gallery, direction) {
+            const images = gallery.querySelectorAll('.gallery-image');
+            const dots = gallery.querySelectorAll('.gallery-dot');
+            let activeIndex = 0;
             
-            paginationContainer.innerHTML = '';
+            // Find current active index
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    activeIndex = index;
+                }
+            });
             
-            if (totalPages <= 1) {
-                return;
+            // Calculate new index
+            let newIndex;
+            if (direction === 'prev') {
+                newIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1;
+            } else {
+                newIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1;
             }
             
-            // Previous button
-            if (currentPage > 1) {
-                const prevButton = document.createElement('button');
-                prevButton.className = 'px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition';
-                prevButton.innerHTML = '&laquo;';
-                prevButton.addEventListener('click', () => {
-                    currentPage--;
-                    renderProducts();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                paginationContainer.appendChild(prevButton);
-            }
+            // Update active classes
+            showGalleryImage(gallery, newIndex);
+        }
+        
+        // Show specific gallery image
+        function showGalleryImage(gallery, index) {
+            const images = gallery.querySelectorAll('.gallery-image');
+            const dots = gallery.querySelectorAll('.gallery-dot');
             
-            // Page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.className = `px-3 py-1 rounded-md transition ${currentPage === i ? 'bg-indigo-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`;
-                pageButton.textContent = i;
-                pageButton.addEventListener('click', () => {
-                    currentPage = i;
-                    renderProducts();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                paginationContainer.appendChild(pageButton);
-            }
+            // Remove active class from all
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
             
-            // Next button
-            if (currentPage < totalPages) {
-                const nextButton = document.createElement('button');
-                nextButton.className = 'px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 transition';
-                nextButton.innerHTML = '&raquo;';
-                nextButton.addEventListener('click', () => {
-                    currentPage++;
-                    renderProducts();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-                paginationContainer.appendChild(nextButton);
-            }
+            // Add active class to selected
+            images[index].classList.add('active');
+            dots[index].classList.add('active');
         }
 
-        // Add size to cart (for body supports)
-        function addSizeToCart(event) {
-            const productId = parseInt(event.target.getAttribute('data-id'));
+        // Add product to cart with size and quantity options
+        function addToCartWithOptions(productId, size, quantity, button) {
             const product = products.find(p => p.id === productId);
-            
-            // Get the selected size and quantity
-            const sizeSelect = event.target.parentElement.querySelector('.size-select');
-            const quantityInput = event.target.parentElement.querySelector('.size-quantity');
-            
-            const selectedSize = sizeSelect.value;
-            const quantity = parseInt(quantityInput.value);
-            
-            if (quantity <= 0) {
-                alert('Please enter a valid quantity');
-                return;
-            }
-            
-            // Create a unique ID for this product+size combination
-            const cartItemId = `${productId}-${selectedSize}`;
-            
-            // Check if this product+size is already in cart
-            const existingItemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-            
+            const cartItemKey = `${productId}-${size}`;
+            const existingItemIndex = cart.findIndex(item => item.id === productId && item.size === size);
+
             if (existingItemIndex !== -1) {
-                // Update existing item
                 cart[existingItemIndex].quantity += quantity;
             } else {
-                // Add new item
                 cart.push({
-                    id: productId,
-                    cartItemId: cartItemId,
+                    id: product.id,
                     name: product.name,
                     price: product.price,
+                    size: size,
                     quantity: quantity,
-                    size: selectedSize,
-                    category: product.category
+                    image: product.images[0] // Use first image for cart
                 });
             }
+
+            updateCartBadge();
             
-            updateCartCount();
-            showAddedToCartNotification(`${product.name} (${selectedSize})`);
+            // Change button color to green for feedback
+            const originalText = button.textContent;
+            const originalClass = button.className;
+            
+            button.textContent = "Added!";
+            button.className = button.className.replace('btn-primary', 'btn-success');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.className = originalClass;
+            }, 1000);
+            
+            showNotification(`Added ${quantity} ${product.name} (${size}) to cart`);
         }
 
-        // Add to cart (for non-body supports)
-        function addToCart(event) {
-            const productId = parseInt(event.target.getAttribute('data-id'));
+        // Add product to cart (for non-clothes items)
+        function addToCart(productId, button) {
             const product = products.find(p => p.id === productId);
-            
-            // For non-body supports, just add the product without size
-            const cartItemId = `${productId}`;
-            
-            // Check if this product is already in cart
-            const existingItemIndex = cart.findIndex(item => item.cartItemId === cartItemId);
-            
-            if (existingItemIndex !== -1) {
-                // Update existing item
-                cart[existingItemIndex].quantity += 1;
+            const existingItem = cart.find(item => item.id === productId && !item.size);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
             } else {
-                // Add new item
                 cart.push({
-                    id: productId,
-                    cartItemId: cartItemId,
+                    id: product.id,
                     name: product.name,
                     price: product.price,
                     quantity: 1,
-                    category: product.category
+                    image: product.images[0] // Use first image for cart
                 });
             }
+
+            updateCartBadge();
             
-            updateCartCount();
-            showAddedToCartNotification(product.name);
+            // Change button color to green for feedback
+            const originalText = button.textContent;
+            const originalClass = button.className;
+            
+            button.textContent = "Added!";
+            button.className = button.className.replace('btn-primary', 'btn-success');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.className = originalClass;
+            }, 1000);
+            
+            showNotification(`Added ${product.name} to cart`);
         }
 
-        // Show notification when product is added to cart
-        function showAddedToCartNotification(productName) {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
-            notification.innerHTML = `
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span>${productName} added to cart</span>
-                </div>
-            `;
-            document.body.appendChild(notification);
+        // Update cart badge
+        function updateCartBadge() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartBadge.textContent = totalItems;
             
-            // Remove notification after 3 seconds
+            if (totalItems > 0) {
+                cartBadge.classList.remove('hidden');
+            } else {
+                cartBadge.classList.add('hidden');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            notification.className = `fixed bottom-4 right-4 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
             setTimeout(() => {
                 notification.style.opacity = '0';
                 setTimeout(() => {
                     document.body.removeChild(notification);
                 }, 300);
-            }, 3000);
+            }, 2000);
         }
 
-        // Update cart count
-        function updateCartCount() {
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCountElement.textContent = totalItems;
+        // Show products section
+        function showProducts() {
+            productsSection.classList.remove('hidden');
+            cartSection.classList.add('hidden');
+            checkoutSection.classList.add('hidden');
+            quotationSection.classList.add('hidden');
         }
 
-        // Render cart items
+        // Show cart section
+        function showCart() {
+            renderCart();
+            productsSection.classList.add('hidden');
+            cartSection.classList.remove('hidden');
+            checkoutSection.classList.add('hidden');
+            quotationSection.classList.add('hidden');
+        }
+
+        // Render cart items with new layout
         function renderCart() {
-            cartItemsContainer.innerHTML = '';
-            
+            cartItems.innerHTML = '';
+
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="py-8 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            <p class="text-gray-600">Your cart is empty</p>
-                        </td>
-                    </tr>
-                `;
+                cartItems.innerHTML = '<div class="py-4 text-center text-gray-500 col-span-5">Your cart is empty</div>';
+                checkoutButton.disabled = true;
+                checkoutButton.classList.add('opacity-50');
                 return;
             }
-            
-            cart.forEach((item) => {
+
+            checkoutButton.disabled = false;
+            checkoutButton.classList.remove('opacity-50');
+
+            cart.forEach(item => {
                 const product = products.find(p => p.id === item.id);
-                const tr = document.createElement('tr');
-                tr.className = 'cart-item';
+                const itemTotal = item.price * item.quantity;
                 
-                // Show size info only for body supports
-                const sizeInfo = item.size ? `<p class="text-sm text-gray-600">Size: ${item.size}</p>` : '';
+                // Display size if it exists
+                const sizeInfo = item.size ? ` <span class="text-sm text-gray-500">(${item.size})</span>` : '';
                 
-                tr.innerHTML = `
-                    <td class="py-4 px-4">
-                        <div class="flex items-center">
-                            <div class="mr-4 text-gray-400 w-12 h-12">
-                                ${product.image}
-                            </div>
-                            <div>
-                                <h4 class="font-medium text-gray-800">${item.name}</h4>
-                                ${sizeInfo}
-                                <span class="text-xs text-gray-500">MOQ: ${product.moq} units</span>
-                                <div class="mt-2">
-                                    <input type="text" placeholder="Additional notes" class="note-input border border-gray-300 rounded px-2 py-1 text-sm w-full" data-id="${item.cartItemId}" value="${item.note || ''}">
-                                </div>
-                            </div>
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item-row';
+                
+                itemElement.innerHTML = `
+                    <div>
+                        <h3 class="text-gray-800 font-medium">${item.name}${sizeInfo}</h3>
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <div class="flex items-center border rounded-md">
+                            <button class="decrease-quantity px-2 py-1" data-id="${item.id}" data-size="${item.size || ''}">-</button>
+                            <input type="number" min="1" value="${item.quantity}" class="cart-quantity-input" data-id="${item.id}" data-size="${item.size || ''}">
+                            <button class="increase-quantity px-2 py-1" data-id="${item.id}" data-size="${item.size || ''}">+</button>
                         </div>
-                    </td>
-                    <td class="py-4 px-4 text-center">
-                        <input type="number" min="1" value="${item.quantity}" class="quantity-input border border-gray-300 rounded px-2 py-1 text-center" data-id="${item.cartItemId}">
-                    </td>
-                    <td class="py-4 px-4 text-right">${formatPrice(item.price)}</td>
-                    <td class="py-4 px-4 text-right font-medium">${formatPrice(item.price * item.quantity)}</td>
-                    <td class="py-4 px-4 text-center">
-                        <button class="remove-from-cart text-red-500 hover:text-red-700" data-id="${item.cartItemId}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </div>
+                    
+                    <div class="text-right">
+                        $${item.price.toLocaleString()}
+                    </div>
+                    
+                    <div class="text-right font-medium">
+                        $${itemTotal.toLocaleString()}
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button class="remove-btn" data-id="${item.id}" data-size="${item.size || ''}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                             </svg>
                         </button>
-                    </td>
+                    </div>
                 `;
-                cartItemsContainer.appendChild(tr);
+                
+                cartItems.appendChild(itemElement);
             });
-            
-            // Add event listeners to quantity inputs
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', updateQuantity);
-            });
-            
-            // Add event listeners to note inputs
-            document.querySelectorAll('.note-input').forEach(input => {
-                input.addEventListener('change', updateNote);
-            });
-            
-            // Add event listeners to remove buttons
-            document.querySelectorAll('.remove-from-cart').forEach(button => {
-                button.addEventListener('click', removeFromCart);
-            });
-            
-            // Update cart total
+
             updateCartTotal();
-        }
-
-        // Update quantity
-        function updateQuantity(event) {
-            const cartItemId = event.target.getAttribute('data-id');
-            const newQuantity = parseInt(event.target.value);
-            
-            if (newQuantity <= 0) {
-                cart = cart.filter(item => item.cartItemId !== cartItemId);
-            } else {
-                const item = cart.find(item => item.cartItemId === cartItemId);
-                if (item) {
-                    item.quantity = newQuantity;
-                }
-            }
-            
-            updateCartCount();
-            renderCart();
-        }
-
-        // Update note
-        function updateNote(event) {
-            const cartItemId = event.target.getAttribute('data-id');
-            const newNote = event.target.value;
-            
-            const item = cart.find(item => item.cartItemId === cartItemId);
-            if (item) {
-                item.note = newNote;
-            }
-        }
-
-        // Remove from cart
-        function removeFromCart(event) {
-            const cartItemId = event.target.closest('.remove-from-cart').getAttribute('data-id');
-            cart = cart.filter(item => item.cartItemId !== cartItemId);
-            
-            updateCartCount();
-            renderCart();
         }
 
         // Update cart total
         function updateCartTotal() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotalElement.textContent = formatPrice(total);
+            cartTotal.textContent = `$${total.toLocaleString()}`;
         }
 
-        // Group cart items by product for quotation
-        function groupCartItemsByProduct() {
-            const groupedItems = [];
-            const productGroups = {};
+        // Decrease item quantity
+        function decreaseQuantity(id, size) {
+            const itemIndex = cart.findIndex(item => item.id === id && (item.size || '') === size);
+            if (itemIndex === -1) return;
             
-            // Group items by product ID
-            cart.forEach(item => {
-                if (!productGroups[item.id]) {
-                    productGroups[item.id] = {
-                        id: item.id,
-                        name: item.name,
-                        price: item.price,
-                        sizes: [],
-                        totalQuantity: 0,
-                        totalPrice: 0,
-                        category: item.category
-                    };
-                }
+            if (cart[itemIndex].quantity > 1) {
+                cart[itemIndex].quantity -= 1;
                 
-                // For body supports, add size and quantity
-                if (item.category === 'body-supports') {
-                    productGroups[item.id].sizes.push({
-                        size: item.size,
-                        quantity: item.quantity,
-                        note: item.note
-                    });
-                } else {
-                    // For other categories, just add quantity
-                    productGroups[item.id].totalQuantity += item.quantity;
+                // Update the quantity input and item total
+                const input = document.querySelector(`.cart-quantity-input[data-id="${id}"][data-size="${size}"]`);
+                if (input) {
+                    input.value = cart[itemIndex].quantity;
+                    updateItemTotal(id, size);
                 }
-                
-                // Update totals
-                productGroups[item.id].totalQuantity += (item.category === 'body-supports' ? 0 : item.quantity);
-                productGroups[item.id].totalPrice += item.price * item.quantity;
-            });
-            
-            // Convert to array
-            for (const id in productGroups) {
-                groupedItems.push(productGroups[id]);
+            } else {
+                removeItem(id, size);
+                return;
             }
             
-            return groupedItems;
+            updateCartBadge();
+            updateCartTotal();
+        }
+
+        // Increase item quantity
+        function increaseQuantity(id, size) {
+            const itemIndex = cart.findIndex(item => item.id === id && (item.size || '') === size);
+            if (itemIndex === -1) return;
+            
+            cart[itemIndex].quantity += 1;
+            
+            // Update the quantity input and item total
+            const input = document.querySelector(`.cart-quantity-input[data-id="${id}"][data-size="${size}"]`);
+            if (input) {
+                input.value = cart[itemIndex].quantity;
+                updateItemTotal(id, size);
+            }
+            
+            updateCartBadge();
+            updateCartTotal();
+        }
+
+        // Update cart item quantity directly
+        function updateCartItemQuantity(id, size, quantity) {
+            const itemIndex = cart.findIndex(item => item.id === id && (item.size || '') === size);
+            if (itemIndex === -1) return;
+            
+            cart[itemIndex].quantity = quantity;
+            updateCartBadge();
+            updateItemTotal(id, size);
+            updateCartTotal();
+        }
+        
+        // Update item total in the cart display
+        function updateItemTotal(id, size) {
+            const itemIndex = cart.findIndex(item => item.id === id && (item.size || '') === size);
+            if (itemIndex === -1) return;
+            
+            const itemRow = document.querySelector(`.cart-quantity-input[data-id="${id}"][data-size="${size}"]`).closest('.cart-item-row');
+            const totalCell = itemRow.querySelector('div:nth-child(4)'); // 4th div is the total column
+            const itemTotal = cart[itemIndex].price * cart[itemIndex].quantity;
+            totalCell.textContent = `$${itemTotal.toLocaleString()}`;
+        }
+
+        // Remove item from cart
+        function removeItem(id, size) {
+            cart = cart.filter(item => !(item.id === id && (item.size || '') === size));
+            updateCartBadge();
+            renderCart();
+        }
+
+        // Show checkout section
+        function showCheckout() {
+            productsSection.classList.add('hidden');
+            cartSection.classList.add('hidden');
+            checkoutSection.classList.remove('hidden');
+            quotationSection.classList.add('hidden');
+        }
+
+        // Process checkout
+        function processCheckout() {
+            // Collect form data
+            customerInfo = {
+                companyName: document.getElementById('companyName').value,
+                customerName: document.getElementById('customerName').value,
+                address: document.getElementById('address').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value
+            };
+
+            // Generate and show quotation
+            generateQuotation();
+            showQuotation();
+        }
+
+        // Show quotation section
+        function showQuotation() {
+            productsSection.classList.add('hidden');
+            cartSection.classList.add('hidden');
+            checkoutSection.classList.add('hidden');
+            quotationSection.classList.remove('hidden');
         }
 
         // Generate quotation
         function generateQuotation() {
-            // Set customer info
-            const customerInfoElement = document.getElementById('customerInfo');
-            customerInfoElement.innerHTML = `
-                <p><strong>Company Name:</strong> ${customerInfo.company}</p>
-                <p><strong>Customer Name:</strong> ${customerInfo.name}</p>
-                <p><strong>Email:</strong> ${customerInfo.email}</p>
-                <p><strong>Phone:</strong> ${customerInfo.phone}</p>
-                <p><strong>Address:</strong> ${customerInfo.address}</p>
-            `;
-            
             // Set quotation number and date
             const today = new Date();
-            const quotationNumber = `QT-${today.getFullYear()}${String(today.getMonth() + 1).padStart(2, '0')}${String(today.getDate()).padStart(2, '0')}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
-            const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+            const quotationNumber = `QT-${today.getFullYear()}${(today.getMonth() + 1).toString().padStart(2, '0')}${today.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+            const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
             
             document.getElementById('quotationNumber').textContent = `No: ${quotationNumber}`;
             document.getElementById('quotationDate').textContent = `Date: ${formattedDate}`;
+
+            // Set customer info
+            document.getElementById('quoteCompanyName').textContent = customerInfo.companyName;
+            document.getElementById('quoteCustomerName').textContent = customerInfo.customerName;
+            document.getElementById('quoteAddress').textContent = customerInfo.address;
+            document.getElementById('quoteEmail').textContent = `Email: ${customerInfo.email}`;
+            document.getElementById('quotePhone').textContent = `Tel: ${customerInfo.phone}`;
             
-            // Set quotation items - now grouped by product
-            const quotationItemsElement = document.getElementById('quotationItems');
-            quotationItemsElement.innerHTML = '';
-            
-            const groupedItems = groupCartItemsByProduct();
-            
-            groupedItems.forEach(item => {
+            // Set customer company name and name in signature area
+            document.getElementById('customerCompanySignature').textContent = customerInfo.companyName;
+            document.getElementById('customerSignatureName').textContent = customerInfo.customerName;
+
+            // Set items
+            const quoteItems = document.getElementById('quoteItems');
+            quoteItems.innerHTML = '';
+
+            cart.forEach(item => {
                 const tr = document.createElement('tr');
+                const itemTotal = item.price * item.quantity;
                 
-                // Format item name based on category
-                let itemName = item.name;
-                
-                // For body supports, format sizes as (Size Quantity) (Size Quantity)
-                if (item.category === 'body-supports' && item.sizes.length > 0) {
-                    const sizesText = item.sizes.map(s => `(${s.size} ${s.quantity})`).join(' ');
-                    itemName = `${item.name} ${sizesText}`;
-                }
-                
-                // Calculate total quantity for body supports
-                const totalQuantity = item.category === 'body-supports' 
-                    ? item.sizes.reduce((sum, s) => sum + s.quantity, 0) 
-                    : item.totalQuantity;
+                // Include size in item name if it exists
+                const itemName = item.size ? `${item.name} (${item.size})` : item.name;
                 
                 tr.innerHTML = `
-                    <td class="py-2 px-4">${itemName}</td>
-                    <td class="py-2 px-4 text-right">${totalQuantity}</td>
-                    <td class="py-2 px-4 text-right">${formatPrice(item.price)}</td>
-                    <td class="py-2 px-4 text-right">${formatPrice(item.totalPrice)}</td>
+                    <td class="border p-2">${itemName}</td>
+                    <td class="border p-2 text-right">$${item.price.toLocaleString()}</td>
+                    <td class="border p-2 text-right">${item.quantity}</td>
+                    <td class="border p-2 text-right">$${itemTotal.toLocaleString()}</td>
                 `;
-                quotationItemsElement.appendChild(tr);
+                quoteItems.appendChild(tr);
             });
-            
-            // Set quotation total
+
+            // Set total
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            document.getElementById('quotationTotal').textContent = formatPrice(total);
-            
-            // Set notes
-            const quotationNotesElement = document.getElementById('quotationNotes');
-            quotationNotesElement.textContent = customerInfo.notes || 'No notes provided';
+            document.getElementById('quoteTotal').textContent = `$${total.toLocaleString()}`;
         }
 
-        // Download PDF
-        function downloadPDF() {
-            const element = document.getElementById('quotationContent');
-            const opt = {
-                margin: [20, 20, 20, 20], // Increased margins [top, right, bottom, left]
-                filename: 'Quotation.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+        // Generate PDF
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const quotationContent = document.getElementById('quotationContent');
             
-            // Add loading indicator
-            const loadingOverlay = document.createElement('div');
-            loadingOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            loadingOverlay.innerHTML = `
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mx-auto mb-4"></div>
-                    <p class="text-gray-800">Generating PDF...</p>
-                </div>
-            `;
-            document.body.appendChild(loadingOverlay);
+            // Show loading indicator
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            loadingIndicator.innerHTML = '<div class="bg-white p-4 rounded-lg"><p class="text-lg font-semibold">Creating PDF...</p></div>';
+            document.body.appendChild(loadingIndicator);
             
-            // Generate PDF with better formatting
-            html2pdf().from(element).set(opt).save().then(() => {
+            // Use html2canvas to capture the quotation content
+            html2canvas(quotationContent, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+const margin = 15; // ระยะขอบกระดาษ (mm)
+const contentWidth = pdfWidth - margin * 2;
+const contentHeight = pdfHeight - margin * 2;
+const ratio = Math.min(contentWidth / imgWidth, contentHeight / imgHeight);
+
+const finalWidth = imgWidth * ratio;
+const finalHeight = imgHeight * ratio;
+
+const imgX = margin;
+const imgY = margin;
+
+pdf.addImage(imgData, 'PNG', imgX, imgY, finalWidth, finalHeight);
+                pdf.save('Quotation.pdf');
+                
                 // Remove loading indicator
-                document.body.removeChild(loadingOverlay);
+                document.body.removeChild(loadingIndicator);
             });
         }
 
-        // Initialize
-        function init() {
-            // Render products
-            renderProducts();
-            
-            // Category tabs
-            categoryTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs
-                    categoryTabs.forEach(t => t.classList.remove('tab-active'));
-                    
-                    // Add active class to clicked tab
-                    tab.classList.add('tab-active');
-                    
-                    // Update current category and reset page
-                    currentCategory = tab.getAttribute('data-category');
-                    currentPage = 1;
-                    
-                    // Render products
-                    renderProducts();
-                });
-            });
-            
-            // Cart button - now only shows the cart section
-            document.getElementById('cartBtn').addEventListener('click', () => {
-                shopSection.classList.add('hidden'); // Hide shop section
-                cartSection.classList.remove('hidden'); // Show cart section
-                checkoutSection.classList.add('hidden');
-                quotationSection.classList.add('hidden');
-                renderCart();
-            });
-            
-            // Back to shop button
-            document.getElementById('backToShopBtn').addEventListener('click', () => {
-                shopSection.classList.remove('hidden');
-                cartSection.classList.add('hidden');
-                checkoutSection.classList.add('hidden');
-                quotationSection.classList.add('hidden');
-            });
-            
-            // Checkout button
-            document.getElementById('checkoutBtn').addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Please add products to your cart before proceeding');
-                    return;
-                }
-                
-                shopSection.classList.add('hidden');
-                cartSection.classList.add('hidden');
-                checkoutSection.classList.remove('hidden');
-                quotationSection.classList.add('hidden');
-            });
-            
-            // Back to cart button
-            document.getElementById('backToCartBtn').addEventListener('click', () => {
-                shopSection.classList.add('hidden');
-                cartSection.classList.remove('hidden');
-                checkoutSection.classList.add('hidden');
-                quotationSection.classList.add('hidden');
-            });
-            
-            // Checkout form submission
-            document.getElementById('checkoutForm').addEventListener('submit', (event) => {
-                event.preventDefault();
-                
-                // Get form data
-                customerInfo = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    company: document.getElementById('company').value,
-                    address: document.getElementById('address').value,
-                    notes: document.getElementById('notes').value
-                };
-                
-                // Generate quotation
-                generateQuotation();
-                
-                // Show quotation section
-                shopSection.classList.add('hidden');
-                cartSection.classList.add('hidden');
-                checkoutSection.classList.add('hidden');
-                quotationSection.classList.remove('hidden');
-            });
-            
-            // Back to checkout button
-            document.getElementById('backToCheckoutBtn').addEventListener('click', () => {
-                shopSection.classList.add('hidden');
-                cartSection.classList.add('hidden');
-                checkoutSection.classList.remove('hidden');
-                quotationSection.classList.add('hidden');
-            });
-            
-            // Download PDF button
-            document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+        // SVG creation functions with color parameter
+        function createLaptopSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="12" rx="2" ry="2"></rect>
+                <line x1="2" y1="20" x2="22" y2="20"></line>
+            </svg>`;
+        }
+
+        function createPhoneSVG(color = '#4f46e5', strokeColor = color) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${strokeColor}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12" y2="18"></line>
+            </svg>`;
+        }
+
+        function createHeadphonesSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+            </svg>`;
+        }
+
+        function createCameraSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+            </svg>`;
+        }
+
+        function createSpeakerSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <circle cx="12" cy="14" r="4"></circle>
+                <circle cx="12" cy="6" r="1"></circle>
+            </svg>`;
+        }
+
+        function createTabletSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12" y2="18"></line>
+            </svg>`;
+        }
+
+        function createWatchSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="7"></circle>
+                <polyline points="12 9 12 12 13.5 13.5"></polyline>
+                <path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path>
+            </svg>`;
+        }
+
+        function createTShirtSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 8l-3-3H7L4 8l2 3v9h12v-9l2-3z"></path>
+                <path d="M7 5c0 2.21 2.24 4 5 4s5-1.79 5-4"></path>
+            </svg>`;
+        }
+
+        function createJeansSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L6 22M18 2L18 22M6 6L18 6M6 16L18 16"></path>
+                <path d="M6 2L10 2C11.1046 2 12 2.89543 12 4L12 22"></path>
+                <path d="M18 2L14 2C12.8954 2 12 2.89543 12 4L12 22"></path>
+            </svg>`;
+        }
+
+        function createHoodieSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7L3 22L21 22L21 7"></path>
+                <path d="M9 3C9 4.10457 10.3431 5 12 5C13.6569 5 15 4.10457 15 3"></path>
+                <path d="M5 7L9 3L15 3L19 7"></path>
+                <path d="M9 13C9 14.1046 10.3431 15 12 15C13.6569 15 15 14.1046 15 13"></path>
+                <path d="M9 13L9 22M15 13L15 22"></path>
+            </svg>`;
+        }
+        
+        // New SVG functions for additional products
+        function createPoloSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 8l-3-3H7L4 8l2 3v9h12v-9l2-3z"></path>
+                <path d="M7 5c0 2.21 2.24 4 5 4s5-1.79 5-4"></path>
+                <path d="M12 9v3"></path>
+                <path d="M10 11h4"></path>
+            </svg>`;
+        }
+        
+        function createJacketSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7L3 22L21 22L21 7"></path>
+                <path d="M9 3C9 4.10457 10.3431 5 12 5C13.6569 5 15 4.10457 15 3"></path>
+                <path d="M5 7L9 3L15 3L19 7"></path>
+                <path d="M8 12L8 22M16 12L16 22"></path>
+                <path d="M8 12L16 12"></path>
+                <path d="M8 17L16 17"></path>
+            </svg>`;
+        }
+        
+        function createShortsSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L6 14M18 2L18 14M6 6L18 6"></path>
+                <path d="M6 2L10 2C11.1046 2 12 2.89543 12 4L12 14"></path>
+                <path d="M18 2L14 2C12.8954 2 12 2.89543 12 4L12 14"></path>
+            </svg>`;
+        }
+        
+        function createFoldablePhoneSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+                <line x1="12" y1="18" x2="12" y2="18"></line>
+            </svg>`;
+        }
+        
+        function createGamingPhoneSVG(color = '#4f46e5') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="7" y="2" width="10" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12" y2="18"></line>
+                <circle cx="10" cy="12" r="1"></circle>
+                <circle cx="14" cy="12" r="1"></circle>
+                <circle cx="12" cy="9" r="1"></circle>
+                <circle cx="12" cy="15" r="1"></circle>
+            </svg>`;
         }
 
         // Initialize the app
         init();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95624ca4b7204b8e',t:'MTc1MDk5OTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.swiper-container').forEach(container => {
-        new Swiper(container, {
-            loop: true,
-            navigation: {
-                nextEl: container.querySelector('.swiper-button-next'),
-                prevEl: container.querySelector('.swiper-button-prev'),
-            },
-            pagination: {
-                el: container.querySelector('.swiper-pagination'),
-                clickable: true,
-            },
-        });
-    });
-});
-</script><script>
-document.addEventListener('DOMContentLoaded', () => {
-  const swipers = document.querySelectorAll('.product-swiper');
-  swipers.forEach((el) => {
-    new Swiper(el, {
-      loop: true,
-      navigation: {
-        nextEl: el.querySelector('.swiper-button-next'),
-        prevEl: el.querySelector('.swiper-button-prev'),
-      },
-    });
-  });
-});
-</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9573e510652c10f8',t:'MTc1MTE4NDA3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
