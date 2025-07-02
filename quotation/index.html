@@ -57,12 +57,14 @@
             transition: all 0.3s ease;
         }
         .btn-primary {
-            background-color: #4f46e5;
+            background-color: #d4af37;
             color: white;
             transition: all 0.3s ease;
+            box-shadow: 0 0 4px #d4af37;
         }
         .btn-primary:hover {
-            background-color: #4338ca;
+            background-color: #b8941e;
+            box-shadow: 0 0 6px #b8941e;
         }
         .btn-secondary {
             background-color: #f43f5e;
@@ -107,7 +109,7 @@
         }
         .image-gallery {
             position: relative;
-            aspect-ratio: 1 / 1.2;
+            aspect-ratio: 2 / 3;
             overflow: hidden;
         }
         .gallery-image {
@@ -263,16 +265,19 @@ body { font-family: 'Montserrat', sans-serif; }</style>
 <body>
 <div class="min-h-screen flex flex-col">
 <!-- Header -->
-<header class="bg-[#FFE6A9] shadow-md py-4 px-6 no-print sticky top-0 z-50">
+<header class="bg-gradient-to-r from-[#e4ce94] to-[#d8bc83] shadow-md py-4 px-6 no-print sticky top-0 z-50">
 <div class="container mx-auto flex justify-between items-center">
-<h1 class="text-2xl font-bold bg-gradient-to-r from-red-500 via-white to-blue-500 bg-clip-text text-transparent animate-gradient-x font-extrabold font-bold text-[#1e293b]">ANG DONGKA (THAILAND) CO., LTD.</h1>
+<h1 class="text-4xl font-bold font-extrabold flex flex-wrap gap-1"><span style="color:#dc2626; font-weight:bold; text-shadow: 1px 1px 2px black;">ANG</span> <span style="color:#ffffff; font-weight:bold; text-shadow: 1px 1px 2px black;">DONGKA</span> <span style="color:#2563eb; font-weight:bold; text-shadow: 1px 1px 2px black;">(THAILAND)</span> <span style="color:#ffffff; font-weight:bold; text-shadow: 1px 1px 2px black;">CO.,</span> <span style="color:#dc2626; font-weight:bold; text-shadow: 1px 1px 2px black;">LTD.</span></h1>
 <div class="flex items-center space-x-4">
-<button class="relative p-2" id="cartButton">
-<svg class="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-white rounded-xl shadow hover:shadow-md transition text-indigo-600 font-semibold" id="cartButton">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
-<span class="cart-badge hidden" id="cartBadge">0</span>
+<span>Cart</span>
+<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden" id="cartBadge">0</span>
 </button>
+</div>
 </div>
 </div>
 </header>
@@ -446,7 +451,7 @@ body { font-family: 'Montserrat', sans-serif; }</style>
 <!-- Footer -->
 <footer class="bg-gray-800 text-white py-6 mt-auto no-print">
 <div class="container mx-auto px-4">
-<p class="text-center">© 2023 ANG DONGKA(THAILAND) CO., LTD. All rights reserved.</p>
+<p class="text-center">© 2025 ANG DONGKA(THAILAND) CO., LTD. All rights reserved.</p>
 </div>
 </footer>
 </div>
@@ -490,11 +495,9 @@ body { font-family: 'Montserrat', sans-serif; }</style>
                 price: 39.99, 
                 category: 'clothes',
                 hasSize: true,
-                images: [
-                    createPoloSVG('#4f46e5'),
-                    createPoloSVG('#10b981'),
-                    createPoloSVG('#f43f5e')
-                ]
+                images: ["<img src=\"https://i.postimg.cc/fLg8K2Jk/dd243938-433e-4f20-b026-1b9c489ab022.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/sfbrfKwV/0f03e966-dccd-4940-92a7-0899fe5bda55.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/XNrW0tKH/Blue-Good-Night-Flyer.webp\" class=\"w-full h-full object-contain\">"]
             },
             { 
                 id: 14, 
@@ -502,37 +505,33 @@ body { font-family: 'Montserrat', sans-serif; }</style>
                 price: 89.99, 
                 category: 'clothes',
                 hasSize: true,
-                images: [
-                    createJacketSVG('#4f46e5'),
-                    createJacketSVG('#000000'),
-                    createJacketSVG('#f43f5e')
-                ]
+                images: ["<img src=\"https://i.postimg.cc/xTfW1MYx/7e46ee89-d6c1-45ed-8bdf-8bb9689a7df2.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/d3Bp9tRj/Untitled-1000-x-1200-px.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/VsBxwDy0/4af36bda-5224-4710-8267-9d4cead93863-1.webp\" class=\"w-full h-full object-contain\">"]
             },
-            { 
-                id: 15, 
-                name: 'KNEE SUPPORT WITH SPRING', 
-                price: 34.99, 
-                category: 'clothes',
-                hasSize: true,
-                images: [
-                    createShortsSVG('#4f46e5'),
-                    createShortsSVG('#10b981'),
-                    createShortsSVG('#000000')
-                ]
-            },
+            {
+  id: 15,
+  name: 'KNEE SUPPORT WITH SPRING',
+  price: 34.99,
+  category: 'clothes',
+  hasSize: true,
+  images: [
+    `<img src="https://i.postimg.cc/q7MSwvhR/24d7498a-6521-40a2-a715-b55282048621.webp" class="w-full h-full object-contain">`,
+    `<img src="https://i.postimg.cc/Bb7fs3z7/3.webp" class="w-full h-full object-contain">`,
+    `<img src="https://i.postimg.cc/6qpxDqMG/4.webp" class="w-full h-full object-contain">`
+  ]
+},
             
             // Skincare Products category - 6 items
             { 
                 id: 4, 
-                name: 'MILK PROTEIN SUNSCREEN', 
+                name: 'MELASMA GOAT MILK', 
                 price: 799.99, 
                 category: 'phones',
                 hasSize: false,
-                images: [
-                    createPhoneSVG('#4f46e5'),
-                    createPhoneSVG('#10b981'),
-                    createPhoneSVG('#f43f5e')
-                ]
+                images: ["<img src=\"https://i.postimg.cc/YCv05wsC/Your-paragraph-text-2.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/j5HLMQk6/Your-paragraph-text.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/13bXPYkc/Your-paragraph-text-1.webp\" class=\"w-full h-full object-contain\">"]
             },
             { 
                 id: 5, 
@@ -540,27 +539,23 @@ body { font-family: 'Montserrat', sans-serif; }</style>
                 price: 999.99, 
                 category: 'phones',
                 hasSize: false,
-                images: [
-                    createPhoneSVG('#000000'),
-                    createPhoneSVG('#ffffff', '#000000'),
-                    createPhoneSVG('#f59e0b')
-                ]
+                images: ["<img src=\"https://i.postimg.cc/432sV693/Untitled-design.png\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/76DYsDNW/56aac559-7a14-45d6-abc7-8efc4424d708.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/wxSb26LQ/9e0e4f28-86c2-43b8-8ed7-0678912d1cbf.webp\" class=\"w-full h-full object-contain\">"]
             },
             { 
                 id: 6, 
-                name: 'NAD PEPTIDE ACNE SERUM', 
+                name: 'PLACENTA SUNSCREEN', 
                 price: 299.99, 
                 category: 'phones',
                 hasSize: false,
-                images: [
-                    createPhoneSVG('#4f46e5'),
-                    createPhoneSVG('#10b981'),
-                    createPhoneSVG('#f43f5e')
-                ]
+                images: ["<img src=\"https://i.postimg.cc/59PnwW84/05871c6d-e08f-43f8-9636-1c26b6c9d1eb.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/FzKp2TXX/f3cced03-161a-4994-94f2-28d717df1498.webp\" class=\"w-full h-full object-contain\">",
+"<img src=\"https://i.postimg.cc/vTShM5Gg/c3d85334-0e86-4bcb-baa2-b8708c5ae5fb.webp\" class=\"w-full h-full object-contain\">"]
             },
             { 
                 id: 16, 
-                name: 'Foldable Phone', 
+                name: 'NAD PEPTIDE ACNE SERUM', 
                 price: 1299.99, 
                 category: 'phones',
                 hasSize: false,
