@@ -430,15 +430,15 @@ body { font-family: 'Montserrat', sans-serif; }</style>
 <p id="customerCompanySignature"></p>
 <p class="text-sm" id="customerSignatureName"></p>
 <div class="position-line mt-2"></div>
-<p class="text-sm">Position: _________________</p>
-<p class="text-sm mt-2">Date: _______________</p>
+<p class="text-sm">Position: _______________________</p>
+<p class="text-sm mt-2">Date: ___________________</p>
 </div>
 <div class="text-center">
 <div class="signature-line"></div>
-<p>ANG DONGKA Signature</p>
+<p>ANG DONGKA(THAILAND) CO., LTD.</p>
 <div class="position-line mt-2"></div>
-<p class="text-sm">Position: _________________</p>
-<p class="text-sm mt-2">Date: _______________</p>
+<p class="text-sm">Position: _______________________</p>
+<p class="text-sm mt-2">Date: ___________________</p>
 </div>
 </div>
 <div class="mt-12 text-center">
@@ -459,68 +459,375 @@ body { font-family: 'Montserrat', sans-serif; }</style>
         // Sample product data with categories - 6 products per category
         const products = [
             // Clothes category - 6 items
-            { 
-                id: 1, 
-                name: 'LS LUMBAR SUPPORT', 
-                price: 29.99, 
-                category: 'clothes',
-                hasSize: true,
-                images: ["<img src=\"https://i.postimg.cc/KY3YR2FP/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp\" class=\"w-full h-full object-contain\">",
+            
+{
+  id: 1,
+  name: 'LS LUMBAR SUPPORT',
+  price: 10,
+  category: 'clothes',
+  hasSize: true,
+  images: ["<img src=\"https://i.postimg.cc/KY3YR2FP/56154bb9-751c-4d3f-823d-9f40b2c572f8.webp\" class=\"w-full h-full object-contain\">",
 "<img src=\"https://i.postimg.cc/3N87C5Mb/63d244e4-8e12-40b3-bebf-ed34f9a30db9.webp\" class=\"w-full h-full object-contain\">",
-"<img src=\"https://i.postimg.cc/2y0Y0crj/Screenshot-2025-06-13-233235.webp\" class=\"w-full h-full object-contain\">"]
-            },
-            { 
+"<img src=\"https://i.postimg.cc/2y0Y0crj/Screenshot-2025-06-13-233235.webp\" class=\"w-full h-full object-contain\">"],
+  description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br><br>
+<strong>Product Features:</strong><br>
+🔸 Made with premium-grade elastic – tough, flexible, and soft<br>
+🌬️ Excellent breathability – no discomfort while wearing<br>
+🦾 Reinforced with 2 aluminum bars at the lower back (removable)<br>
+🛡️ 6 polycarbonate stabilizers for all-around support<br>
+🧵 Lightweight and snug fit<br>
+👕 Can be worn over clothes with ease – non-bulky<br>
+<br><strong>Recommended For:</strong><br>
+💢 Lower back, waist, or hip pain<br>
+💻 People sitting in the same position for long hours (Office Syndrome)<br>
+📦 Heavy lifters – factory workers, housekeepers, drivers<br>
+👵 Elderly or people with muscle weakness<br>
+🧬 Muscle inflammation / spinal degeneration / herniated disc<br>
+🛌 Post-surgery recovery<br>
+🧘 Physiotherapy support<br><br>
+
+<strong>Size Chart (Waist in inches):</strong><br>
+S – 26–30"<br>
+M – 30–34"<br>
+L – 34–38"<br>
+XL – 38–42"<br>
+2XL – 42–50"<br>
+3XL – 50–56"<br>
+
+
+<br><strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br>
+❌ Wear during sleep<br>
+
+<br>
+
+<strong>Available Colors:</strong><br>
+⚫ Black<br>
+<span style=\"display:inline-block;width:14px;height:14px;border-radius:50%;background-color:#FFF2E0;vertical-align:middle;margin-right:6px;\"></span>Beige<br><br><strong>Minimum Order Quantity (MOQ):</strong><br>📦 20 pieces
+`
+},
+{ 
                 id: 2, 
                 name: 'ECO BACK SUPPORT', 
-                price: 59.99, 
+                price: 40, 
                 category: 'clothes',
                 hasSize: true,
                 images: ["<img src=\"https://i.postimg.cc/8cmy7qyk/f36f51f6-fcca-4ccc-975d-a3a7cd5ae873.webp\" class=\"w-full h-full object-contain\">",
 "<img src=\"https://i.postimg.cc/527RqWf6/23329eb6-3957-4c35-b1cf-b632564dad52.webp\" class=\"w-full h-full object-contain\">",
-"<img src=\"https://i.postimg.cc/wvJ4ptLm/1749831782489.webp\" class=\"w-full h-full object-contain\">"]
-            },
+"<img src=\"https://i.postimg.cc/wvJ4ptLm/1749831782489.webp\" class=\"w-full h-full object-contain\">"],
+  description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br><br>
+
+<strong>Product Features:</strong><br>
+🩺 Made from premium-grade elastic – highly flexible, durable, and breathable<br>
+🎗️ Comes with adjustable, removable shoulder straps<br>
+🧩 Reinforced with 4 polycarbonate stabilizers<br>
+🪶 Lightweight, snug fit, and comfortable<br>
+🧷 Secured with large Velcro straps – firm and long-lasting<br><br>
+
+<strong>Recommended For:</strong><br>
+🚗 Long-distance drivers, warehouse staff, factory workers, housekeepers<br>
+📏 Keep your back and waist straight<br>
+💼 Office syndrome / prolonged sitting<br>
+🧓 Elderly / muscle weakness<br>
+🛠️ Manual labor, machine movers<br>
+🏥 Nurses, caregivers, post-surgery recovery, physical therapy<br>
+⚠️ Back, waist, or hip pain<br>
+📦 Frequent heavy lifting<br><br><strong>Size Chart (Waist in inches):</strong><br>
+S – 20" – 26"<br>
+M – 26" – 30"<br>
+L – 30" – 36"<br>
+XL – 36" – 42"<br>
+2XL – 42" – 48"<br>
+3XL – 48" – 54"<br><br>
+
+<strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br>
+❌ Wear during sleep<br>
+
+<br><strong>Available Colors:</strong><br>
+⚫ Black<br><br>
+<br>
+<strong>Minimum Order Quantity (MOQ):</strong><br>
+📦 20 pieces<br>
+`
+},
             { 
                 id: 3, 
                 name: 'Posture Support Shirt LS14', 
-                price: 49.99, 
+                price: 50, 
                 category: 'clothes',
                 hasSize: true,
                 images: ["<img src=\"https://i.postimg.cc/mkZ8vmwP/f9df1d8d-8215-4582-aab4-a078a8b8ade4.webp\" class=\"w-full h-full object-contain\">",
 "<img src=\"https://i.postimg.cc/KzPWSkhH/542e4ff6-4d03-48eb-9b0a-e8df5cea6245.webp\" class=\"w-full h-full object-contain\">",
-"<img src=\"https://i.postimg.cc/9MYLg6G3/1def40ea-5f23-4fa1-9f4d-8807d0cdf02e.webp\" class=\"w-full h-full object-contain\">"]
-            },
+"<img src=\"https://i.postimg.cc/9MYLg6G3/1def40ea-5f23-4fa1-9f4d-8807d0cdf02e.webp\" class=\"w-full h-full object-contain\">"],
+  description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br><br>
+
+<strong>Product Features:</strong><br>
+🩺 Premium-grade elastic – strong, breathable, and flexible<br>
+🧥 Full-back coverage for maximum support<br>
+🎗️ Adjustable straps – fit the body comfortably<br>
+🧩 Reinforced with 2 polycarbonate stays<br>
+🪶 Lightweight and snug fit for comfortable wear<br>
+🧷 Large Velcro straps – firm grip, not easy to loosen<br><br>
+
+
+
+<strong>Recommended For:</strong><br>
+🧍‍♂️ Upper to lower back pain<br>
+🎯 Posture correction – rounded shoulders and hunchback<br>
+💼 Office workers – long hours of sitting<br>
+🏋️‍♂️ Heavy lifting – factory staff, housekeepers<br>
+👵 Elderly people<br>
+🧘 Muscle weakness / degenerative spine<br>
+🤕 Recovery after injury or surgery<br><br>
+
+<br><strong>Size Chart (Waist in inches):</strong><br>
+
+S – 27" – 32"<br>
+M – 32" – 36"<br>
+L – 36" – 40"<br>
+XL – 40" – 44"<br>
+2XL – 44" – 48"<br>
+3XL – 48" – 52"<br><br>
+
+<br><strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br>
+❌ Wear during sleep<br>
+
+<br><strong>Available Colors:</strong><br>
+⚫ Black<br><br>
+<br>
+<strong>Minimum Order Quantity (MOQ):</strong><br>
+📦 20 pieces<br>
+`
+},
             { 
+
+            
                 id: 13, 
                 name: 'MINI BACK SUPPORT', 
-                price: 39.99, 
+                price: 25, 
                 category: 'clothes',
                 hasSize: true,
                 images: ["<img src=\"https://i.postimg.cc/fLg8K2Jk/dd243938-433e-4f20-b026-1b9c489ab022.webp\" class=\"w-full h-full object-contain\">",
 "<img src=\"https://i.postimg.cc/sfbrfKwV/0f03e966-dccd-4940-92a7-0899fe5bda55.webp\" class=\"w-full h-full object-contain\">",
-"<img src=\"https://i.postimg.cc/XNrW0tKH/Blue-Good-Night-Flyer.webp\" class=\"w-full h-full object-contain\">"]
-            },
+"<img src=\"https://i.postimg.cc/XNrW0tKH/Blue-Good-Night-Flyer.webp\" class=\"w-full h-full object-contain\">"],
+
+
+  description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br><br>
+
+<strong>Product Features:</strong><br>
+🩺 Premium-grade Elastic – Flexible, firm grip, breathable<br>
+🧩 Reinforced with 6 polycarbonate support bars<br>
+📏 Compact design – Lightweight and easy to carry<br>
+🪶 Ultra-light and comfortable – Fits snugly without discomfort<br>
+🧷 Large Velcro closure – Strong and secure grip<br><br>
+
+
+<strong>Recommended For:</strong><br>
+💢 People with lower back, waist, or hip pain<br>
+💻 Those who sit for long hours – Office Syndrome sufferers<br>
+🏋️‍♀️ Frequent lifters – Homemakers, factory workers, drivers<br>
+👵 Elderly individuals<br>
+💪 People with muscle weakness, spinal degeneration, or herniated discs<br>
+🏥 Individuals recovering from surgery or undergoing physical therapy<br><br>
+
+
+<br><strong>Size Chart (Waist in inches):</strong><br>
+
+S – 26" – 30"<br>
+M – 30" – 34"<br>
+L – 34" – 38"<br>
+XL – 38" – 42"<br>
+2XL – 42" – 50"<br><br>
+
+
+<br><strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br>
+❌ Wear during sleep<br>
+
+<br><strong>Available Colors:</strong><br>
+⚫ Black<br>
+<span style=\"display:inline-block;width:14px;height:14px;border-radius:50%;background-color:#FFF2E0;vertical-align:middle;margin-right:6px;\"></span>Beige<br><br>
+<br>
+<strong>Minimum Order Quantity (MOQ):</strong><br>
+📦 20 pieces<br>
+`
+},
             { 
                 id: 14, 
                 name: 'BACK POSTURE SUPPORT', 
-                price: 89.99, 
+                price: 80, 
                 category: 'clothes',
                 hasSize: true,
                 images: ["<img src=\"https://i.postimg.cc/xTfW1MYx/7e46ee89-d6c1-45ed-8bdf-8bb9689a7df2.webp\" class=\"w-full h-full object-contain\">",
 "<img src=\"https://i.postimg.cc/d3Bp9tRj/Untitled-1000-x-1200-px.webp\" class=\"w-full h-full object-contain\">",
-"<img src=\"https://i.postimg.cc/VsBxwDy0/4af36bda-5224-4710-8267-9d4cead93863-1.webp\" class=\"w-full h-full object-contain\">"]
-            },
-            {
+"<img src=\"https://i.postimg.cc/VsBxwDy0/4af36bda-5224-4710-8267-9d4cead93863-1.webp\" class=\"w-full h-full object-contain\">"],
+
+
+
+             description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br><br>
+
+<strong>Product Features:</strong><br>
+🩺 Premium-grade Elastic – Flexible, firm grip, breathable<br>
+🧥 Designed as a full-back posture shirt<br>
+🪢 Features adjustable straps to fit different body types<br>
+🪶 Lightweight and snug fit – comfortable and non-restrictive<br>
+🔒 Equipped with large Velcro straps – secure and durable fastening<br><br>
+
+
+<strong>Recommended For:</strong><br>
+💺 Individuals with upper back pain<br>
+🧍‍♂️ Those who want to improve posture and stand tall<br>
+🧑‍💻 Office workers or anyone who sits in the same position for long hours<br>
+👵 Elderly individuals<br>
+🏋️‍♀️ Laborers, factory workers, homemakers, drivers<br>
+🏥 Individuals recovering from surgery or undergoing physical therapy<br><br>
+
+
+<br><strong>Size Chart (Waist in inches):</strong><br>
+
+S – 25" – 28"<br>
+M – 28" – 34"<br>
+L – 34" – 40"<br>
+XL – 40" – 44"<br>
+2XL – 44" – 52"<br><br>
+
+
+<br><strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br>
+❌ Wear during sleep<br>
+
+<br><strong>Available Colors:</strong><br>
+
+<span style=\"display:inline-block;width:14px;height:14px;border-radius:50%;background-color:#FFF2E0;vertical-align:middle;margin-right:6px;\"></span>Beige<br><br>
+<br>
+<strong>Minimum Order Quantity (MOQ):</strong><br>
+📦 20 pieces<br>
+`
+},
+            { 
   id: 15,
   name: 'KNEE SUPPORT WITH SPRING',
-  price: 34.99,
+  price: 35,
   category: 'clothes',
   hasSize: true,
   images: [
     `<img src="https://i.postimg.cc/q7MSwvhR/24d7498a-6521-40a2-a715-b55282048621.webp" class="w-full h-full object-contain">`,
     `<img src="https://i.postimg.cc/Bb7fs3z7/3.webp" class="w-full h-full object-contain">`,
-    `<img src="https://i.postimg.cc/6qpxDqMG/4.webp" class="w-full h-full object-contain">`
-  ]
-},
+    `<img src="https://i.postimg.cc/6qpxDqMG/4.webp" class="w-full h-full object-contain">`]
+
+,
+  description: `👫 Unisex – suitable for both men and women<br>
+📦 In-stock and ready to ship<br>
+🇹🇭 100% made in Thailand by a Thai factory<br>
+✅ ISO9001 & ISO13485 Certified Quality<br>
+📌 Sold per piece – If you want a pair, please order 2 items<br><br>
+
+<strong>Product Features:</strong><br>
+🩺 Made from medical-grade elastic (70% Nylon, 20% Rubber, 10% Spandex)<br>
+🌀 Reinforced with stainless steel spring supports on both sides of the knee for natural movement<br>
+💪 Provides maximum compression and support around the knee<br>
+🧵 Soft, flexible materials – comfortable for every movement<br>
+🌿 Hypoallergenic – Safe for long-term wear, non-irritating<br><br>
+
+<strong>Recommended For:</strong><br>
+🤕 Helps relieve knee pain and swelling, especially for heavy-duty users<br>
+🧓 Elderly with weak joints<br>
+🤕 Recovery from knee surgery or injury<br>
+📦 Heavy-duty workers<br>
+🏃‍♀️ Ideal for sports and exercise<br>
+🚶‍♂️ Everyday joint stability<br><br>
+
+
+<br><strong>Size Chart (Measure around kneecap):</strong><br>
+
+S – 13" – 15"<br>
+M – 15" – 17"<br>
+L – 17" – 19"<br>
+XL – 19" – 21"<br>
+2XL – 21" – 23"<br><br>
+
+
+
+<strong>Care Instructions:</strong><br>
+🧼 Soak in mild detergent for about 30 minutes<br>
+🤲 Hand wash gently<br>
+🚿 Rinse with clean water<br>
+🌤️ Dry in shade / soft sunlight / ventilated area<br><br>
+
+<strong>Do Not:</strong><br>
+❌ Machine wash<br>
+❌ Dry under direct strong sunlight<br>
+❌ Iron or use scrubbing brush<br>
+❌ Twist or wring the fabric<br><br>
+
+<strong>Available Colors:</strong><br>
+<span style=\"display:inline-block;width:14px;height:14px;border-radius:50%;background-color:#FFF2E0;vertical-align:middle;margin-right:6px;\"></span>Beige<br><br>
+<br>
+
+<strong>Minimum Order Quantity (MOQ):</strong><br>
+📦 20 pieces<br>`},
             
             // Skincare Products category - 6 items
             { 
@@ -1092,7 +1399,20 @@ body { font-family: 'Montserrat', sans-serif; }</style>
                 productCard.innerHTML = `
                     ${galleryHtml}
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold mb-1">${product.name}</h3>
+                        <div class="flex items-center justify-between mb-1">
+            <h3 class="text-lg font-semibold">${product.name}</h3>
+            ${(() => {
+  switch(product.id) {
+    case 1: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Best Seller</span>';
+    case 2: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Affordable Model</span>';
+    case 3: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Flagship Model</span>';
+    case 13: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Compact Model</span>';
+    case 14: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Ergonomic Model</span>';
+    case 15: return '<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Ergonomic Model</span>';
+    default: return '';
+  }
+})()}
+        </div>
 <p class="text-sm text-gray-600 mb-2">${product.description}</p>
                         <p class="text-gray-700 mb-4">$${product.price.toLocaleString()}</p>
                         ${sizeSelectionHtml}
